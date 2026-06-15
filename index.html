@@ -1111,8 +1111,20 @@
             metaRes.json(),
             catRes.json(),
           ]);
+
+          // Debug — remove after fix
+          console.log("listData keys:", Object.keys(listData));
+          console.log("metaData keys:", Object.keys(metaData));
+
           if (listData.status?.error_code) {
             showError(listData.status.error_message);
+            setStatus("Error", false);
+            btn.disabled = false;
+            btn.textContent = "Run signals";
+            return;
+          }
+          if (!listData.data) {
+            showError("Unexpected API response — check console");
             setStatus("Error", false);
             btn.disabled = false;
             btn.textContent = "Run signals";
