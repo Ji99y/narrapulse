@@ -587,15 +587,26 @@
       </div>
     </div>
 
-    <div class="api-bar">
-      <input
-        type="password"
-        id="api-key"
-        placeholder="Paste your CoinMarketCap API key..."
-      />
+    <div
+      style="
+        background: var(--bg2);
+        border-bottom: 0.5px solid var(--border);
+        padding: 10px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      "
+    >
       <button class="btn" id="run-btn" onclick="loadData()">Run signals</button>
+      <span
+        style="
+          font-size: 11px;
+          color: var(--text3);
+          font-family: &quot;JetBrains Mono&quot;, monospace;
+        "
+        >Live CMC data · updates on demand</span
+      >
     </div>
-
     <div id="error-area"></div>
     <div id="regime-area"></div>
 
@@ -679,499 +690,657 @@
     </div>
 
     <script>
-      function getKey() {
-        return document.getElementById("api-key").value.trim();
-      }
-      function setStatus(msg, live) {
-        document.getElementById("status-text").textContent = msg;
-        document.getElementById("pulse-dot").style.background = live
-          ? "var(--green)"
-          : "var(--text3)";
-      }
-      function showError(msg) {
-        document.getElementById("error-area").innerHTML =
-          `<div class="error-bar">⚠ ${msg}</div>`;
-      }
-      function clearError() {
-        document.getElementById("error-area").innerHTML = "";
-      }
+        function getKey() {
+          return document.getElementById("api-key").value.trim();
+        }
+        function setStatus(msg, live) {
+          document.getElementById("status-text").textContent = msg;
+          document.getElementById("pulse-dot").style.background = live
+            ? "var(--green)"
+            : "var(--text3)";
+        }
+        function showError(msg) {
+          document.getElementById("error-area").innerHTML =
+            `<div class="error-bar">⚠ ${msg}</div>`;
+        }
+        function clearError() {
+          document.getElementById("error-area").innerHTML = "";
+        }
 
-      function fmtPrice(p) {
-        if (p >= 1000)
-          return "$" + p.toLocaleString("en-US", { maximumFractionDigits: 2 });
-        if (p >= 1) return "$" + p.toFixed(2);
-        if (p >= 0.01) return "$" + p.toFixed(4);
-        return "$" + p.toFixed(6);
-      }
-      function fmtPct(v) {
-        return `<span class="${v >= 0 ? "pos" : "neg"}">${v >= 0 ? "+" : ""}${v.toFixed(2)}%</span>`;
-      }
+        function fmtPrice(p) {
+          if (p >= 1000)
+            return "$" + p.toLocaleString("en-US", { maximumFractionDigits: 2 });
+          if (p >= 1) return "$" + p.toFixed(2);
+          if (p >= 0.01) return "$" + p.toFixed(4);
+          return "$" + p.toFixed(6);
+        }
+        function fmtPct(v) {
+          return `<span class="${v >= 0 ? "pos" : "neg"}">${v >= 0 ? "+" : ""}${v.toFixed(2)}%</span>`;
+        }
 
-      function getVolumeTrend(q) {
-        const vc = q.volume_change_24h || 0;
-        if (vc > 20) return { trend: "SURGING", mult: 1.0 };
-        if (vc > 0) return { trend: "RISING", mult: 1.0 };
-        if (vc > -20) return { trend: "FADING", mult: 0.5 };
-        return { trend: "COLLAPSING", mult: 0.0 };
-      }
-      function getDivergence(q) {
-        const vt = getVolumeTrend(q);
-        if (q.percent_change_24h <= 0)
-          return { signal: "NO_SIGNAL", cls: "t-none", label: "—" };
-        if (vt.trend === "SURGING" || vt.trend === "RISING")
+        function getVolumeTrend(q) {
+          const vc = q.volume_change_24h || 0;
+          if (vc > 20) return { trend: "SURGING", mult: 1.0 };
+          if (vc > 0) return { trend: "RISING", mult: 1.0 };
+          if (vc > -20) return { trend: "FADING", mult: 0.5 };
+          return { trend: "COLLAPSING", mult: 0.0 };
+        }
+        function getDivergence(q) {
+          const vt = getVolumeTrend(q);
+          if (q.percent_change_24h <= 0)
+            return { signal: "NO_SIGNAL", cls: "t-none", label: "—" };
+          if (vt.trend === "SURGING" || vt.trend === "RISING")
+            return {
+              signal: "CONFIRMED",
+              cls: "t-confirmed",
+              label: "CONFIRMED",
+            };
+          if (vt.trend === "FADING")
+            return { signal: "WEAK", cls: "t-weak", label: "WEAK" };
+          return { signal: "DIVERGING", cls: "t-diverging", label: "DIVERGING" };
+        }
+        function getNarrativeAge(q) {
+          const c7 = q.percent_change_7d || 0,
+            c30 = q.percent_change_30d || 0;
+          const c24 = q.percent_change_24h || 0,
+            c1 = q.percent_change_1h || 0;
+          if (c7 > 10 && c30 < 20)
+            return { age: "EARLY", cls: "t-early", label: "EARLY", bonus: 3 };
+          if (c7 > 10 && c30 > 20 && c24 > 0)
+            return { age: "PRIME", cls: "t-prime", label: "PRIME", bonus: 1 };
+          if (c30 > 80 && c24 < 5 && c1 < 1)
+            return {
+              age: "EXHAUSTED",
+              cls: "t-exhausted",
+              label: "EXHAUSTED",
+              bonus: -3,
+            };
+          if (c30 > 40 && c7 < c30 / 4)
+            return { age: "LATE", cls: "t-late", label: "LATE", bonus: -1 };
+          return { age: "MID", cls: "t-mid", label: "MID", bonus: 0 };
+        }
+        function getPumpStatus(q) {
+          const c1 = q.percent_change_1h || 0,
+            c24 = q.percent_change_24h || 0,
+            vc = q.volume_change_24h || 0;
+          if (c24 <= 20) return { label: "—", cls: "t-none", warn: false };
+          const slow = c1 * 24 < c24 * 0.5;
+          if (slow && vc > 30)
+            return { label: "EXIT SOON", cls: "t-exit", warn: true };
+          if (slow && vc <= 30)
+            return { label: "EXIT NOW", cls: "t-exit", warn: true };
+          return { label: "RUNNING", cls: "t-running", warn: false };
+        }
+        function classifyNarrative(tags = []) {
+          const t = tags.map((x) => (x.slug || x).toLowerCase());
+          if (
+            t.some((x) =>
+              [
+                "ai",
+                "artificial-intelligence",
+                "machine-learning",
+                "ai-agent",
+              ].includes(x),
+            )
+          )
+            return "AI";
+          if (
+            t.some((x) =>
+              [
+                "defi",
+                "decentralized-finance",
+                "dex",
+                "yield-farming",
+                "lending",
+              ].includes(x),
+            )
+          )
+            return "DeFi";
+          if (
+            t.some((x) =>
+              ["meme", "memes", "dog-themed", "cat-themed"].includes(x),
+            )
+          )
+            return "Meme";
+          if (
+            t.some((x) =>
+              ["layer-1", "layer1", "l1", "smart-contracts", "platform"].includes(
+                x,
+              ),
+            )
+          )
+            return "L1";
+          if (
+            t.some((x) =>
+              ["layer-2", "layer2", "l2", "scaling", "rollup"].includes(x),
+            )
+          )
+            return "L2";
+          if (
+            t.some((x) =>
+              [
+                "infrastructure",
+                "interoperability",
+                "oracle",
+                "bridge",
+                "storage",
+              ].includes(x),
+            )
+          )
+            return "Infra";
+          if (
+            t.some((x) =>
+              ["gaming", "metaverse", "nft", "play-to-earn", "gamefi"].includes(
+                x,
+              ),
+            )
+          )
+            return "Gaming";
+          return "Other";
+        }
+        function parseFG(metrics) {
+          const fg = metrics?.fear_greed_value ?? null;
+          if (fg === null)
+            return { label: "⚪ NEUTRAL (unavailable)", gated: false };
+          if (fg <= 25) return { label: `🔴 EXTREME FEAR (${fg})`, gated: true };
+          if (fg <= 45) return { label: `🟠 FEAR (${fg})`, gated: false };
+          if (fg <= 55) return { label: `⚪ NEUTRAL (${fg})`, gated: false };
+          if (fg <= 75) return { label: `🟡 GREED (${fg})`, gated: false };
+          return { label: `🔴 EXTREME GREED (${fg})`, gated: true };
+        }
+        function scoreToken(token, tagMap) {
+          const q = token.quote.USD;
+          const mcap = q.market_cap || 0,
+            vol = q.volume_24h || 0;
+          if (mcap < 50000000 || vol < 5000000 || q.price <= 0.001) return null;
+          if (
+            q.price > 0.99 &&
+            q.price < 1.01 &&
+            Math.abs(q.percent_change_7d || 0) < 1
+          )
+            return null;
+          const c1 = q.percent_change_1h || 0,
+            c24 = q.percent_change_24h || 0,
+            c7 = q.percent_change_7d || 0;
+          const vmr = vol / mcap;
+          const vt = getVolumeTrend(q),
+            div = getDivergence(q),
+            na = getNarrativeAge(q),
+            ps = getPumpStatus(q);
+          const allPos = c1 > 0 && c24 > 0 && c7 > 0;
+          let score = 0;
+          if (allPos) score += 4;
+          if (c24 > 3) score += 1;
+          if (c24 > 8) score += 2;
+          if (c24 > 20) score += 1;
+          if (c7 > 5) score += 1;
+          if (c7 > 20) score += 2;
+          if (vmr > 0.1) score += 1;
+          if (vmr > 0.25) score += 2;
+          if (vmr > 0.5) score += 1;
+          score = Math.round(score * vt.mult);
+          if (c24 > 80) score -= 4;
+          if (c7 > 200) score -= 3;
+          if (vmr > 2.0) score -= 2;
+          score += na.bonus;
           return {
-            signal: "CONFIRMED",
-            cls: "t-confirmed",
-            label: "CONFIRMED",
+            symbol: token.symbol,
+            id: token.id,
+            price: q.price,
+            c1,
+            c24,
+            c7,
+            divergence: div,
+            narAge: na,
+            pumpStatus: ps,
+            allPos,
+            narrative: classifyNarrative(tagMap[token.id] || []),
+            score,
           };
-        if (vt.trend === "FADING")
-          return { signal: "WEAK", cls: "t-weak", label: "WEAK" };
-        return { signal: "DIVERGING", cls: "t-diverging", label: "DIVERGING" };
-      }
-      function getNarrativeAge(q) {
-        const c7 = q.percent_change_7d || 0,
-          c30 = q.percent_change_30d || 0;
-        const c24 = q.percent_change_24h || 0,
-          c1 = q.percent_change_1h || 0;
-        if (c7 > 10 && c30 < 20)
-          return { age: "EARLY", cls: "t-early", label: "EARLY", bonus: 3 };
-        if (c7 > 10 && c30 > 20 && c24 > 0)
-          return { age: "PRIME", cls: "t-prime", label: "PRIME", bonus: 1 };
-        if (c30 > 80 && c24 < 5 && c1 < 1)
+        }
+        function detectRegime(m) {
+          const btc = m.btc_dominance,
+            vol = m.quote.USD.total_volume_24h,
+            mcap = m.quote.USD.total_market_cap;
+          if (btc > 58)
+            return {
+              regime: "BTC_DOMINANCE",
+              cls: "",
+              risk: "LOW",
+              note: "Altcoins suppressed — be very selective",
+              maxPos: 2,
+              alloc: 20,
+              btc,
+              mcap,
+              vol,
+            };
+          if (btc < 50)
+            return {
+              regime: "ALTSEASON",
+              cls: "alt",
+              risk: "HIGH",
+              note: "Broad altcoin momentum — wider opportunities",
+              maxPos: 5,
+              alloc: 10,
+              btc,
+              mcap,
+              vol,
+            };
+          if (vol / mcap > 0.05)
+            return {
+              regime: "ACTIVE",
+              cls: "",
+              risk: "MED",
+              note: "Healthy volume — standard sizing",
+              maxPos: 3,
+              alloc: 15,
+              btc,
+              mcap,
+              vol,
+            };
           return {
-            age: "EXHAUSTED",
-            cls: "t-exhausted",
-            label: "EXHAUSTED",
-            bonus: -3,
-          };
-        if (c30 > 40 && c7 < c30 / 4)
-          return { age: "LATE", cls: "t-late", label: "LATE", bonus: -1 };
-        return { age: "MID", cls: "t-mid", label: "MID", bonus: 0 };
-      }
-      function getPumpStatus(q) {
-        const c1 = q.percent_change_1h || 0,
-          c24 = q.percent_change_24h || 0,
-          vc = q.volume_change_24h || 0;
-        if (c24 <= 20) return { label: "—", cls: "t-none", warn: false };
-        const slow = c1 * 24 < c24 * 0.5;
-        if (slow && vc > 30)
-          return { label: "EXIT SOON", cls: "t-exit", warn: true };
-        if (slow && vc <= 30)
-          return { label: "EXIT NOW", cls: "t-exit", warn: true };
-        return { label: "RUNNING", cls: "t-running", warn: false };
-      }
-      function classifyNarrative(tags = []) {
-        const t = tags.map((x) => (x.slug || x).toLowerCase());
-        if (
-          t.some((x) =>
-            [
-              "ai",
-              "artificial-intelligence",
-              "machine-learning",
-              "ai-agent",
-            ].includes(x),
-          )
-        )
-          return "AI";
-        if (
-          t.some((x) =>
-            [
-              "defi",
-              "decentralized-finance",
-              "dex",
-              "yield-farming",
-              "lending",
-            ].includes(x),
-          )
-        )
-          return "DeFi";
-        if (
-          t.some((x) =>
-            ["meme", "memes", "dog-themed", "cat-themed"].includes(x),
-          )
-        )
-          return "Meme";
-        if (
-          t.some((x) =>
-            ["layer-1", "layer1", "l1", "smart-contracts", "platform"].includes(
-              x,
-            ),
-          )
-        )
-          return "L1";
-        if (
-          t.some((x) =>
-            ["layer-2", "layer2", "l2", "scaling", "rollup"].includes(x),
-          )
-        )
-          return "L2";
-        if (
-          t.some((x) =>
-            [
-              "infrastructure",
-              "interoperability",
-              "oracle",
-              "bridge",
-              "storage",
-            ].includes(x),
-          )
-        )
-          return "Infra";
-        if (
-          t.some((x) =>
-            ["gaming", "metaverse", "nft", "play-to-earn", "gamefi"].includes(
-              x,
-            ),
-          )
-        )
-          return "Gaming";
-        return "Other";
-      }
-      function parseFG(metrics) {
-        const fg = metrics?.fear_greed_value ?? null;
-        if (fg === null)
-          return { label: "⚪ NEUTRAL (unavailable)", gated: false };
-        if (fg <= 25) return { label: `🔴 EXTREME FEAR (${fg})`, gated: true };
-        if (fg <= 45) return { label: `🟠 FEAR (${fg})`, gated: false };
-        if (fg <= 55) return { label: `⚪ NEUTRAL (${fg})`, gated: false };
-        if (fg <= 75) return { label: `🟡 GREED (${fg})`, gated: false };
-        return { label: `🔴 EXTREME GREED (${fg})`, gated: true };
-      }
-      function scoreToken(token, tagMap) {
-        const q = token.quote.USD;
-        const mcap = q.market_cap || 0,
-          vol = q.volume_24h || 0;
-        if (mcap < 50000000 || vol < 5000000 || q.price <= 0.001) return null;
-        if (
-          q.price > 0.99 &&
-          q.price < 1.01 &&
-          Math.abs(q.percent_change_7d || 0) < 1
-        )
-          return null;
-        const c1 = q.percent_change_1h || 0,
-          c24 = q.percent_change_24h || 0,
-          c7 = q.percent_change_7d || 0;
-        const vmr = vol / mcap;
-        const vt = getVolumeTrend(q),
-          div = getDivergence(q),
-          na = getNarrativeAge(q),
-          ps = getPumpStatus(q);
-        const allPos = c1 > 0 && c24 > 0 && c7 > 0;
-        let score = 0;
-        if (allPos) score += 4;
-        if (c24 > 3) score += 1;
-        if (c24 > 8) score += 2;
-        if (c24 > 20) score += 1;
-        if (c7 > 5) score += 1;
-        if (c7 > 20) score += 2;
-        if (vmr > 0.1) score += 1;
-        if (vmr > 0.25) score += 2;
-        if (vmr > 0.5) score += 1;
-        score = Math.round(score * vt.mult);
-        if (c24 > 80) score -= 4;
-        if (c7 > 200) score -= 3;
-        if (vmr > 2.0) score -= 2;
-        score += na.bonus;
-        return {
-          symbol: token.symbol,
-          id: token.id,
-          price: q.price,
-          c1,
-          c24,
-          c7,
-          divergence: div,
-          narAge: na,
-          pumpStatus: ps,
-          allPos,
-          narrative: classifyNarrative(tagMap[token.id] || []),
-          score,
-        };
-      }
-      function detectRegime(m) {
-        const btc = m.btc_dominance,
-          vol = m.quote.USD.total_volume_24h,
-          mcap = m.quote.USD.total_market_cap;
-        if (btc > 58)
-          return {
-            regime: "BTC_DOMINANCE",
+            regime: "QUIET",
             cls: "",
             risk: "LOW",
-            note: "Altcoins suppressed — be very selective",
+            note: "Low volume — reduce position sizes",
             maxPos: 2,
             alloc: 20,
             btc,
             mcap,
             vol,
           };
-        if (btc < 50)
-          return {
-            regime: "ALTSEASON",
-            cls: "alt",
-            risk: "HIGH",
-            note: "Broad altcoin momentum — wider opportunities",
-            maxPos: 5,
-            alloc: 10,
-            btc,
-            mcap,
-            vol,
-          };
-        if (vol / mcap > 0.05)
-          return {
-            regime: "ACTIVE",
-            cls: "",
-            risk: "MED",
-            note: "Healthy volume — standard sizing",
-            maxPos: 3,
-            alloc: 15,
-            btc,
-            mcap,
-            vol,
-          };
-        return {
-          regime: "QUIET",
-          cls: "",
-          risk: "LOW",
-          note: "Low volume — reduce position sizes",
-          maxPos: 2,
-          alloc: 20,
-          btc,
-          mcap,
-          vol,
-        };
-      }
-
-      function renderRegime(r, fg) {
-        document.getElementById("regime-area").innerHTML = `
-    <div class="regime-bar">
-      <span class="regime-badge ${r.cls}">${r.regime}</span>
-      <span class="regime-meta">BTC Dom <strong>${r.btc.toFixed(1)}%</strong></span>
-      <span class="regime-meta">MCap <strong>$${(r.mcap / 1e12).toFixed(2)}T</strong></span>
-      <span class="regime-meta">Vol <strong>$${(r.vol / 1e9).toFixed(1)}B</strong></span>
-      <span class="regime-meta">Sentiment <strong>${fg.label}</strong></span>
-      <span class="regime-note">${r.note}</span>
-    </div>`;
-      }
-      function renderNarratives(tokens) {
-        const map = {};
-        tokens.forEach((t) => {
-          if (!map[t.narrative])
-            map[t.narrative] = { total: 0, count: 0, syms: [] };
-          map[t.narrative].total += t.score;
-          map[t.narrative].count++;
-          map[t.narrative].syms.push(t.symbol);
-        });
-        const ranked = Object.entries(map)
-          .map(([n, d]) => ({ name: n, avg: d.total / d.count, syms: d.syms }))
-          .sort((a, b) => b.avg - a.avg);
-        document.getElementById("nar-grid").innerHTML = ranked
-          .map(
-            (n, i) => `
-    <div class="nar-card ${i === 0 ? "hot" : ""}">
-      <div class="nar-name">${i === 0 ? "HOTTEST — " : ""}${n.name}</div>
-      <div class="nar-score">${n.avg.toFixed(1)}</div>
-      <div class="nar-tokens">${n.syms.join(" · ")}</div>
-    </div>`,
-          )
-          .join("");
-        return ranked;
-      }
-      function renderCategories(cats) {
-        const top = cats
-          .filter(
-            (c) => c.market_cap > 100000000 && c.avg_price_change !== undefined,
-          )
-          .map((c) => ({
-            name: c.name,
-            change: c.avg_price_change || 0,
-            mcap: c.market_cap,
-            tokens: c.num_tokens,
-          }))
-          .sort((a, b) => b.change - a.change)
-          .slice(0, 6);
-        document.getElementById("cat-grid").innerHTML = top
-          .map(
-            (c, i) => `
-    <div class="cat-card ${i === 0 ? "top" : ""}">
-      <div class="cat-name">${i === 0 ? "🔥 " : ""}${c.name}</div>
-      <div class="cat-change ${c.change >= 0 ? "pos" : "neg"}">${c.change >= 0 ? "+" : ""}${c.change.toFixed(2)}%</div>
-      <div class="cat-meta">$${(c.mcap / 1e9).toFixed(1)}B mcap · ${c.tokens} tokens</div>
-    </div>`,
-          )
-          .join("");
-        return top;
-      }
-      function renderAlignment(topCats, narRanking) {
-        if (!topCats.length || !narRanking.length) return;
-        const topCMC = topCats[0].name;
-        const topNar = narRanking[0].name.toLowerCase();
-        const match = topCats
-          .slice(0, 3)
-          .some(
-            (c) =>
-              c.name.toLowerCase().includes(topNar) ||
-              topNar.includes(c.name.toLowerCase().split(" ")[0]),
-          );
-        document.getElementById("align-area").innerHTML = `
-    <div class="align-card" style="border-color:${match ? "var(--gborder)" : "var(--aborder)"}">
-      <div class="align-text">
-        ${match ? "✅" : "⚠️"} <strong>Signal alignment:</strong> CMC's leading category is <strong>${topCMC}</strong>.
-        Our heat map shows <strong>${narRanking[0].name}</strong> leading.
-        ${match ? "Both agree — higher confidence." : "Divergence detected — use extra caution."}
-      </div>
-    </div>`;
-      }
-      function renderTable(tokens) {
-        document.getElementById("token-table").innerHTML = tokens
-          .slice(0, 10)
-          .map(
-            (t, i) => `
-    <tr>
-      <td style="color:var(--text3)">${i + 1}</td>
-      <td style="font-weight:700">${t.symbol}</td>
-      <td style="color:var(--text2)">${t.narrative}</td>
-      <td><span class="tag ${t.narAge.cls}">${t.narAge.label}</span></td>
-      <td>${fmtPct(t.c24)}</td>
-      <td>${fmtPct(t.c7)}</td>
-      <td><span class="tag ${t.divergence.cls}">${t.divergence.label}</span></td>
-      <td><span class="tag ${t.pumpStatus.cls}">${t.pumpStatus.label}</span></td>
-      <td style="font-weight:700;color:var(--blue)">${t.score}</td>
-    </tr>`,
-          )
-          .join("");
-      }
-      function renderWatchlist(tokens, regime, fg) {
-        const effMax = fg.gated ? 1 : regime.maxPos,
-          effAlloc = fg.gated ? 10 : regime.alloc;
-        const wl = tokens
-          .filter(
-            (t) =>
-              t.allPos &&
-              t.divergence.signal === "CONFIRMED" &&
-              t.narAge.age !== "EXHAUSTED",
-          )
-          .slice(0, effMax);
-        document.getElementById("wl-count").textContent =
-          `${wl.length} signal${wl.length !== 1 ? "s" : ""}`;
-        document.getElementById("wl-subtext").textContent =
-          `Max ${effMax} positions · ${effAlloc}% each · 7% stop · 20% target`;
-        document.getElementById("wl-body").innerHTML =
-          wl.length === 0
-            ? `<div class="empty">No confirmed signals<br><span style="font-size:11px;color:var(--text3)">Hold cash — wait for cleaner setup</span></div>`
-            : wl
-                .map(
-                  (t) => `
-      <div class="wl-item">
-        <div class="wl-top">
-          <div>
-            <div class="wl-sym">${t.symbol}</div>
-            <span class="tag ${t.narAge.cls}" style="margin-top:4px;display:inline-block">${t.narAge.label}</span>
-          </div>
-          <div class="score-pill">${t.score}</div>
-        </div>
-        <div class="wl-grid">
-          <div><div class="wl-lbl">Entry</div><div class="wl-val">${fmtPrice(t.price)}</div></div>
-          <div><div class="wl-lbl">Stop</div><div class="wl-val stop">${fmtPrice(t.price * 0.93)}</div></div>
-          <div><div class="wl-lbl">Target</div><div class="wl-val tgt">${fmtPrice(t.price * 1.2)}</div></div>
-        </div>
-        ${t.pumpStatus.warn ? `<div style="margin-top:8px"><span class="tag t-exit">⚠ ${t.pumpStatus.label}</span></div>` : ""}
-      </div>`,
-                )
-                .join("");
-      }
-
-      async function loadData() {
-        const key = getKey();
-        if (!key) {
-          showError("Please enter your CMC API key");
-          return;
         }
-        clearError();
-        const btn = document.getElementById("run-btn");
-        btn.disabled = true;
-        btn.textContent = "Loading...";
-        setStatus("Fetching market data...", false);
-        try {
-          const h = { "X-CMC_PRO_API_KEY": key, Accept: "application/json" };
-          const CMC = "https://pro-api.coinmarketcap.com";
-          const [listRes, metaRes, catRes] = await Promise.all([
-            fetch(
-              "/api/proxy/v1/cryptocurrency/listings/latest?limit=200&convert=USD&sort=market_cap",
-              { headers: h },
-            ),
-            fetch("/api/proxy/v1/global-metrics/quotes/latest?convert=USD", {
-              headers: h,
-            }),
-            fetch(
-              "/api/proxy/v1/cryptocurrency/categories?limit=50&convert=USD",
-              { headers: h },
-            ),
-          ]);
-          const [listData, metaData, catData] = await Promise.all([
-            listRes.json(),
-            metaRes.json(),
-            catRes.json(),
-          ]);
 
-          // Debug — remove after fix
-          console.log("listData keys:", Object.keys(listData));
-          console.log("metaData keys:", Object.keys(metaData));
+        function renderRegime(r, fg) {
+          document.getElementById("regime-area").innerHTML = `
+      <div class="regime-bar">
+        <span class="regime-badge ${r.cls}">${r.regime}</span>
+        <span class="regime-meta">BTC Dom <strong>${r.btc.toFixed(1)}%</strong></span>
+        <span class="regime-meta">MCap <strong>$${(r.mcap / 1e12).toFixed(2)}T</strong></span>
+        <span class="regime-meta">Vol <strong>$${(r.vol / 1e9).toFixed(1)}B</strong></span>
+        <span class="regime-meta">Sentiment <strong>${fg.label}</strong></span>
+        <span class="regime-note">${r.note}</span>
+      </div>`;
+        }
+        function renderNarratives(tokens) {
+          const map = {};
+          tokens.forEach((t) => {
+            if (!map[t.narrative])
+              map[t.narrative] = { total: 0, count: 0, syms: [] };
+            map[t.narrative].total += t.score;
+            map[t.narrative].count++;
+            map[t.narrative].syms.push(t.symbol);
+          });
+          const ranked = Object.entries(map)
+            .map(([n, d]) => ({ name: n, avg: d.total / d.count, syms: d.syms }))
+            .sort((a, b) => b.avg - a.avg);
+          document.getElementById("nar-grid").innerHTML = ranked
+            .map(
+              (n, i) => `
+      <div class="nar-card ${i === 0 ? "hot" : ""}">
+        <div class="nar-name">${i === 0 ? "HOTTEST — " : ""}${n.name}</div>
+        <div class="nar-score">${n.avg.toFixed(1)}</div>
+        <div class="nar-tokens">${n.syms.join(" · ")}</div>
+      </div>`,
+            )
+            .join("");
+          return ranked;
+        }
+        function renderCategories(cats) {
+          const top = cats
+            .filter(
+              (c) => c.market_cap > 100000000 && c.avg_price_change !== undefined,
+            )
+            .map((c) => ({
+              name: c.name,
+              change: c.avg_price_change || 0,
+              mcap: c.market_cap,
+              tokens: c.num_tokens,
+            }))
+            .sort((a, b) => b.change - a.change)
+            .slice(0, 6);
+          document.getElementById("cat-grid").innerHTML = top
+            .map(
+              (c, i) => `
+      <div class="cat-card ${i === 0 ? "top" : ""}">
+        <div class="cat-name">${i === 0 ? "🔥 " : ""}${c.name}</div>
+        <div class="cat-change ${c.change >= 0 ? "pos" : "neg"}">${c.change >= 0 ? "+" : ""}${c.change.toFixed(2)}%</div>
+        <div class="cat-meta">$${(c.mcap / 1e9).toFixed(1)}B mcap · ${c.tokens} tokens</div>
+      </div>`,
+            )
+            .join("");
+          return top;
+        }
+        function renderAlignment(topCats, narRanking) {
+          if (!topCats.length || !narRanking.length) return;
+          const topCMC = topCats[0].name;
+          const topNar = narRanking[0].name.toLowerCase();
+          const match = topCats
+            .slice(0, 3)
+            .some(
+              (c) =>
+                c.name.toLowerCase().includes(topNar) ||
+                topNar.includes(c.name.toLowerCase().split(" ")[0]),
+            );
+          document.getElementById("align-area").innerHTML = `
+      <div class="align-card" style="border-color:${match ? "var(--gborder)" : "var(--aborder)"}">
+        <div class="align-text">
+          ${match ? "✅" : "⚠️"} <strong>Signal alignment:</strong> CMC's leading category is <strong>${topCMC}</strong>.
+          Our heat map shows <strong>${narRanking[0].name}</strong> leading.
+          ${match ? "Both agree — higher confidence." : "Divergence detected — use extra caution."}
+        </div>
+      </div>`;
+        }
+        function renderTable(tokens) {
+          document.getElementById("token-table").innerHTML = tokens
+            .slice(0, 10)
+            .map(
+              (t, i) => `
+      <tr>
+        <td style="color:var(--text3)">${i + 1}</td>
+        <td style="font-weight:700">${t.symbol}</td>
+        <td style="color:var(--text2)">${t.narrative}</td>
+        <td><span class="tag ${t.narAge.cls}">${t.narAge.label}</span></td>
+        <td>${fmtPct(t.c24)}</td>
+        <td>${fmtPct(t.c7)}</td>
+        <td><span class="tag ${t.divergence.cls}">${t.divergence.label}</span></td>
+        <td><span class="tag ${t.pumpStatus.cls}">${t.pumpStatus.label}</span></td>
+        <td style="font-weight:700;color:var(--blue)">${t.score}</td>
+      </tr>`,
+            )
+            .join("");
+        }
+        function renderWatchlist(tokens, regime, fg) {
+          const effMax = fg.gated ? 1 : regime.maxPos,
+            effAlloc = fg.gated ? 10 : regime.alloc;
+          const wl = tokens
+            .filter(
+              (t) =>
+                t.allPos &&
+                t.divergence.signal === "CONFIRMED" &&
+                t.narAge.age !== "EXHAUSTED",
+            )
+            .slice(0, effMax);
+          document.getElementById("wl-count").textContent =
+            `${wl.length} signal${wl.length !== 1 ? "s" : ""}`;
+          document.getElementById("wl-subtext").textContent =
+            `Max ${effMax} positions · ${effAlloc}% each · 7% stop · 20% target`;
+          document.getElementById("wl-body").innerHTML =
+            wl.length === 0
+              ? `<div class="empty">No confirmed signals<br><span style="font-size:11px;color:var(--text3)">Hold cash — wait for cleaner setup</span></div>`
+              : wl
+                  .map(
+                    (t) => `
+        <div class="wl-item">
+          <div class="wl-top">
+            <div>
+              <div class="wl-sym">${t.symbol}</div>
+              <span class="tag ${t.narAge.cls}" style="margin-top:4px;display:inline-block">${t.narAge.label}</span>
+            </div>
+            <div class="score-pill">${t.score}</div>
+          </div>
+          <div class="wl-grid">
+            <div><div class="wl-lbl">Entry</div><div class="wl-val">${fmtPrice(t.price)}</div></div>
+            <div><div class="wl-lbl">Stop</div><div class="wl-val stop">${fmtPrice(t.price * 0.93)}</div></div>
+            <div><div class="wl-lbl">Target</div><div class="wl-val tgt">${fmtPrice(t.price * 1.2)}</div></div>
+          </div>
+          ${t.pumpStatus.warn ? `<div style="margin-top:8px"><span class="tag t-exit">⚠ ${t.pumpStatus.label}</span></div>` : ""}
+        </div>`,
+                  )
+                  .join("");
+        }
 
-          if (listData.status?.error_code) {
-            showError(listData.status.error_message);
-            setStatus("Error", false);
-            btn.disabled = false;
-            btn.textContent = "Run signals";
-            return;
-          }
-          if (!listData.data) {
-            showError("Unexpected API response — check console");
-            setStatus("Error", false);
-            btn.disabled = false;
-            btn.textContent = "Run signals";
-            return;
-          }
-
-          setStatus("Fetching token tags...", false);
-          const tokens = listData.data;
-          const ids = tokens
-            .slice(0, 100)
-            .map((t) => t.id)
-            .join(",");
-          const infoRes = await fetch(
-            `/api/proxy/v2/cryptocurrency/info?id=${ids}&aux=tags`,
-            { headers: h },
-          );
-          const infoData = await infoRes.json();
-          const tagMap = {};
-          Object.entries(infoData.data || {}).forEach(([id, info]) => {
-            tagMap[parseInt(id)] = info.tags || [];
+        function runBacktest(tokens) {
+          const qualified = tokens.filter((t) => {
+            const q = t.quote.USD;
+            if ((q.market_cap || 0) < 50000000) return false;
+            if ((q.volume_24h || 0) < 5000000) return false;
+            if ((q.price || 0) < 0.001) return false;
+            if (
+              q.price > 0.99 &&
+              q.price < 1.01 &&
+              Math.abs(q.percent_change_7d || 0) < 1
+            )
+              return false;
+            return true;
           });
 
-          const scored = tokens
-            .map((t) => scoreToken(t, tagMap))
-            .filter(Boolean)
-            .sort((a, b) => b.score - a.score);
-          const regime = detectRegime(metaData.data);
-          const fg = parseFG(metaData.data);
-          const cats = catData.data || [];
+          const windows = [
+            {
+              label: "1d→7d",
+              entryKey: "percent_change_24h",
+              exitKey: "percent_change_7d",
+              days: 6,
+            },
+            {
+              label: "7d→30d",
+              entryKey: "percent_change_7d",
+              exitKey: "percent_change_30d",
+              days: 23,
+            },
+            {
+              label: "30d→60d",
+              entryKey: "percent_change_30d",
+              exitKey: "percent_change_60d",
+              days: 30,
+            },
+          ];
 
-          renderRegime(regime, fg);
-          const narRanking = renderNarratives(scored.slice(0, 10));
-          const topCats = renderCategories(cats);
-          renderAlignment(topCats, narRanking);
-          renderTable(scored);
-          renderWatchlist(scored, regime, fg);
+          const allTrades = [];
+          const windowRows = [];
 
-          document.getElementById("main-content").style.display = "grid";
-          setStatus(`Live · ${new Date().toLocaleTimeString()}`, true);
-        } catch (e) {
-          showError(e.message);
-          setStatus("Error", false);
-        } finally {
-          btn.disabled = false;
-          btn.textContent = "Refresh";
+          windows.forEach((w) => {
+            const trades = qualified
+              .map((token) => {
+                const q = token.quote.USD;
+                const entryChange = q[w.entryKey] || 0;
+                const exitChange = q[w.exitKey] || 0;
+                const vc = q.volume_change_24h || 0;
+                const volOk = vc > 0;
+                if (!volOk || entryChange <= 0) return null;
+                const c30 = q.percent_change_30d || 0;
+                if (c30 > 80 && entryChange < 5) return null;
+
+                const entryPrice = q.price / (1 + exitChange / 100);
+                const rawReturn = ((q.price - entryPrice) / entryPrice) * 100;
+                let actualReturn, outcome;
+                if (rawReturn <= -7) {
+                  actualReturn = -7;
+                  outcome = "STOPPED";
+                } else if (rawReturn >= 20) {
+                  actualReturn = 20;
+                  outcome = "TARGET";
+                } else {
+                  actualReturn = rawReturn;
+                  outcome = "OPEN";
+                }
+
+                const c7 = q.percent_change_7d || 0;
+                const narAge =
+                  c7 > 10 && c30 < 20
+                    ? "EARLY"
+                    : c7 > 10 && c30 > 20
+                      ? "PRIME"
+                      : "MID";
+                return { actualReturn, outcome, narAge, window: w.label };
+              })
+              .filter(Boolean);
+
+            const winners = trades.filter((t) => t.actualReturn > 0);
+            const targeted = trades.filter((t) => t.outcome === "TARGET");
+            const stopped = trades.filter((t) => t.outcome === "STOPPED");
+            const avgRet = trades.length
+              ? trades.reduce((s, t) => s + t.actualReturn, 0) / trades.length
+              : 0;
+            const winRate = trades.length
+              ? (winners.length / trades.length) * 100
+              : 0;
+
+            windowRows.push({
+              label: w.label,
+              trades: trades.length,
+              winRate,
+              avgRet,
+              targeted: targeted.length,
+              stopped: stopped.length,
+            });
+            allTrades.push(...trades);
+          });
+
+          const allWinners = allTrades.filter((t) => t.actualReturn > 0);
+          const allTargeted = allTrades.filter((t) => t.outcome === "TARGET");
+          const allStopped = allTrades.filter((t) => t.outcome === "STOPPED");
+          const overallAvg = allTrades.length
+            ? allTrades.reduce((s, t) => s + t.actualReturn, 0) / allTrades.length
+            : 0;
+          const overallWR = allTrades.length
+            ? (allWinners.length / allTrades.length) * 100
+            : 0;
+          const expectancy = (overallAvg * overallWR) / 100;
+
+          const earlyTrades = allTrades.filter((t) => t.narAge === "EARLY");
+          const primeTrades = allTrades.filter((t) => t.narAge === "PRIME");
+          const earlyWR = earlyTrades.length
+            ? (earlyTrades.filter((t) => t.actualReturn > 0).length /
+                earlyTrades.length) *
+              100
+            : 0;
+          const primeWR = primeTrades.length
+            ? (primeTrades.filter((t) => t.actualReturn > 0).length /
+                primeTrades.length) *
+              100
+            : 0;
+          const earlyAvg = earlyTrades.length
+            ? earlyTrades.reduce((s, t) => s + t.actualReturn, 0) /
+              earlyTrades.length
+            : 0;
+          const primeAvg = primeTrades.length
+            ? primeTrades.reduce((s, t) => s + t.actualReturn, 0) /
+              primeTrades.length
+            : 0;
+
+          return {
+            windowRows,
+            allTrades,
+            overallWR,
+            overallAvg,
+            expectancy,
+            allTargeted,
+            allStopped,
+            earlyWR,
+            earlyAvg,
+            earlyTrades,
+            primeWR,
+            primeAvg,
+            primeTrades,
+          };
         }
-      }
+
+        function renderBacktest(bt) {
+          document.getElementById("bt-winrate").textContent =
+            bt.overallWR.toFixed(1) + "%";
+          document.getElementById("bt-avgreturn").textContent =
+            (bt.overallAvg >= 0 ? "+" : "") + bt.overallAvg.toFixed(2) + "%";
+          document.getElementById("bt-trades").textContent = bt.allTrades.length;
+          document.getElementById("bt-expectancy").textContent =
+            (bt.expectancy >= 0 ? "+" : "") + bt.expectancy.toFixed(2) + "%";
+
+          document.getElementById("bt-narrative").innerHTML = `
+      🟢 EARLY &nbsp;${bt.earlyWR.toFixed(1)}% win · ${bt.earlyAvg >= 0 ? "+" : ""}${bt.earlyAvg.toFixed(2)}% avg · ${bt.earlyTrades.length} trades<br>
+      🟡 PRIME &nbsp;${bt.primeWR.toFixed(1)}% win · ${bt.primeAvg >= 0 ? "+" : ""}${bt.primeAvg.toFixed(2)}% avg · ${bt.primeTrades.length} trades<br>
+      <span style="color:var(--text3);font-size:10px">${bt.allTrades.length} total trades · 3 time windows · live calculation</span>`;
+        }
+
+        async function loadData() {
+          // API key handled server-side via proxy
+          }
+          clearError();
+          const btn = document.getElementById("run-btn");
+          btn.disabled = true;
+          btn.textContent = "Loading...";
+          setStatus("Fetching market data...", false);
+          try {
+            const h={'Accept':'application/json'};
+            const CMC = "https://pro-api.coinmarketcap.com";
+            const [listRes, metaRes, catRes] = await Promise.all([
+              fetch(
+                "/api/proxy/v1/cryptocurrency/listings/latest?limit=200&convert=USD&sort=market_cap",
+                { headers: h },
+              ),
+              fetch("/api/proxy/v1/global-metrics/quotes/latest?convert=USD", {
+                headers: h,
+              }),
+              fetch(
+                "/api/proxy/v1/cryptocurrency/categories?limit=50&convert=USD",
+                { headers: h },
+              ),
+            ]);
+            const [listData, metaData, catData] = await Promise.all([
+              listRes.json(),
+              metaRes.json(),
+              catRes.json(),
+            ]);
+
+            // Debug — remove after fix
+            console.log("listData keys:", Object.keys(listData));
+            console.log("metaData keys:", Object.keys(metaData));
+
+            if (listData.status?.error_code) {
+              showError(listData.status.error_message);
+              setStatus("Error", false);
+              btn.disabled = false;
+              btn.textContent = "Run signals";
+              return;
+            }
+            if (!listData.data) {
+              showError("Unexpected API response — check console");
+              setStatus("Error", false);
+              btn.disabled = false;
+              btn.textContent = "Run signals";
+              return;
+            }
+
+            setStatus("Fetching token tags...", false);
+            const tokens = listData.data;
+            const ids = tokens
+              .slice(0, 100)
+              .map((t) => t.id)
+              .join(",");
+            const infoRes = await fetch(
+              `/api/proxy/v2/cryptocurrency/info?id=${ids}&aux=tags`,
+              { headers: h },
+            );
+            const infoData = await infoRes.json();
+            const tagMap = {};
+            Object.entries(infoData.data || {}).forEach(([id, info]) => {
+              tagMap[parseInt(id)] = info.tags || [];
+            });
+
+            const scored = tokens
+              .map((t) => scoreToken(t, tagMap))
+              .filter(Boolean)
+              .sort((a, b) => b.score - a.score);
+            const regime = detectRegime(metaData.data);
+            const fg = parseFG(metaData.data);
+            const cats = catData.data || [];
+
+            renderRegime(regime, fg);
+            const narRanking = renderNarratives(scored.slice(0, 10));
+            const topCats = renderCategories(cats);
+            renderAlignment(topCats, narRanking);
+            renderTable(scored);
+            renderWatchlist(scored, regime, fg);
+
+            document.getElementById("main-content").style.display = "grid";
+            setStatus(`Live · ${new Date().toLocaleTimeString()}`, true);
+          } catch (e) {
+            showError(e.message);
+            setStatus("Error", false);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Refresh";
+          }
+        }
     </script>
   </body>
 </html>
