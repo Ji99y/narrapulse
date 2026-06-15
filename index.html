@@ -1,381 +1,1032 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NarraPulse — BSC Narrative Momentum Skill</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:    #0A0A0F;
-      --bg2:   #111118;
-      --bg3:   #18181f;
-      --border: rgba(255,255,255,0.07);
-      --border2: rgba(255,255,255,0.13);
-      --text:  #E8E8EE;
-      --text2: #8888A0;
-      --text3: #55556A;
-      --green: #00E87A;
-      --gbg:   rgba(0,232,122,0.08);
-      --gborder: rgba(0,232,122,0.22);
-      --amber: #FFB800;
-      --abg:   rgba(255,184,0,0.08);
-      --aborder: rgba(255,184,0,0.22);
-      --red:   #FF4D4D;
-      --rbg:   rgba(255,77,77,0.08);
-      --rborder: rgba(255,77,77,0.22);
-      --blue:  #4D9EFF;
-      --bbg:   rgba(77,158,255,0.08);
-      --bborder: rgba(77,158,255,0.22);
-    }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NarraPulse — BSC Narrative Momentum Skill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #0a0a0f;
+        --bg2: #111118;
+        --bg3: #18181f;
+        --border: rgba(255, 255, 255, 0.07);
+        --border2: rgba(255, 255, 255, 0.13);
+        --text: #e8e8ee;
+        --text2: #8888a0;
+        --text3: #55556a;
+        --green: #00e87a;
+        --gbg: rgba(0, 232, 122, 0.08);
+        --gborder: rgba(0, 232, 122, 0.22);
+        --amber: #ffb800;
+        --abg: rgba(255, 184, 0, 0.08);
+        --aborder: rgba(255, 184, 0, 0.22);
+        --red: #ff4d4d;
+        --rbg: rgba(255, 77, 77, 0.08);
+        --rborder: rgba(255, 77, 77, 0.22);
+        --blue: #4d9eff;
+        --bbg: rgba(77, 158, 255, 0.08);
+        --bborder: rgba(77, 158, 255, 0.22);
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        min-height: 100vh;
+      }
 
-    /* TOPBAR */
-    .topbar { background: var(--bg2); border-bottom: 0.5px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-    .logo { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; }
-    .logo span { color: var(--green); }
-    .status { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
-    .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+      /* TOPBAR */
+      .topbar {
+        background: var(--bg2);
+        border-bottom: 0.5px solid var(--border);
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .logo {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+      }
+      .logo span {
+        color: var(--green);
+      }
+      .status {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--text3);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .pulse {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--text3);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
 
-    /* API BAR */
-    .api-bar { background: var(--bg2); border-bottom: 0.5px solid var(--border); padding: 10px 24px; display: flex; gap: 10px; align-items: center; }
-    .api-bar input { flex: 1; background: var(--bg3); border: 0.5px solid var(--border2); border-radius: 6px; padding: 8px 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); outline: none; transition: border-color 0.15s; }
-    .api-bar input:focus { border-color: var(--green); }
-    .api-bar input::placeholder { color: var(--text3); }
-    .btn { background: var(--green); color: #000; border: none; border-radius: 6px; padding: 8px 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
-    .btn:hover { opacity: 0.85; }
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+      /* API BAR */
+      .api-bar {
+        background: var(--bg2);
+        border-bottom: 0.5px solid var(--border);
+        padding: 10px 24px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .api-bar input {
+        flex: 1;
+        background: var(--bg3);
+        border: 0.5px solid var(--border2);
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.15s;
+      }
+      .api-bar input:focus {
+        border-color: var(--green);
+      }
+      .api-bar input::placeholder {
+        color: var(--text3);
+      }
+      .btn {
+        background: var(--green);
+        color: #000;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 18px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.15s;
+        white-space: nowrap;
+      }
+      .btn:hover {
+        opacity: 0.85;
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
 
-    /* REGIME BAR */
-    .regime-bar { background: var(--bg2); border-bottom: 0.5px solid var(--border); padding: 10px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .regime-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 8px; border-radius: 4px; background: var(--abg); color: var(--amber); border: 0.5px solid var(--aborder); }
-    .regime-badge.alt { background: var(--gbg); color: var(--green); border-color: var(--gborder); }
-    .regime-meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text2); }
-    .regime-meta strong { color: var(--text); font-weight: 500; }
-    .regime-note { font-size: 12px; color: var(--text3); margin-left: auto; }
+      /* REGIME BAR */
+      .regime-bar {
+        background: var(--bg2);
+        border-bottom: 0.5px solid var(--border);
+        padding: 10px 24px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .regime-badge {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 3px 8px;
+        border-radius: 4px;
+        background: var(--abg);
+        color: var(--amber);
+        border: 0.5px solid var(--aborder);
+      }
+      .regime-badge.alt {
+        background: var(--gbg);
+        color: var(--green);
+        border-color: var(--gborder);
+      }
+      .regime-meta {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--text2);
+      }
+      .regime-meta strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .regime-note {
+        font-size: 12px;
+        color: var(--text3);
+        margin-left: auto;
+      }
 
-    /* LAYOUT */
-    .main { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: 1fr 300px; gap: 16px; }
-    @media(max-width:900px){ .main { grid-template-columns:1fr; } }
+      /* LAYOUT */
+      .main {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 20px 24px;
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .main {
+          grid-template-columns: 1fr;
+        }
+      }
 
-    /* SECTION */
-    .section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
-    .card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+      /* SECTION */
+      .section-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text3);
+        margin-bottom: 10px;
+      }
+      .card {
+        background: var(--bg2);
+        border: 0.5px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
 
-    /* NARRATIVE GRID */
-    .narrative-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px,1fr)); gap: 8px; margin-bottom: 16px; }
-    .nar-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px; }
-    .nar-card.hot { border-color: var(--gborder); background: var(--gbg); }
-    .nar-name { font-size: 10px; font-weight: 600; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-    .nar-card.hot .nar-name { color: var(--green); }
-    .nar-score { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 4px; }
-    .nar-card.hot .nar-score { color: var(--green); }
-    .nar-tokens { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); }
+      /* NARRATIVE GRID */
+      .narrative-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .nar-card {
+        background: var(--bg2);
+        border: 0.5px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .nar-card.hot {
+        border-color: var(--gborder);
+        background: var(--gbg);
+      }
+      .nar-name {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--text3);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .nar-card.hot .nar-name {
+        color: var(--green);
+      }
+      .nar-score {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .nar-card.hot .nar-score {
+        color: var(--green);
+      }
+      .nar-tokens {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        color: var(--text3);
+      }
 
-    /* CMC CATEGORIES */
-    .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 8px; margin-bottom: 16px; }
-    .cat-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; }
-    .cat-card.top { border-color: var(--gborder); }
-    .cat-name { font-size: 11px; font-weight: 500; color: var(--text2); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .cat-card.top .cat-name { color: var(--green); }
-    .cat-change { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; }
-    .cat-meta { font-size: 10px; color: var(--text3); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+      /* CMC CATEGORIES */
+      .cat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .cat-card {
+        background: var(--bg2);
+        border: 0.5px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+      .cat-card.top {
+        border-color: var(--gborder);
+      }
+      .cat-name {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--text2);
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .cat-card.top .cat-name {
+        color: var(--green);
+      }
+      .cat-change {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .cat-meta {
+        font-size: 10px;
+        color: var(--text3);
+        margin-top: 2px;
+        font-family: "JetBrains Mono", monospace;
+      }
 
-    /* TABLE */
-    .table-wrap { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: 'JetBrains Mono', monospace; }
-    thead th { padding: 10px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); border-bottom: 0.5px solid var(--border); background: var(--bg3); white-space: nowrap; }
-    tbody td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); color: var(--text); white-space: nowrap; }
-    tbody tr:last-child td { border-bottom: none; }
-    tbody tr:hover { background: var(--bg3); }
+      /* TABLE */
+      .table-wrap {
+        background: var(--bg2);
+        border: 0.5px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        font-family: "JetBrains Mono", monospace;
+      }
+      thead th {
+        padding: 10px 12px;
+        text-align: left;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text3);
+        border-bottom: 0.5px solid var(--border);
+        background: var(--bg3);
+        white-space: nowrap;
+      }
+      tbody td {
+        padding: 9px 12px;
+        border-bottom: 0.5px solid var(--border);
+        color: var(--text);
+        white-space: nowrap;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tbody tr:hover {
+        background: var(--bg3);
+      }
 
-    /* TAGS */
-    .tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 4px; }
-    .t-early     { background: var(--gbg);  color: var(--green); border: 0.5px solid var(--gborder); }
-    .t-prime     { background: var(--abg);  color: var(--amber); border: 0.5px solid var(--aborder); }
-    .t-mid       { background: var(--bg3);  color: var(--text3); border: 0.5px solid var(--border);  }
-    .t-late,
-    .t-exhausted { background: var(--rbg);  color: var(--red);   border: 0.5px solid var(--rborder); }
-    .t-confirmed { background: var(--gbg);  color: var(--green); border: 0.5px solid var(--gborder); }
-    .t-weak      { background: var(--abg);  color: var(--amber); border: 0.5px solid var(--aborder); }
-    .t-diverging { background: var(--rbg);  color: var(--red);   border: 0.5px solid var(--rborder); }
-    .t-none      { background: var(--bg3);  color: var(--text3); border: 0.5px solid var(--border);  }
-    .t-exit      { background: var(--rbg);  color: var(--red);   border: 0.5px solid var(--rborder); }
-    .t-running   { background: var(--gbg);  color: var(--green); border: 0.5px solid var(--gborder); }
+      /* TAGS */
+      .tag {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 2px 7px;
+        border-radius: 4px;
+      }
+      .t-early {
+        background: var(--gbg);
+        color: var(--green);
+        border: 0.5px solid var(--gborder);
+      }
+      .t-prime {
+        background: var(--abg);
+        color: var(--amber);
+        border: 0.5px solid var(--aborder);
+      }
+      .t-mid {
+        background: var(--bg3);
+        color: var(--text3);
+        border: 0.5px solid var(--border);
+      }
+      .t-late,
+      .t-exhausted {
+        background: var(--rbg);
+        color: var(--red);
+        border: 0.5px solid var(--rborder);
+      }
+      .t-confirmed {
+        background: var(--gbg);
+        color: var(--green);
+        border: 0.5px solid var(--gborder);
+      }
+      .t-weak {
+        background: var(--abg);
+        color: var(--amber);
+        border: 0.5px solid var(--aborder);
+      }
+      .t-diverging {
+        background: var(--rbg);
+        color: var(--red);
+        border: 0.5px solid var(--rborder);
+      }
+      .t-none {
+        background: var(--bg3);
+        color: var(--text3);
+        border: 0.5px solid var(--border);
+      }
+      .t-exit {
+        background: var(--rbg);
+        color: var(--red);
+        border: 0.5px solid var(--rborder);
+      }
+      .t-running {
+        background: var(--gbg);
+        color: var(--green);
+        border: 0.5px solid var(--gborder);
+      }
 
-    .pos { color: var(--green); }
-    .neg { color: var(--red); }
+      .pos {
+        color: var(--green);
+      }
+      .neg {
+        color: var(--red);
+      }
 
-    /* SIDEBAR */
-    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+      /* SIDEBAR */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
 
-    /* WATCHLIST */
-    .wl-header { padding: 12px 16px; border-bottom: 0.5px solid var(--border); background: var(--bg3); display: flex; align-items: center; justify-content: space-between; }
-    .wl-title { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
-    .wl-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); }
-    .wl-subtext { font-size: 10px; color: var(--text3); padding: 6px 16px; border-bottom: 0.5px solid var(--border); background: var(--bg3); font-family: 'JetBrains Mono', monospace; }
-    .wl-item { padding: 14px 16px; border-bottom: 0.5px solid var(--border); }
-    .wl-item:last-child { border-bottom: none; }
-    .wl-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .wl-sym { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; }
-    .score-pill { background: var(--bbg); color: var(--blue); border: 0.5px solid var(--bborder); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 4px; }
-    .wl-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    .wl-lbl { font-size: 10px; color: var(--text3); margin-bottom: 2px; font-family: 'JetBrains Mono', monospace; }
-    .wl-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); }
-    .wl-val.stop { color: var(--red); }
-    .wl-val.tgt  { color: var(--green); }
+      /* WATCHLIST */
+      .wl-header {
+        padding: 12px 16px;
+        border-bottom: 0.5px solid var(--border);
+        background: var(--bg3);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .wl-title {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text3);
+      }
+      .wl-count {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--green);
+      }
+      .wl-subtext {
+        font-size: 10px;
+        color: var(--text3);
+        padding: 6px 16px;
+        border-bottom: 0.5px solid var(--border);
+        background: var(--bg3);
+        font-family: "JetBrains Mono", monospace;
+      }
+      .wl-item {
+        padding: 14px 16px;
+        border-bottom: 0.5px solid var(--border);
+      }
+      .wl-item:last-child {
+        border-bottom: none;
+      }
+      .wl-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .wl-sym {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .score-pill {
+        background: var(--bbg);
+        color: var(--blue);
+        border: 0.5px solid var(--bborder);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 4px;
+      }
+      .wl-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+      }
+      .wl-lbl {
+        font-size: 10px;
+        color: var(--text3);
+        margin-bottom: 2px;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .wl-val {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--text);
+      }
+      .wl-val.stop {
+        color: var(--red);
+      }
+      .wl-val.tgt {
+        color: var(--green);
+      }
 
-    /* STATS */
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .stat-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px; }
-    .stat-lbl { font-size: 10px; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
-    .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--text); }
-    .stat-val.g { color: var(--green); }
+      /* STATS */
+      .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .stat-card {
+        background: var(--bg2);
+        border: 0.5px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .stat-lbl {
+        font-size: 10px;
+        color: var(--text3);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .stat-val {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .stat-val.g {
+        color: var(--green);
+      }
 
-    /* ALIGNMENT */
-    .align-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 10px; }
-    .align-text { font-size: 12px; color: var(--text2); line-height: 1.5; }
-    .align-text strong { color: var(--text); }
+      /* ALIGNMENT */
+      .align-card {
+        background: var(--bg2);
+        border: 0.5px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .align-text {
+        font-size: 12px;
+        color: var(--text2);
+        line-height: 1.5;
+      }
+      .align-text strong {
+        color: var(--text);
+      }
 
-    /* EMPTY / ERROR */
-    .empty { padding: 32px; text-align: center; color: var(--text3); font-size: 13px; line-height: 1.6; }
-    .error-bar { background: var(--rbg); border-bottom: 0.5px solid var(--rborder); padding: 8px 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--red); }
+      /* EMPTY / ERROR */
+      .empty {
+        padding: 32px;
+        text-align: center;
+        color: var(--text3);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .error-bar {
+        background: var(--rbg);
+        border-bottom: 0.5px solid var(--rborder);
+        padding: 8px 24px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--red);
+      }
 
-    /* FOOTER */
-    .footer { text-align: center; padding: 24px; font-size: 11px; color: var(--text3); border-top: 0.5px solid var(--border); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
-    .footer a { color: var(--text2); text-decoration: none; }
-    .footer a:hover { color: var(--green); }
-  </style>
-</head>
-<body>
-
-<div class="topbar">
-  <div class="logo">Narra<span>Pulse</span></div>
-  <div class="status"><span class="pulse" id="pulse-dot"></span><span id="status-text">Enter API key to load signals</span></div>
-</div>
-
-<div class="api-bar">
-  <input type="password" id="api-key" placeholder="Paste your CoinMarketCap API key..." />
-  <button class="btn" id="run-btn" onclick="loadData()">Run signals</button>
-</div>
-
-<div id="error-area"></div>
-<div id="regime-area"></div>
-
-<div class="main" id="main-content" style="display:none">
-  <div class="left">
-
-    <div class="section-label">Narrative heat map</div>
-    <div class="narrative-grid" id="nar-grid"></div>
-
-    <div class="section-label">CMC official category momentum</div>
-    <div class="cat-grid" id="cat-grid"></div>
-    <div id="align-area"></div>
-
-    <div class="section-label">Top momentum tokens</div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th><th>Symbol</th><th>Narrative</th><th>Age</th>
-            <th>24h%</th><th>7d%</th><th>Divergence</th><th>Pump</th><th>Score</th>
-          </tr>
-        </thead>
-        <tbody id="token-table"></tbody>
-      </table>
-    </div>
-
-  </div>
-  <div class="sidebar">
-
-    <div>
-      <div class="section-label">Backtest summary (7-day proxy)</div>
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-lbl">Win rate</div><div class="stat-val g">100%</div></div>
-        <div class="stat-card"><div class="stat-lbl">Avg return</div><div class="stat-val g">+10.0%</div></div>
-        <div class="stat-card"><div class="stat-lbl">Trades</div><div class="stat-val">10</div></div>
-        <div class="stat-card"><div class="stat-lbl">Targets hit</div><div class="stat-val">2</div></div>
+      /* FOOTER */
+      .footer {
+        text-align: center;
+        padding: 24px;
+        font-size: 11px;
+        color: var(--text3);
+        border-top: 0.5px solid var(--border);
+        margin-top: 8px;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .footer a {
+        color: var(--text2);
+        text-decoration: none;
+      }
+      .footer a:hover {
+        color: var(--green);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="logo">Narra<span>Pulse</span></div>
+      <div class="status">
+        <span class="pulse" id="pulse-dot"></span
+        ><span id="status-text">Enter API key to load signals</span>
       </div>
     </div>
 
-    <div class="card">
-      <div class="wl-header">
-        <span class="wl-title">Watchlist</span>
-        <span class="wl-count" id="wl-count">—</span>
-      </div>
-      <div class="wl-subtext" id="wl-subtext">Run signals to populate</div>
-      <div id="wl-body"><div class="empty">Paste your CMC API key<br>and hit Run signals</div></div>
+    <div class="api-bar">
+      <input
+        type="password"
+        id="api-key"
+        placeholder="Paste your CoinMarketCap API key..."
+      />
+      <button class="btn" id="run-btn" onclick="loadData()">Run signals</button>
     </div>
 
-  </div>
-</div>
+    <div id="error-area"></div>
+    <div id="regime-area"></div>
 
-<div class="footer">
-  <strong style="color:var(--text)">NarraPulse</strong> &nbsp;·&nbsp;
-  Built for <a href="https://dorahacks.io/hackathon/bnbhack-twt-cmc/" target="_blank">BNB HACK: AI Trading Agent Edition</a> &nbsp;·&nbsp;
-  Data: <a href="https://coinmarketcap.com" target="_blank">CoinMarketCap</a> &nbsp;·&nbsp;
-  <a href="https://github.com/Ji99y/narrapulse" target="_blank">GitHub ↗</a>
-</div>
+    <div class="main" id="main-content" style="display: none">
+      <div class="left">
+        <div class="section-label">Narrative heat map</div>
+        <div class="narrative-grid" id="nar-grid"></div>
 
-<script>
-function getKey() { return document.getElementById('api-key').value.trim(); }
-function setStatus(msg, live) {
-  document.getElementById('status-text').textContent = msg;
-  document.getElementById('pulse-dot').style.background = live ? 'var(--green)' : 'var(--text3)';
-}
-function showError(msg) { document.getElementById('error-area').innerHTML = `<div class="error-bar">⚠ ${msg}</div>`; }
-function clearError() { document.getElementById('error-area').innerHTML = ''; }
+        <div class="section-label">CMC official category momentum</div>
+        <div class="cat-grid" id="cat-grid"></div>
+        <div id="align-area"></div>
 
-function fmtPrice(p) {
-  if (p >= 1000) return '$' + p.toLocaleString('en-US', {maximumFractionDigits:2});
-  if (p >= 1)    return '$' + p.toFixed(2);
-  if (p >= 0.01) return '$' + p.toFixed(4);
-  return '$' + p.toFixed(6);
-}
-function fmtPct(v) {
-  return `<span class="${v>=0?'pos':'neg'}">${v>=0?'+':''}${v.toFixed(2)}%</span>`;
-}
+        <div class="section-label">Top momentum tokens</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Symbol</th>
+                <th>Narrative</th>
+                <th>Age</th>
+                <th>24h%</th>
+                <th>7d%</th>
+                <th>Divergence</th>
+                <th>Pump</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="token-table"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div>
+          <div class="section-label">Backtest summary (7-day proxy)</div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-lbl">Win rate</div>
+              <div class="stat-val g">100%</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-lbl">Avg return</div>
+              <div class="stat-val g">+10.0%</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-lbl">Trades</div>
+              <div class="stat-val">10</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-lbl">Targets hit</div>
+              <div class="stat-val">2</div>
+            </div>
+          </div>
+        </div>
 
-function getVolumeTrend(q) {
-  const vc = q.volume_change_24h || 0;
-  if (vc > 20)  return { trend:'SURGING',   mult:1.0 };
-  if (vc > 0)   return { trend:'RISING',    mult:1.0 };
-  if (vc > -20) return { trend:'FADING',    mult:0.5 };
-  return              { trend:'COLLAPSING', mult:0.0 };
-}
-function getDivergence(q) {
-  const vt = getVolumeTrend(q);
-  if (q.percent_change_24h <= 0) return { signal:'NO_SIGNAL', cls:'t-none',      label:'—'         };
-  if (vt.trend==='SURGING'||vt.trend==='RISING') return { signal:'CONFIRMED', cls:'t-confirmed', label:'CONFIRMED' };
-  if (vt.trend==='FADING')       return { signal:'WEAK',      cls:'t-weak',      label:'WEAK'      };
-  return                                { signal:'DIVERGING',  cls:'t-diverging', label:'DIVERGING' };
-}
-function getNarrativeAge(q) {
-  const c7=q.percent_change_7d||0, c30=q.percent_change_30d||0;
-  const c24=q.percent_change_24h||0, c1=q.percent_change_1h||0;
-  if (c7>10&&c30<20)             return { age:'EARLY',    cls:'t-early',    label:'EARLY',    bonus: 3 };
-  if (c7>10&&c30>20&&c24>0)      return { age:'PRIME',    cls:'t-prime',    label:'PRIME',    bonus: 1 };
-  if (c30>80&&c24<5&&c1<1)       return { age:'EXHAUSTED',cls:'t-exhausted',label:'EXHAUSTED',bonus:-3 };
-  if (c30>40&&c7<c30/4)          return { age:'LATE',     cls:'t-late',     label:'LATE',     bonus:-1 };
-  return                                { age:'MID',      cls:'t-mid',      label:'MID',      bonus: 0 };
-}
-function getPumpStatus(q) {
-  const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, vc=q.volume_change_24h||0;
-  if (c24<=20) return { label:'—',        cls:'t-none',    warn:false };
-  const slow=(c1*24)<c24*0.5;
-  if (slow&&vc>30)  return { label:'EXIT SOON', cls:'t-exit',    warn:true  };
-  if (slow&&vc<=30) return { label:'EXIT NOW',  cls:'t-exit',    warn:true  };
-  return                   { label:'RUNNING',   cls:'t-running', warn:false };
-}
-function classifyNarrative(tags=[]) {
-  const t=tags.map(x=>(x.slug||x).toLowerCase());
-  if (t.some(x=>['ai','artificial-intelligence','machine-learning','ai-agent'].includes(x))) return 'AI';
-  if (t.some(x=>['defi','decentralized-finance','dex','yield-farming','lending'].includes(x))) return 'DeFi';
-  if (t.some(x=>['meme','memes','dog-themed','cat-themed'].includes(x))) return 'Meme';
-  if (t.some(x=>['layer-1','layer1','l1','smart-contracts','platform'].includes(x))) return 'L1';
-  if (t.some(x=>['layer-2','layer2','l2','scaling','rollup'].includes(x))) return 'L2';
-  if (t.some(x=>['infrastructure','interoperability','oracle','bridge','storage'].includes(x))) return 'Infra';
-  if (t.some(x=>['gaming','metaverse','nft','play-to-earn','gamefi'].includes(x))) return 'Gaming';
-  return 'Other';
-}
-function parseFG(metrics) {
-  const fg=metrics?.fear_greed_value??null;
-  if (fg===null) return { label:'⚪ NEUTRAL (unavailable)', gated:false };
-  if (fg<=25) return { label:`🔴 EXTREME FEAR (${fg})`,  gated:true  };
-  if (fg<=45) return { label:`🟠 FEAR (${fg})`,          gated:false };
-  if (fg<=55) return { label:`⚪ NEUTRAL (${fg})`,       gated:false };
-  if (fg<=75) return { label:`🟡 GREED (${fg})`,         gated:false };
-  return             { label:`🔴 EXTREME GREED (${fg})`, gated:true  };
-}
-function scoreToken(token, tagMap) {
-  const q=token.quote.USD;
-  const mcap=q.market_cap||0, vol=q.volume_24h||0;
-  if (mcap<50000000||vol<5000000||q.price<=0.001) return null;
-  if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return null;
-  const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, c7=q.percent_change_7d||0;
-  const vmr=vol/mcap;
-  const vt=getVolumeTrend(q), div=getDivergence(q), na=getNarrativeAge(q), ps=getPumpStatus(q);
-  const allPos=c1>0&&c24>0&&c7>0;
-  let score=0;
-  if (allPos) score+=4;
-  if (c24>3) score+=1; if (c24>8) score+=2; if (c24>20) score+=1;
-  if (c7>5)  score+=1; if (c7>20) score+=2;
-  if (vmr>0.10) score+=1; if (vmr>0.25) score+=2; if (vmr>0.50) score+=1;
-  score=Math.round(score*vt.mult);
-  if (c24>80) score-=4; if (c7>200) score-=3; if (vmr>2.0) score-=2;
-  score+=na.bonus;
-  return { symbol:token.symbol, id:token.id, price:q.price, c1, c24, c7,
-           divergence:div, narAge:na, pumpStatus:ps, allPos,
-           narrative:classifyNarrative(tagMap[token.id]||[]), score };
-}
-function detectRegime(m) {
-  const btc=m.btc_dominance, vol=m.quote.USD.total_volume_24h, mcap=m.quote.USD.total_market_cap;
-  if (btc>58) return {regime:'BTC_DOMINANCE',cls:'',   risk:'LOW', note:'Altcoins suppressed — be very selective',maxPos:2,alloc:20,btc,mcap,vol};
-  if (btc<50) return {regime:'ALTSEASON',    cls:'alt',risk:'HIGH',note:'Broad altcoin momentum — wider opportunities',maxPos:5,alloc:10,btc,mcap,vol};
-  if (vol/mcap>0.05) return {regime:'ACTIVE',cls:'',  risk:'MED', note:'Healthy volume — standard sizing',maxPos:3,alloc:15,btc,mcap,vol};
-  return              {regime:'QUIET',       cls:'',   risk:'LOW', note:'Low volume — reduce position sizes',maxPos:2,alloc:20,btc,mcap,vol};
-}
+        <div class="card">
+          <div class="wl-header">
+            <span class="wl-title">Watchlist</span>
+            <span class="wl-count" id="wl-count">—</span>
+          </div>
+          <div class="wl-subtext" id="wl-subtext">Run signals to populate</div>
+          <div id="wl-body">
+            <div class="empty">
+              Paste your CMC API key<br />and hit Run signals
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-function renderRegime(r, fg) {
-  document.getElementById('regime-area').innerHTML = `
+    <div class="footer">
+      <strong style="color: var(--text)">NarraPulse</strong> &nbsp;·&nbsp; Built
+      for
+      <a href="https://dorahacks.io/hackathon/bnbhack-twt-cmc/" target="_blank"
+        >BNB HACK: AI Trading Agent Edition</a
+      >
+      &nbsp;·&nbsp; Data:
+      <a href="https://coinmarketcap.com" target="_blank">CoinMarketCap</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/Ji99y/narrapulse" target="_blank">GitHub ↗</a>
+    </div>
+
+    <script>
+      function getKey() {
+        return document.getElementById("api-key").value.trim();
+      }
+      function setStatus(msg, live) {
+        document.getElementById("status-text").textContent = msg;
+        document.getElementById("pulse-dot").style.background = live
+          ? "var(--green)"
+          : "var(--text3)";
+      }
+      function showError(msg) {
+        document.getElementById("error-area").innerHTML =
+          `<div class="error-bar">⚠ ${msg}</div>`;
+      }
+      function clearError() {
+        document.getElementById("error-area").innerHTML = "";
+      }
+
+      function fmtPrice(p) {
+        if (p >= 1000)
+          return "$" + p.toLocaleString("en-US", { maximumFractionDigits: 2 });
+        if (p >= 1) return "$" + p.toFixed(2);
+        if (p >= 0.01) return "$" + p.toFixed(4);
+        return "$" + p.toFixed(6);
+      }
+      function fmtPct(v) {
+        return `<span class="${v >= 0 ? "pos" : "neg"}">${v >= 0 ? "+" : ""}${v.toFixed(2)}%</span>`;
+      }
+
+      function getVolumeTrend(q) {
+        const vc = q.volume_change_24h || 0;
+        if (vc > 20) return { trend: "SURGING", mult: 1.0 };
+        if (vc > 0) return { trend: "RISING", mult: 1.0 };
+        if (vc > -20) return { trend: "FADING", mult: 0.5 };
+        return { trend: "COLLAPSING", mult: 0.0 };
+      }
+      function getDivergence(q) {
+        const vt = getVolumeTrend(q);
+        if (q.percent_change_24h <= 0)
+          return { signal: "NO_SIGNAL", cls: "t-none", label: "—" };
+        if (vt.trend === "SURGING" || vt.trend === "RISING")
+          return {
+            signal: "CONFIRMED",
+            cls: "t-confirmed",
+            label: "CONFIRMED",
+          };
+        if (vt.trend === "FADING")
+          return { signal: "WEAK", cls: "t-weak", label: "WEAK" };
+        return { signal: "DIVERGING", cls: "t-diverging", label: "DIVERGING" };
+      }
+      function getNarrativeAge(q) {
+        const c7 = q.percent_change_7d || 0,
+          c30 = q.percent_change_30d || 0;
+        const c24 = q.percent_change_24h || 0,
+          c1 = q.percent_change_1h || 0;
+        if (c7 > 10 && c30 < 20)
+          return { age: "EARLY", cls: "t-early", label: "EARLY", bonus: 3 };
+        if (c7 > 10 && c30 > 20 && c24 > 0)
+          return { age: "PRIME", cls: "t-prime", label: "PRIME", bonus: 1 };
+        if (c30 > 80 && c24 < 5 && c1 < 1)
+          return {
+            age: "EXHAUSTED",
+            cls: "t-exhausted",
+            label: "EXHAUSTED",
+            bonus: -3,
+          };
+        if (c30 > 40 && c7 < c30 / 4)
+          return { age: "LATE", cls: "t-late", label: "LATE", bonus: -1 };
+        return { age: "MID", cls: "t-mid", label: "MID", bonus: 0 };
+      }
+      function getPumpStatus(q) {
+        const c1 = q.percent_change_1h || 0,
+          c24 = q.percent_change_24h || 0,
+          vc = q.volume_change_24h || 0;
+        if (c24 <= 20) return { label: "—", cls: "t-none", warn: false };
+        const slow = c1 * 24 < c24 * 0.5;
+        if (slow && vc > 30)
+          return { label: "EXIT SOON", cls: "t-exit", warn: true };
+        if (slow && vc <= 30)
+          return { label: "EXIT NOW", cls: "t-exit", warn: true };
+        return { label: "RUNNING", cls: "t-running", warn: false };
+      }
+      function classifyNarrative(tags = []) {
+        const t = tags.map((x) => (x.slug || x).toLowerCase());
+        if (
+          t.some((x) =>
+            [
+              "ai",
+              "artificial-intelligence",
+              "machine-learning",
+              "ai-agent",
+            ].includes(x),
+          )
+        )
+          return "AI";
+        if (
+          t.some((x) =>
+            [
+              "defi",
+              "decentralized-finance",
+              "dex",
+              "yield-farming",
+              "lending",
+            ].includes(x),
+          )
+        )
+          return "DeFi";
+        if (
+          t.some((x) =>
+            ["meme", "memes", "dog-themed", "cat-themed"].includes(x),
+          )
+        )
+          return "Meme";
+        if (
+          t.some((x) =>
+            ["layer-1", "layer1", "l1", "smart-contracts", "platform"].includes(
+              x,
+            ),
+          )
+        )
+          return "L1";
+        if (
+          t.some((x) =>
+            ["layer-2", "layer2", "l2", "scaling", "rollup"].includes(x),
+          )
+        )
+          return "L2";
+        if (
+          t.some((x) =>
+            [
+              "infrastructure",
+              "interoperability",
+              "oracle",
+              "bridge",
+              "storage",
+            ].includes(x),
+          )
+        )
+          return "Infra";
+        if (
+          t.some((x) =>
+            ["gaming", "metaverse", "nft", "play-to-earn", "gamefi"].includes(
+              x,
+            ),
+          )
+        )
+          return "Gaming";
+        return "Other";
+      }
+      function parseFG(metrics) {
+        const fg = metrics?.fear_greed_value ?? null;
+        if (fg === null)
+          return { label: "⚪ NEUTRAL (unavailable)", gated: false };
+        if (fg <= 25) return { label: `🔴 EXTREME FEAR (${fg})`, gated: true };
+        if (fg <= 45) return { label: `🟠 FEAR (${fg})`, gated: false };
+        if (fg <= 55) return { label: `⚪ NEUTRAL (${fg})`, gated: false };
+        if (fg <= 75) return { label: `🟡 GREED (${fg})`, gated: false };
+        return { label: `🔴 EXTREME GREED (${fg})`, gated: true };
+      }
+      function scoreToken(token, tagMap) {
+        const q = token.quote.USD;
+        const mcap = q.market_cap || 0,
+          vol = q.volume_24h || 0;
+        if (mcap < 50000000 || vol < 5000000 || q.price <= 0.001) return null;
+        if (
+          q.price > 0.99 &&
+          q.price < 1.01 &&
+          Math.abs(q.percent_change_7d || 0) < 1
+        )
+          return null;
+        const c1 = q.percent_change_1h || 0,
+          c24 = q.percent_change_24h || 0,
+          c7 = q.percent_change_7d || 0;
+        const vmr = vol / mcap;
+        const vt = getVolumeTrend(q),
+          div = getDivergence(q),
+          na = getNarrativeAge(q),
+          ps = getPumpStatus(q);
+        const allPos = c1 > 0 && c24 > 0 && c7 > 0;
+        let score = 0;
+        if (allPos) score += 4;
+        if (c24 > 3) score += 1;
+        if (c24 > 8) score += 2;
+        if (c24 > 20) score += 1;
+        if (c7 > 5) score += 1;
+        if (c7 > 20) score += 2;
+        if (vmr > 0.1) score += 1;
+        if (vmr > 0.25) score += 2;
+        if (vmr > 0.5) score += 1;
+        score = Math.round(score * vt.mult);
+        if (c24 > 80) score -= 4;
+        if (c7 > 200) score -= 3;
+        if (vmr > 2.0) score -= 2;
+        score += na.bonus;
+        return {
+          symbol: token.symbol,
+          id: token.id,
+          price: q.price,
+          c1,
+          c24,
+          c7,
+          divergence: div,
+          narAge: na,
+          pumpStatus: ps,
+          allPos,
+          narrative: classifyNarrative(tagMap[token.id] || []),
+          score,
+        };
+      }
+      function detectRegime(m) {
+        const btc = m.btc_dominance,
+          vol = m.quote.USD.total_volume_24h,
+          mcap = m.quote.USD.total_market_cap;
+        if (btc > 58)
+          return {
+            regime: "BTC_DOMINANCE",
+            cls: "",
+            risk: "LOW",
+            note: "Altcoins suppressed — be very selective",
+            maxPos: 2,
+            alloc: 20,
+            btc,
+            mcap,
+            vol,
+          };
+        if (btc < 50)
+          return {
+            regime: "ALTSEASON",
+            cls: "alt",
+            risk: "HIGH",
+            note: "Broad altcoin momentum — wider opportunities",
+            maxPos: 5,
+            alloc: 10,
+            btc,
+            mcap,
+            vol,
+          };
+        if (vol / mcap > 0.05)
+          return {
+            regime: "ACTIVE",
+            cls: "",
+            risk: "MED",
+            note: "Healthy volume — standard sizing",
+            maxPos: 3,
+            alloc: 15,
+            btc,
+            mcap,
+            vol,
+          };
+        return {
+          regime: "QUIET",
+          cls: "",
+          risk: "LOW",
+          note: "Low volume — reduce position sizes",
+          maxPos: 2,
+          alloc: 20,
+          btc,
+          mcap,
+          vol,
+        };
+      }
+
+      function renderRegime(r, fg) {
+        document.getElementById("regime-area").innerHTML = `
     <div class="regime-bar">
       <span class="regime-badge ${r.cls}">${r.regime}</span>
       <span class="regime-meta">BTC Dom <strong>${r.btc.toFixed(1)}%</strong></span>
-      <span class="regime-meta">MCap <strong>$${(r.mcap/1e12).toFixed(2)}T</strong></span>
-      <span class="regime-meta">Vol <strong>$${(r.vol/1e9).toFixed(1)}B</strong></span>
+      <span class="regime-meta">MCap <strong>$${(r.mcap / 1e12).toFixed(2)}T</strong></span>
+      <span class="regime-meta">Vol <strong>$${(r.vol / 1e9).toFixed(1)}B</strong></span>
       <span class="regime-meta">Sentiment <strong>${fg.label}</strong></span>
       <span class="regime-note">${r.note}</span>
     </div>`;
-}
-function renderNarratives(tokens) {
-  const map={};
-  tokens.forEach(t=>{
-    if (!map[t.narrative]) map[t.narrative]={total:0,count:0,syms:[]};
-    map[t.narrative].total+=t.score; map[t.narrative].count++;
-    map[t.narrative].syms.push(t.symbol);
-  });
-  const ranked=Object.entries(map).map(([n,d])=>({name:n,avg:d.total/d.count,syms:d.syms})).sort((a,b)=>b.avg-a.avg);
-  document.getElementById('nar-grid').innerHTML=ranked.map((n,i)=>`
-    <div class="nar-card ${i===0?'hot':''}">
-      <div class="nar-name">${i===0?'HOTTEST — ':''}${n.name}</div>
+      }
+      function renderNarratives(tokens) {
+        const map = {};
+        tokens.forEach((t) => {
+          if (!map[t.narrative])
+            map[t.narrative] = { total: 0, count: 0, syms: [] };
+          map[t.narrative].total += t.score;
+          map[t.narrative].count++;
+          map[t.narrative].syms.push(t.symbol);
+        });
+        const ranked = Object.entries(map)
+          .map(([n, d]) => ({ name: n, avg: d.total / d.count, syms: d.syms }))
+          .sort((a, b) => b.avg - a.avg);
+        document.getElementById("nar-grid").innerHTML = ranked
+          .map(
+            (n, i) => `
+    <div class="nar-card ${i === 0 ? "hot" : ""}">
+      <div class="nar-name">${i === 0 ? "HOTTEST — " : ""}${n.name}</div>
       <div class="nar-score">${n.avg.toFixed(1)}</div>
-      <div class="nar-tokens">${n.syms.join(' · ')}</div>
-    </div>`).join('');
-  return ranked;
-}
-function renderCategories(cats) {
-  const top=cats.filter(c=>c.market_cap>100000000&&c.avg_price_change!==undefined)
-    .map(c=>({name:c.name,change:c.avg_price_change||0,mcap:c.market_cap,tokens:c.num_tokens}))
-    .sort((a,b)=>b.change-a.change).slice(0,6);
-  document.getElementById('cat-grid').innerHTML=top.map((c,i)=>`
-    <div class="cat-card ${i===0?'top':''}">
-      <div class="cat-name">${i===0?'🔥 ':''}${c.name}</div>
-      <div class="cat-change ${c.change>=0?'pos':'neg'}">${c.change>=0?'+':''}${c.change.toFixed(2)}%</div>
-      <div class="cat-meta">$${(c.mcap/1e9).toFixed(1)}B mcap · ${c.tokens} tokens</div>
-    </div>`).join('');
-  return top;
-}
-function renderAlignment(topCats, narRanking) {
-  if (!topCats.length||!narRanking.length) return;
-  const topCMC=topCats[0].name;
-  const topNar=narRanking[0].name.toLowerCase();
-  const match=topCats.slice(0,3).some(c=>c.name.toLowerCase().includes(topNar)||topNar.includes(c.name.toLowerCase().split(' ')[0]));
-  document.getElementById('align-area').innerHTML=`
-    <div class="align-card" style="border-color:${match?'var(--gborder)':'var(--aborder)'}">
+      <div class="nar-tokens">${n.syms.join(" · ")}</div>
+    </div>`,
+          )
+          .join("");
+        return ranked;
+      }
+      function renderCategories(cats) {
+        const top = cats
+          .filter(
+            (c) => c.market_cap > 100000000 && c.avg_price_change !== undefined,
+          )
+          .map((c) => ({
+            name: c.name,
+            change: c.avg_price_change || 0,
+            mcap: c.market_cap,
+            tokens: c.num_tokens,
+          }))
+          .sort((a, b) => b.change - a.change)
+          .slice(0, 6);
+        document.getElementById("cat-grid").innerHTML = top
+          .map(
+            (c, i) => `
+    <div class="cat-card ${i === 0 ? "top" : ""}">
+      <div class="cat-name">${i === 0 ? "🔥 " : ""}${c.name}</div>
+      <div class="cat-change ${c.change >= 0 ? "pos" : "neg"}">${c.change >= 0 ? "+" : ""}${c.change.toFixed(2)}%</div>
+      <div class="cat-meta">$${(c.mcap / 1e9).toFixed(1)}B mcap · ${c.tokens} tokens</div>
+    </div>`,
+          )
+          .join("");
+        return top;
+      }
+      function renderAlignment(topCats, narRanking) {
+        if (!topCats.length || !narRanking.length) return;
+        const topCMC = topCats[0].name;
+        const topNar = narRanking[0].name.toLowerCase();
+        const match = topCats
+          .slice(0, 3)
+          .some(
+            (c) =>
+              c.name.toLowerCase().includes(topNar) ||
+              topNar.includes(c.name.toLowerCase().split(" ")[0]),
+          );
+        document.getElementById("align-area").innerHTML = `
+    <div class="align-card" style="border-color:${match ? "var(--gborder)" : "var(--aborder)"}">
       <div class="align-text">
-        ${match?'✅':'⚠️'} <strong>Signal alignment:</strong> CMC's leading category is <strong>${topCMC}</strong>.
+        ${match ? "✅" : "⚠️"} <strong>Signal alignment:</strong> CMC's leading category is <strong>${topCMC}</strong>.
         Our heat map shows <strong>${narRanking[0].name}</strong> leading.
-        ${match?'Both agree — higher confidence.':'Divergence detected — use extra caution.'}
+        ${match ? "Both agree — higher confidence." : "Divergence detected — use extra caution."}
       </div>
     </div>`;
-}
-function renderTable(tokens) {
-  document.getElementById('token-table').innerHTML=tokens.slice(0,10).map((t,i)=>`
+      }
+      function renderTable(tokens) {
+        document.getElementById("token-table").innerHTML = tokens
+          .slice(0, 10)
+          .map(
+            (t, i) => `
     <tr>
-      <td style="color:var(--text3)">${i+1}</td>
+      <td style="color:var(--text3)">${i + 1}</td>
       <td style="font-weight:700">${t.symbol}</td>
       <td style="color:var(--text2)">${t.narrative}</td>
       <td><span class="tag ${t.narAge.cls}">${t.narAge.label}</span></td>
@@ -384,16 +1035,31 @@ function renderTable(tokens) {
       <td><span class="tag ${t.divergence.cls}">${t.divergence.label}</span></td>
       <td><span class="tag ${t.pumpStatus.cls}">${t.pumpStatus.label}</span></td>
       <td style="font-weight:700;color:var(--blue)">${t.score}</td>
-    </tr>`).join('');
-}
-function renderWatchlist(tokens, regime, fg) {
-  const effMax=fg.gated?1:regime.maxPos, effAlloc=fg.gated?10:regime.alloc;
-  const wl=tokens.filter(t=>t.allPos&&t.divergence.signal==='CONFIRMED'&&t.narAge.age!=='EXHAUSTED').slice(0,effMax);
-  document.getElementById('wl-count').textContent=`${wl.length} signal${wl.length!==1?'s':''}`;
-  document.getElementById('wl-subtext').textContent=`Max ${effMax} positions · ${effAlloc}% each · 7% stop · 20% target`;
-  document.getElementById('wl-body').innerHTML=wl.length===0
-    ?`<div class="empty">No confirmed signals<br><span style="font-size:11px;color:var(--text3)">Hold cash — wait for cleaner setup</span></div>`
-    :wl.map(t=>`
+    </tr>`,
+          )
+          .join("");
+      }
+      function renderWatchlist(tokens, regime, fg) {
+        const effMax = fg.gated ? 1 : regime.maxPos,
+          effAlloc = fg.gated ? 10 : regime.alloc;
+        const wl = tokens
+          .filter(
+            (t) =>
+              t.allPos &&
+              t.divergence.signal === "CONFIRMED" &&
+              t.narAge.age !== "EXHAUSTED",
+          )
+          .slice(0, effMax);
+        document.getElementById("wl-count").textContent =
+          `${wl.length} signal${wl.length !== 1 ? "s" : ""}`;
+        document.getElementById("wl-subtext").textContent =
+          `Max ${effMax} positions · ${effAlloc}% each · 7% stop · 20% target`;
+        document.getElementById("wl-body").innerHTML =
+          wl.length === 0
+            ? `<div class="empty">No confirmed signals<br><span style="font-size:11px;color:var(--text3)">Hold cash — wait for cleaner setup</span></div>`
+            : wl
+                .map(
+                  (t) => `
       <div class="wl-item">
         <div class="wl-top">
           <div>
@@ -404,59 +1070,95 @@ function renderWatchlist(tokens, regime, fg) {
         </div>
         <div class="wl-grid">
           <div><div class="wl-lbl">Entry</div><div class="wl-val">${fmtPrice(t.price)}</div></div>
-          <div><div class="wl-lbl">Stop</div><div class="wl-val stop">${fmtPrice(t.price*0.93)}</div></div>
-          <div><div class="wl-lbl">Target</div><div class="wl-val tgt">${fmtPrice(t.price*1.20)}</div></div>
+          <div><div class="wl-lbl">Stop</div><div class="wl-val stop">${fmtPrice(t.price * 0.93)}</div></div>
+          <div><div class="wl-lbl">Target</div><div class="wl-val tgt">${fmtPrice(t.price * 1.2)}</div></div>
         </div>
-        ${t.pumpStatus.warn?`<div style="margin-top:8px"><span class="tag t-exit">⚠ ${t.pumpStatus.label}</span></div>`:''}
-      </div>`).join('');
-}
+        ${t.pumpStatus.warn ? `<div style="margin-top:8px"><span class="tag t-exit">⚠ ${t.pumpStatus.label}</span></div>` : ""}
+      </div>`,
+                )
+                .join("");
+      }
 
-async function loadData() {
-  const key=getKey();
-  if (!key) { showError('Please enter your CMC API key'); return; }
-  clearError();
-  const btn=document.getElementById('run-btn');
-  btn.disabled=true; btn.textContent='Loading...';
-  setStatus('Fetching market data...', false);
-  try {
-    const h={'X-CMC_PRO_API_KEY':key,'Accept':'application/json'};
-    const [listRes,metaRes,catRes]=await Promise.all([
-      fetch('/api/v1/cryptocurrency/listings/latest?limit=200&convert=USD&sort=market_cap',{headers:h}),
-      fetch('/api/v1/global-metrics/quotes/latest?convert=USD',{headers:h}),
-      fetch('/api/v1/cryptocurrency/categories?limit=50&convert=USD',{headers:h})
-    ]);
-    const [listData,metaData,catData]=await Promise.all([listRes.json(),metaRes.json(),catRes.json()]);
-    if (listData.status?.error_code) { showError(listData.status.error_message); setStatus('Error',false); btn.disabled=false; btn.textContent='Run signals'; return; }
+      async function loadData() {
+        const key = getKey();
+        if (!key) {
+          showError("Please enter your CMC API key");
+          return;
+        }
+        clearError();
+        const btn = document.getElementById("run-btn");
+        btn.disabled = true;
+        btn.textContent = "Loading...";
+        setStatus("Fetching market data...", false);
+        try {
+          const h = { "X-CMC_PRO_API_KEY": key, Accept: "application/json" };
+          const [listRes, metaRes, catRes] = await Promise.all([
+            fetch(
+              "/api/proxy/v1/cryptocurrency/listings/latest?limit=200&convert=USD&sort=market_cap",
+              { headers: h },
+            ),
+            fetch("/api/proxy/v1/global-metrics/quotes/latest?convert=USD", {
+              headers: h,
+            }),
+            fetch(
+              "/api/proxy/v1/cryptocurrency/categories?limit=50&convert=USD",
+              { headers: h },
+            ),
+          ]);
+          const [listData, metaData, catData] = await Promise.all([
+            listRes.json(),
+            metaRes.json(),
+            catRes.json(),
+          ]);
+          if (listData.status?.error_code) {
+            showError(listData.status.error_message);
+            setStatus("Error", false);
+            btn.disabled = false;
+            btn.textContent = "Run signals";
+            return;
+          }
 
-    setStatus('Fetching token tags...', false);
-    const tokens=listData.data;
-    const ids=tokens.slice(0,100).map(t=>t.id).join(',');
-    const infoRes=await fetch(`/api/v2/cryptocurrency/info?id=${ids}&aux=tags`,{headers:h});
-    const infoData=await infoRes.json();
-    const tagMap={};
-    Object.entries(infoData.data||{}).forEach(([id,info])=>{ tagMap[parseInt(id)]=info.tags||[]; });
+          setStatus("Fetching token tags...", false);
+          const tokens = listData.data;
+          const ids = tokens
+            .slice(0, 100)
+            .map((t) => t.id)
+            .join(",");
+          const infoRes = await fetch(
+            `/api/proxy/v2/cryptocurrency/info?id=${ids}&aux=tags`,
+            { headers: h },
+          );
+          const infoData = await infoRes.json();
+          const tagMap = {};
+          Object.entries(infoData.data || {}).forEach(([id, info]) => {
+            tagMap[parseInt(id)] = info.tags || [];
+          });
 
-    const scored=tokens.map(t=>scoreToken(t,tagMap)).filter(Boolean).sort((a,b)=>b.score-a.score);
-    const regime=detectRegime(metaData.data);
-    const fg=parseFG(metaData.data);
-    const cats=catData.data||[];
+          const scored = tokens
+            .map((t) => scoreToken(t, tagMap))
+            .filter(Boolean)
+            .sort((a, b) => b.score - a.score);
+          const regime = detectRegime(metaData.data);
+          const fg = parseFG(metaData.data);
+          const cats = catData.data || [];
 
-    renderRegime(regime,fg);
-    const narRanking=renderNarratives(scored.slice(0,10));
-    const topCats=renderCategories(cats);
-    renderAlignment(topCats,narRanking);
-    renderTable(scored);
-    renderWatchlist(scored,regime,fg);
+          renderRegime(regime, fg);
+          const narRanking = renderNarratives(scored.slice(0, 10));
+          const topCats = renderCategories(cats);
+          renderAlignment(topCats, narRanking);
+          renderTable(scored);
+          renderWatchlist(scored, regime, fg);
 
-    document.getElementById('main-content').style.display='grid';
-    setStatus(`Live · ${new Date().toLocaleTimeString()}`,true);
-  } catch(e) {
-    showError(e.message);
-    setStatus('Error',false);
-  } finally {
-    btn.disabled=false; btn.textContent='Refresh';
-  }
-}
-</script>
-</body>
+          document.getElementById("main-content").style.display = "grid";
+          setStatus(`Live · ${new Date().toLocaleTimeString()}`, true);
+        } catch (e) {
+          showError(e.message);
+          setStatus("Error", false);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Refresh";
+        }
+      }
+    </script>
+  </body>
 </html>
