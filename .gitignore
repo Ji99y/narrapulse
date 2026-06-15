@@ -1,3 +1,5 @@
 .env
 node_modules/
 backtest_results.csv
+.vercel
+.env*
