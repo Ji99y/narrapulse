@@ -277,14 +277,37 @@ function classifyNarrative(tags=[]) {
   if (t.some(x=>['gaming','metaverse','nft','play-to-earn','gamefi'].includes(x))) return 'Gaming';
   return 'Other';
 }
-function parseFG(metrics) {
-  const fg=metrics?.fear_greed_value??null;
-  if (fg===null) return { label:'⚪ NEUTRAL (unavailable)', gated:false };
-  if (fg<=25) return { label:`🔴 EXTREME FEAR (${fg})`,  gated:true  };
-  if (fg<=45) return { label:`🟠 FEAR (${fg})`,          gated:false };
-  if (fg<=55) return { label:`⚪ NEUTRAL (${fg})`,       gated:false };
-  if (fg<=75) return { label:`🟡 GREED (${fg})`,         gated:false };
-  return             { label:`🔴 EXTREME GREED (${fg})`, gated:true  };
+function computeSentiment(metrics, tokens) {
+  // Signal 1: breadth — % of qualified tokens with positive 24h change
+  const qualified = tokens.filter(t => {
+    const q = t.quote.USD;
+    return (q.market_cap||0) > 50000000 && (q.volume_24h||0) > 5000000;
+  });
+  const positive24h = qualified.filter(t => (t.quote.USD.percent_change_24h||0) > 0);
+  const breadth = qualified.length ? (positive24h.length / qualified.length) * 100 : 50;
+
+  // Signal 2: BTC dominance (higher = risk-off = bearish for alts)
+  const btcDom = metrics.btc_dominance || 50;
+  const btcScore = Math.max(0, Math.min(100, (65 - btcDom) * 3.33 + 50));
+
+  // Signal 3: volume/mcap ratio (higher = more market conviction)
+  const vol  = metrics.quote.USD.total_volume_24h;
+  const mcap = metrics.quote.USD.total_market_cap;
+  const vmr  = vol / mcap;
+  const volScore = Math.min(100, vmr * 1000);
+
+  // Weighted composite score
+  const score = Math.round((breadth * 0.5) + (btcScore * 0.3) + (volScore * 0.2));
+
+  let gate, label, emoji;
+  if (score <= 20)      { gate='EXTREME_FEAR';  emoji='🔴'; label=`EXTREME FEAR (${score}/100)`;  }
+  else if (score <= 40) { gate='FEAR';          emoji='🟠'; label=`FEAR (${score}/100)`;          }
+  else if (score <= 60) { gate='NEUTRAL';       emoji='⚪'; label=`NEUTRAL (${score}/100)`;       }
+  else if (score <= 80) { gate='GREED';         emoji='🟡'; label=`GREED (${score}/100)`;         }
+  else                  { gate='EXTREME_GREED'; emoji='🔴'; label=`EXTREME GREED (${score}/100)`; }
+
+  const gated = gate === 'EXTREME_FEAR' || gate === 'EXTREME_GREED';
+  return { score, gate, label:`${emoji} ${label}`, gated, breadth:breadth.toFixed(0), btcScore:btcScore.toFixed(0), volScore:volScore.toFixed(0) };
 }
 function scoreToken(token, tagMap) {
   const q=token.quote.USD;
@@ -385,7 +408,7 @@ function renderRegime(r, fg) {
       <span class="regime-meta">BTC Dom <strong>${r.btc.toFixed(1)}%</strong></span>
       <span class="regime-meta">MCap <strong>$${(r.mcap/1e12).toFixed(2)}T</strong></span>
       <span class="regime-meta">Vol <strong>$${(r.vol/1e9).toFixed(1)}B</strong></span>
-      <span class="regime-meta">Sentiment <strong>${fg.label}</strong></span>
+      <span class="regime-meta" title="Breadth: ${fg.breadth}% tokens positive · BTC score: ${fg.btcScore}/100 · Vol score: ${fg.volScore}/100" style="cursor:help">Sentiment <strong>${fg.label}</strong></span>
       <span class="regime-note">${r.note}</span>
     </div>`;
 }
@@ -496,7 +519,7 @@ async function loadData() {
 
     const scored=tokens.map(t=>scoreToken(t,tagMap)).filter(Boolean).sort((a,b)=>b.score-a.score);
     const regime=detectRegime(metaData.data);
-    const fg=parseFG(metaData.data);
+    const fg=computeSentiment(metaData.data, tokens);
     const cats=catData.data||[];
 
     renderRegime(regime,fg);
