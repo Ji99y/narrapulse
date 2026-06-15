@@ -1095,15 +1095,16 @@
           const CMC = "https://pro-api.coinmarketcap.com";
           const [listRes, metaRes, catRes] = await Promise.all([
             fetch(
-              `${CMC}/v1/cryptocurrency/listings/latest?limit=200&convert=USD&sort=market_cap`,
+              "/api/proxy/v1/cryptocurrency/listings/latest?limit=200&convert=USD&sort=market_cap",
               { headers: h },
             ),
-            fetch(`${CMC}/v1/global-metrics/quotes/latest?convert=USD`, {
+            fetch("/api/proxy/v1/global-metrics/quotes/latest?convert=USD", {
               headers: h,
             }),
-            fetch(`${CMC}/v1/cryptocurrency/categories?limit=50&convert=USD`, {
-              headers: h,
-            }),
+            fetch(
+              "/api/proxy/v1/cryptocurrency/categories?limit=50&convert=USD",
+              { headers: h },
+            ),
           ]);
           const [listData, metaData, catData] = await Promise.all([
             listRes.json(),
@@ -1125,7 +1126,7 @@
             .map((t) => t.id)
             .join(",");
           const infoRes = await fetch(
-            `${CMC}/v2/cryptocurrency/info?id=${ids}&aux=tags`,
+            `/api/proxy/v2/cryptocurrency/info?id=${ids}&aux=tags`,
             { headers: h },
           );
           const infoData = await infoRes.json();
