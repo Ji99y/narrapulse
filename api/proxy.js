@@ -4,7 +4,9 @@ export default async function handler(req, res) {
 
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
 
-  const cmcPath = req.url.replace('/api/proxy', '');
+  // Extract the CMC path from the full URL
+  const fullUrl = req.url;
+  const cmcPath = fullUrl.replace('/api/proxy', '');
   const url = `https://pro-api.coinmarketcap.com${cmcPath}`;
 
   try {

@@ -1,11 +1,5 @@
 {
-  "outputDirectory": ".",
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "api/proxy.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/api/proxy(.*)", "dest": "/api/proxy" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/api/proxy/:path*", "destination": "/api/proxy" }
   ]
 }
