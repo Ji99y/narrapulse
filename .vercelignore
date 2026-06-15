@@ -1,0 +1,6 @@
+server.local.js
+fetch.js
+backtest.js
+backtest_results.csv
+.env
+node_modules
