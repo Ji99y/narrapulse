@@ -258,9 +258,13 @@ function getNarrativeAge(q) {
   if (c30>40&&c7<c30/4)          return { age:'LATE',     cls:'t-late',     label:'LATE',     bonus:-1 };
   return                                { age:'MID',      cls:'t-mid',      label:'MID',      bonus: 0 };
 }
-function getPumpStatus(q) {
+function getPumpStatus(q, narAge) {
   const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, vc=q.volume_change_24h||0;
-  if (c24<=20) return { label:'—',        cls:'t-none',    warn:false };
+  // EARLY-stage narratives are expected to be choppy on a single day; require a
+  // bigger 24h spike before calling it exhausted, so a token can't be flagged
+  // EARLY (buy the story) and EXIT (sell now) at the same time.
+  const threshold = narAge === 'EARLY' ? 40 : 20;
+  if (c24<=threshold) return { label:'—',        cls:'t-none',    warn:false };
   const slow=(c1*24)<c24*0.5;
   if (slow&&vc>30)  return { label:'EXIT SOON', cls:'t-exit',    warn:true  };
   if (slow&&vc<=30) return { label:'EXIT NOW',  cls:'t-exit',    warn:true  };
@@ -316,7 +320,7 @@ function scoreToken(token, tagMap) {
   if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return null;
   const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, c7=q.percent_change_7d||0;
   const vmr=vol/mcap;
-  const vt=getVolumeTrend(q), div=getDivergence(q), na=getNarrativeAge(q), ps=getPumpStatus(q);
+  const vt=getVolumeTrend(q), div=getDivergence(q), na=getNarrativeAge(q), ps=getPumpStatus(q, na.age);
   const allPos=c1>0&&c24>0&&c7>0;
   let score=0;
   if (allPos) score+=4;
@@ -470,7 +474,7 @@ function renderTable(tokens) {
 }
 function renderWatchlist(tokens, regime, fg) {
   const effMax=fg.gated?1:regime.maxPos, effAlloc=fg.gated?10:regime.alloc;
-  const wl=tokens.filter(t=>t.allPos&&t.divergence.signal==='CONFIRMED'&&t.narAge.age!=='EXHAUSTED').slice(0,effMax);
+  const wl=tokens.filter(t=>t.allPos&&t.divergence.signal==='CONFIRMED'&&t.narAge.age!=='EXHAUSTED'&&!t.pumpStatus.warn).slice(0,effMax);
   document.getElementById('wl-count').textContent=`${wl.length} signal${wl.length!==1?'s':''}`;
   document.getElementById('wl-subtext').textContent=`Max ${effMax} positions · ${effAlloc}% each · 7% stop · 20% target`;
   document.getElementById('wl-body').innerHTML=wl.length===0
