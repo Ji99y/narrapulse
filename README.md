@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/logo.jpeg" alt="NarraPulse logo" width="480" />
-</p>
-
 # NarraPulse — BSC Narrative Momentum Strategy Skill
 
 > *Built for BSC retail traders who keep buying narrative tops and missing exits.*
