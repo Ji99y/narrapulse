@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.jpeg" alt="NarraPulse logo" width="480" />
+</p>
+
 # NarraPulse — BSC Narrative Momentum Strategy Skill
 
 > *Built for BSC retail traders who keep buying narrative tops and missing exits.*
@@ -53,7 +57,7 @@ NarraPulse addresses both problems above with a multi-layer signal pipeline buil
 | Endpoint | Purpose |
 |---|---|
 | `/v1/cryptocurrency/listings/latest` | Token price, volume, % changes, market cap |
-| `/v1/global-metrics/quotes/latest` | BTC dominance, market cap, Fear & Greed Index |
+| `/v1/global-metrics/quotes/latest` | BTC dominance, market cap, sentiment composite inputs |
 | `/v2/cryptocurrency/info` | Token tags for narrative classification |
 | `/v1/cryptocurrency/categories` | Official CMC category momentum (authoritative narrative ranking) |
 
@@ -64,7 +68,7 @@ NarraPulse addresses both problems above with a multi-layer signal pipeline buil
 ```
 1. Market Regime Detection
         ↓
-2. Fear & Greed Sentiment Gate
+2. Sentiment Composite Gate
         ↓
 3. Universe Filtering (quality filters)
         ↓
@@ -315,7 +319,7 @@ NarraPulse is compatible with the CMC Agent Hub MCP server. To invoke via MCP:
 
 1. Connect to the CMC MCP endpoint
 2. Call `get_listings_latest` with `limit=200&sort=market_cap`
-3. Call `get_global_metrics` (extracts regime + Fear & Greed in one call)
+3. Call `get_global_metrics` (extracts regime + sentiment composite inputs in one call)
 4. Call `get_cryptocurrency_info` on top 10 token IDs for tags
 5. Call `get_categories` for official narrative momentum
 6. Apply scoring, filtering, and output the watchlist spec above
