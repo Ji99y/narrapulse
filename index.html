@@ -255,7 +255,7 @@ function getDivergence(q) {
 function getNarrativeAge(q) {
   const c7=q.percent_change_7d||0, c30=q.percent_change_30d||0;
   const c24=q.percent_change_24h||0, c1=q.percent_change_1h||0;
-  if (c7>10&&c30<20)             return { age:'EARLY',    cls:'t-early',    label:'EARLY',    bonus: 3 };
+  if (c7>10&&c30<20&&c1>0&&c24>3) return { age:'EARLY', cls:'t-early', label:'EARLY', bonus: 3 };
   if (c7>10&&c30>20&&c24>0)      return { age:'PRIME',    cls:'t-prime',    label:'PRIME',    bonus: 1 };
   if (c30>80&&c24<5&&c1<1)       return { age:'EXHAUSTED',cls:'t-exhausted',label:'EXHAUSTED',bonus:-3 };
   if (c30>40&&c7<c30/4)          return { age:'LATE',     cls:'t-late',     label:'LATE',     bonus:-1 };
@@ -333,6 +333,7 @@ function scoreToken(token, tagMap) {
   score=Math.round(score*vt.mult);
   if (c24>80) score-=4; if (c7>200) score-=3; if (vmr>2.0) score-=2;
   score+=na.bonus;
+  if (na.age==='EARLY'&&vt.trend==='SURGING') score+=2;
   return { symbol:token.symbol, id:token.id, price:q.price, c1, c24, c7,
            divergence:div, narAge:na, pumpStatus:ps, allPos,
            narrative:classifyNarrative(tagMap[token.id]||[]), score };
@@ -352,6 +353,7 @@ function runBacktest(tokens) {
     if ((q.volume_24h||0) < 5000000)  return false;
     if ((q.price||0) < 0.001)         return false;
     if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return false;
+    if (Math.abs(c24) < 0.1 && Math.abs(c7) < 0.5) return null;
     return true;
   });
   const windows = [

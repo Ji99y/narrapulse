@@ -43,18 +43,28 @@ function detectRegime(metrics) {
   return               { regime: 'QUIET',            risk: 'LOW',  note: 'Low volume — reduce position sizes, wait for confirmation' };
 }
 
-// ─── FEAR & GREED ────────────────────────────────────────────────────────────
+// ─── SENTIMENT COMPOSITE ─────────────────────────────────────────────────────
 
-function parseFearAndGreed(metrics) {
-  const fg = metrics?.fear_greed_value ?? null;
+function computeSentiment(metrics, tokens) {
+  const qualified   = tokens.filter(t => (t.quote.USD.market_cap||0) > 50000000 && (t.quote.USD.volume_24h||0) > 5000000);
+  const positive24h = qualified.filter(t => (t.quote.USD.percent_change_24h||0) > 0);
+  const breadth     = qualified.length ? (positive24h.length / qualified.length) * 100 : 50;
+  const btcDom      = metrics.btc_dominance || 50;
+  const btcScore    = Math.max(0, Math.min(100, (65 - btcDom) * 3.33 + 50));
+  const vol         = metrics.quote.USD.total_volume_24h;
+  const mcap        = metrics.quote.USD.total_market_cap;
+  const volScore    = Math.min(100, (vol / mcap) * 1000);
+  const score       = Math.round((breadth * 0.5) + (btcScore * 0.3) + (volScore * 0.2));
 
-  if (fg === null) return { value: null, gate: 'NEUTRAL', label: '⚪ NEUTRAL (unavailable)', gated: false };
+  let gate, label, emoji;
+  if (score <= 20)      { gate='EXTREME_FEAR';  emoji='🔴'; label=`EXTREME FEAR (${score}/100)`;  }
+  else if (score <= 40) { gate='FEAR';          emoji='🟠'; label=`FEAR (${score}/100)`;          }
+  else if (score <= 60) { gate='NEUTRAL';       emoji='⚪'; label=`NEUTRAL (${score}/100)`;       }
+  else if (score <= 80) { gate='GREED';         emoji='🟡'; label=`GREED (${score}/100)`;         }
+  else                  { gate='EXTREME_GREED'; emoji='🔴'; label=`EXTREME GREED (${score}/100)`; }
 
-  if (fg <= 25) return { value: fg, gate: 'EXTREME_FEAR',  label: `🔴 EXTREME FEAR (${fg}/100)`,  gated: true  };
-  if (fg <= 45) return { value: fg, gate: 'FEAR',          label: `🟠 FEAR (${fg}/100)`,          gated: false };
-  if (fg <= 55) return { value: fg, gate: 'NEUTRAL',       label: `⚪ NEUTRAL (${fg}/100)`,       gated: false };
-  if (fg <= 75) return { value: fg, gate: 'GREED',         label: `🟡 GREED (${fg}/100)`,         gated: false };
-  return              { value: fg, gate: 'EXTREME_GREED', label: `🔴 EXTREME GREED (${fg}/100)`, gated: true  };
+  const gated = gate === 'EXTREME_FEAR' || gate === 'EXTREME_GREED';
+  return { score, gate, label: `${emoji} ${label}`, gated };
 }
 
 // ─── VOLUME TREND ────────────────────────────────────────────────────────────
@@ -87,7 +97,7 @@ function detectNarrativeAge(q) {
   const c24 = q.percent_change_24h || 0;
   const c1  = q.percent_change_1h  || 0;
 
-  if (c7 > 10 && c30 < 20)               return { age: 'EARLY',    label: '🟢 EARLY',    bonus:  3 };
+  if (c7 > 10 && c30 < 20 && c1 > 0 && c24 > 3) return { age: 'EARLY', label: '🟢 EARLY', bonus: 3 };
   if (c7 > 10 && c30 > 20 && c24 > 0)   return { age: 'PRIME',    label: '🟡 PRIME',    bonus:  1 };
   if (c30 > 80 && c24 < 5 && c1 < 1)    return { age: 'EXHAUSTED',label: '🔴 EXHAUSTED',bonus: -3 };
   if (c30 > 40 && c7 < c30 / 4)         return { age: 'LATE',     label: '🟠 LATE',     bonus: -1 };
@@ -139,9 +149,11 @@ function scoreToken(token) {
   const mcap = q.market_cap  || 0;
 
   // Quality filters
-  if (mcap < 50_000_000) return null;
+  if (mcap < 30_000_000) return null;
   if (vol  <  5_000_000) return null;
   if (q.price <= 0)      return null;
+  // Filter near-zero volatility tokens (stablecoins that slip through price filter)
+  if (Math.abs(c24) < 0.1 && Math.abs(c7) < 0.5) return null;
 
   const vmr        = vol / mcap;
   const volTrend   = getVolumeTrend(q);
@@ -168,6 +180,7 @@ function scoreToken(token) {
   if (vmr > 2.0)  score -= 2;
 
   score += narAge.bonus;
+  if (narAge.age === 'EARLY' && volTrend.trend === 'SURGING') score += 2;
 
   return {
     // identity
@@ -202,7 +215,7 @@ async function main() {
   const [tokens, metrics] = await Promise.all([getMomentumTokens(), getMarketMetrics()]);
 
   const regime = detectRegime(metrics);
-  const fg     = parseFearAndGreed(metrics);
+  const fg     = computeSentiment(metrics, tokens);
 
   const maxPos   = regime.risk === 'HIGH' ? 5 : regime.risk === 'MED' ? 3 : 2;
   const allocPct = regime.risk === 'HIGH' ? 10 : regime.risk === 'MED' ? 15 : 20;
@@ -263,7 +276,8 @@ async function main() {
     .filter(t =>
       t.allPos &&
       t.divergence.signal === 'CONFIRMED' &&
-      t.narAge.age !== 'EXHAUSTED'
+      t.narAge.age !== 'EXHAUSTED' &&
+      !t.pumpStatus.exitWarning
     )
     .slice(0, effectiveMaxPos);
 
