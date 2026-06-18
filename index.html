@@ -184,7 +184,7 @@
   <div class="sidebar">
 
     <div>
-      <div class="section-label">Backtest summary (live · 3 windows)</div>
+      <div class="section-label">Illustrative backtest (not validated — see note)</div>
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-lbl">Win rate</div><div class="stat-val g" id="bt-winrate">—</div></div>
         <div class="stat-card"><div class="stat-lbl">Avg return</div><div class="stat-val g" id="bt-avgreturn">—</div></div>
@@ -194,6 +194,18 @@
       <div style="margin-top:8px;background:var(--bg2);border:0.5px solid var(--gborder);border-radius:8px;padding:10px 12px;">
         <div class="stat-lbl" style="margin-bottom:6px">Narrative age performance</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2);line-height:1.8" id="bt-narrative">—</div>
+      </div>
+      <div style="margin-top:8px;background:var(--abg);border:0.5px solid var(--aborder);border-radius:8px;padding:8px 10px;font-size:10px;color:var(--amber);line-height:1.5;font-family:'JetBrains Mono',monospace;">
+        ⚠ Reconstructed from current % change fields, not real historical prices. Entry signal and outcome window overlap, so these numbers do not show genuine predictive edge — for illustration only.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="wl-header" style="background:var(--abg)">
+        <span class="wl-title" style="color:var(--amber)">⚠ Data limitation</span>
+      </div>
+      <div style="padding:10px 16px;font-size:11px;color:var(--text2);line-height:1.6;font-family:'JetBrains Mono',monospace;">
+        CMC's listings endpoint only returns % change snapshots, not a real price history. The backtest above approximates past prices algebraically from today's numbers, so its "entry signal" and "result" are derived from overlapping data and can't demonstrate real edge. Treat the win rate / avg return / expectancy figures as a worked example of the methodology, not validated performance.
       </div>
     </div>
 
@@ -285,7 +297,7 @@ function computeSentiment(metrics, tokens) {
   // Signal 1: breadth — % of qualified tokens with positive 24h change
   const qualified = tokens.filter(t => {
     const q = t.quote.USD;
-    return (q.market_cap||0) > 50000000 && (q.volume_24h||0) > 5000000;
+    return (q.market_cap||0) > 30000000 && (q.volume_24h||0) > 5000000;
   });
   const positive24h = qualified.filter(t => (t.quote.USD.percent_change_24h||0) > 0);
   const breadth = qualified.length ? (positive24h.length / qualified.length) * 100 : 50;
@@ -316,7 +328,7 @@ function computeSentiment(metrics, tokens) {
 function scoreToken(token, tagMap) {
   const q=token.quote.USD;
   const mcap=q.market_cap||0, vol=q.volume_24h||0;
-  if (mcap<50000000||vol<5000000||q.price<=0.001) return null;
+  if (mcap<30000000||vol<5000000||q.price<=0.001) return null;
   if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return null;
   const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, c7=q.percent_change_7d||0;
   const vmr=vol/mcap;
@@ -345,7 +357,7 @@ function detectRegime(m) {
 function runBacktest(tokens) {
   const qualified = tokens.filter(t => {
     const q = t.quote.USD;
-    if ((q.market_cap||0) < 50000000) return false;
+    if ((q.market_cap||0) < 30000000) return false;
     if ((q.volume_24h||0) < 5000000)  return false;
     if ((q.price||0) < 0.001)         return false;
     if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return false;
@@ -402,7 +414,7 @@ function renderBacktest(bt) {
   document.getElementById('bt-narrative').innerHTML =
     `🟢 EARLY &nbsp;${bt.earlyWR.toFixed(1)}% win · ${fmtR(bt.earlyAvg)} avg · ${bt.earlyTrades.length} trades<br>` +
     `🟡 PRIME &nbsp;${bt.primeWR.toFixed(1)}% win · ${fmtR(bt.primeAvg)} avg · ${bt.primeTrades.length} trades<br>` +
-    `<span style="color:var(--text3);font-size:10px">${bt.allTrades.length} trades · 3 windows · live calculation</span>`;
+    `<span style="color:var(--text3);font-size:10px">${bt.allTrades.length} trades · 3 windows · recomputed from current snapshot, not historical prices</span>`;
 }
 
 function renderRegime(r, fg) {

@@ -130,7 +130,7 @@ Extreme sentiment in either direction reduces position sizing — markets at ext
 Call `/v1/cryptocurrency/listings/latest?limit=200&sort=market_cap`.
 
 Quality filters applied:
-- Market cap ≥ $50M (eliminates micro-caps)
+- Market cap ≥ $30M (eliminates micro-caps)
 - 24h volume ≥ $5M (eliminates illiquid tokens)
 - Price > $0.001 (eliminates dust tokens)
 - Price not in $0.99–$1.01 range with <1% 7d change (eliminates stablecoins)
@@ -256,7 +256,9 @@ Hold period: up to 7 days or until stop/target hit
 ---
 
 ## Backtest Results
-*Multi-window live backtest | Universe: top 200 by market cap | 3 time windows | Computed in real time*
+*Illustrative only — see limitation below before reading these as validated performance*
+
+⚠ **Methodology limitation:** CMC's listings endpoint only returns percent-change snapshots (1h/24h/7d/30d/60d), not a real historical price series. The backtest below reconstructs past prices algebraically from today's snapshot, which means the "entry signal" and the simulated "outcome" for a given window are derived from overlapping data rather than independent, time-separated observations. In practice this inflates the results below — a token that already rose over a window will tend to satisfy the entry filter for that same window by construction, regardless of whether the underlying strategy logic has any real predictive power. **Treat the numbers in this section as a worked example of the scoring methodology, not as evidence the pipeline has genuine edge.** A trustworthy backtest would need an actual historical OHLCV dataset with entry signals computed strictly before the outcome window — that's flagged as future work below.
 
 | Window | Trades | Win Rate | Avg Return | Targets Hit | Stopped Out |
 |---|---|---|---|---|---|
@@ -265,9 +267,9 @@ Hold period: up to 7 days or until stop/target hit
 | 30d → 60d | ~19 | ~100.0% | +17.95% | 14 | 0 |
 | **Overall** | **~225–272** | **~56–57%** | **+2.7–3.0%** | **~25** | **~73** |
 
-**Expectancy: ~+1.5–1.7% per trade across all market conditions**
+**Expectancy: ~+1.5–1.7% per trade** *(under this methodology — not a forward-looking guarantee, see limitation above)*
 
-> Note: Backtest recalculates live on every page refresh using current CMC data. Numbers vary slightly with market conditions — figures above represent observed range across multiple sessions.
+> Note: This recomputes live on every page refresh using current CMC data, so numbers vary slightly session to session. That variability reflects the input snapshot changing, not genuine out-of-sample validation.
 
 ### Results by Narrative Age
 | Age | Trades | Win Rate | Avg Return |
@@ -275,10 +277,13 @@ Hold period: up to 7 days or until stop/target hit
 | 🟢 EARLY | ~49–61 | 61–63% | +5.86–6.46% |
 | 🟡 PRIME | ~11–12 | 100% | +18.59–19.40% |
 
-### Key Insight
-The strategy performs best on short (1–7 day) and longer (30–60 day) holds. The 7d→30d window shows weakness (-3.61% avg) — this aligns with the "mid-narrative chop" phase where momentum has started but hasn't resolved. NarraPulse's EARLY/PRIME filters are specifically designed to avoid entering during this phase.
+### Observations (not claims of edge)
+The 7d→30d window underperforms the 1d→7d and 30d→60d windows under this methodology, loosely consistent with a "mid-narrative chop" phase where momentum has started but not resolved. The EARLY/PRIME narrative-age filters are designed around that intuition.
 
-The PRIME narrative age signal is the strongest performer: 100% win rate, +18–19% average return. This validates the core thesis that narrative age detection adds meaningful edge beyond price momentum alone.
+The PRIME segment shows the strongest numbers (100% win rate, +18–19% avg return) of any slice in this backtest. Given the small sample size (~11–12 trades) and the look-ahead bias described above, this should be read as a directionally interesting result worth investigating with real historical data — not as proof that narrative-age detection adds measurable edge.
+
+### Planned fix
+Rebuilding this backtest against real historical OHLCV data (rather than algebraically reconstructed prices) is the top priority follow-up, so entry signals and outcomes are genuinely time-separated.
 
 ---
 
