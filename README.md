@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/logo.jpeg" alt="NarraPulse logo" width="480" />
-</p>
-
 # NarraPulse — BSC Narrative Momentum Strategy Skill
 
 > *Built for BSC retail traders who keep buying narrative tops and missing exits.*
@@ -260,27 +256,31 @@ Hold period: up to 7 days or until stop/target hit
 
 ⚠ **Methodology limitation:** CMC's listings endpoint only returns percent-change snapshots (1h/24h/7d/30d/60d), not a real historical price series. The backtest below reconstructs past prices algebraically from today's snapshot, which means the "entry signal" and the simulated "outcome" for a given window are derived from overlapping data rather than independent, time-separated observations. In practice this inflates the results below — a token that already rose over a window will tend to satisfy the entry filter for that same window by construction, regardless of whether the underlying strategy logic has any real predictive power. **Treat the numbers in this section as a worked example of the scoring methodology, not as evidence the pipeline has genuine edge.** A trustworthy backtest would need an actual historical OHLCV dataset with entry signals computed strictly before the outcome window — that's flagged as future work below.
 
-| Window | Trades | Win Rate | Avg Return | Targets Hit | Stopped Out |
-|---|---|---|---|---|---|
-| 1d → 7d | ~107 | ~86.9% | +5.89% | 5 | 3 |
-| 7d → 30d | ~99 | ~15.2% | -3.61% | 6 | 70 |
-| 30d → 60d | ~19 | ~100.0% | +17.95% | 14 | 0 |
-| **Overall** | **~225–272** | **~56–57%** | **+2.7–3.0%** | **~25** | **~73** |
+*Snapshot: June 18, 2026 — figures recompute live on each refresh, these represent a single session*
 
-**Expectancy: ~+1.5–1.7% per trade** *(under this methodology — not a forward-looking guarantee, see limitation above)*
+| Metric | Value |
+|---|---|
+| Trades | 48 |
+| Win Rate | 54.2% |
+| Avg Return | +4.45% |
+| Expectancy | +2.41% |
+
+**Expectancy: +2.41% per trade** *(under this methodology — not a forward-looking guarantee, see limitation above)*
 
 > Note: This recomputes live on every page refresh using current CMC data, so numbers vary slightly session to session. That variability reflects the input snapshot changing, not genuine out-of-sample validation.
 
 ### Results by Narrative Age
+*June 18, 2026 snapshot*
+
 | Age | Trades | Win Rate | Avg Return |
 |---|---|---|---|
-| 🟢 EARLY | ~49–61 | 61–63% | +5.86–6.46% |
-| 🟡 PRIME | ~11–12 | 100% | +18.59–19.40% |
+| 🟢 EARLY | 4 | 25.0% | -1.65% |
+| 🟡 PRIME | 8 | 100.0% | +20.00% |
 
 ### Observations (not claims of edge)
-The 7d→30d window underperforms the 1d→7d and 30d→60d windows under this methodology, loosely consistent with a "mid-narrative chop" phase where momentum has started but not resolved. The EARLY/PRIME narrative-age filters are designed around that intuition.
+In this June 18 snapshot, PRIME tokens dominate — 100% win rate, +20% avg return across 8 trades. EARLY shows a negative avg return (-1.65% across 4 trades), consistent with early-narrative chop where the move hasn't confirmed yet. Overall win rate of 54.2% with +2.41% expectancy across 48 trades.
 
-The PRIME segment shows the strongest numbers (100% win rate, +18–19% avg return) of any slice in this backtest. Given the small sample size (~11–12 trades) and the look-ahead bias described above, this should be read as a directionally interesting result worth investigating with real historical data — not as proof that narrative-age detection adds measurable edge.
+The PRIME result in particular should be read as directionally interesting given the small sample and the look-ahead bias described above — not as proof that narrative-age detection adds measurable edge.
 
 ### Planned fix
 Rebuilding this backtest against real historical OHLCV data (rather than algebraically reconstructed prices) is the top priority follow-up, so entry signals and outcomes are genuinely time-separated.
