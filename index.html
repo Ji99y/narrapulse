@@ -319,12 +319,13 @@ function computeSentiment(metrics, tokens) {
 function scoreToken(token, tagMap) {
   const q=token.quote.USD;
   const mcap=q.market_cap||0, vol=q.volume_24h||0;
-  if (mcap<30000000||vol<5000000||q.price<=0.001) return null;
-  if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return null;
   const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, c7=q.percent_change_7d||0;
   const vmr=vol/mcap;
   const vt=getVolumeTrend(q), div=getDivergence(q), na=getNarrativeAge(q), ps=getPumpStatus(q, na.age);
   const allPos=c1>0&&c24>0&&c7>0;
+  if (mcap<30000000||vol<5000000||q.price<=0.001) return null;
+  if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return null;
+  if (Math.abs(c24) < 0.1 && Math.abs(c7) < 0.5) return null;
   let score=0;
   if (allPos) score+=4;
   if (c24>3) score+=1; if (c24>8) score+=2; if (c24>20) score+=1;
@@ -353,7 +354,6 @@ function runBacktest(tokens) {
     if ((q.volume_24h||0) < 5000000)  return false;
     if ((q.price||0) < 0.001)         return false;
     if (q.price>0.99&&q.price<1.01&&Math.abs(q.percent_change_7d||0)<1) return false;
-    if (Math.abs(c24) < 0.1 && Math.abs(c7) < 0.5) return null;
     return true;
   });
   const windows = [
