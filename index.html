@@ -317,9 +317,10 @@ function computeSentiment(metrics, tokens) {
   const gated = gate === 'EXTREME_FEAR' || gate === 'EXTREME_GREED';
   return { score, gate, label:`${emoji} ${label}`, gated, breadth:breadth.toFixed(0), btcScore:btcScore.toFixed(0), volScore:volScore.toFixed(0) };
 }
-function scoreToken(token, tagMap) {
+function scoreToken(token, tagMap, btc24h=0) {
   const q=token.quote.USD;
   const fdv=q.fully_diluted_market_cap||q.market_cap||0;
+  const mcap=q.market_cap||0;
   const vol=q.volume_24h||0;
   if (fdv<50000000||fdv>500000000) return null;
   if (vol<5000000||q.price<=0.001) return null;
@@ -327,6 +328,8 @@ function scoreToken(token, tagMap) {
   const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, c7=q.percent_change_7d||0;
   if (Math.abs(c24)<0.1&&Math.abs(c7)<0.5) return null;
   const vmr=vol/fdv;
+  const supplyRatio=fdv>0?fdv/(mcap||fdv):1;
+  if (supplyRatio>5.0) return null; // serious dilution risk — exclude
   const vt=getVolumeTrend(q), div=getDivergence(q), na=getNarrativeAge(q), ps=getPumpStatus(q, na.age);
   const allPos=c1>0&&c24>0&&c7>0;
   let score=0;
@@ -336,6 +339,14 @@ function scoreToken(token, tagMap) {
   if (vmr>0.10) score+=1; if (vmr>0.25) score+=2; if (vmr>0.50) score+=1;
   score=Math.round(score*vt.mult);
   if (c24>80) score-=4; if (c7>200) score-=3; if (vmr>2.0) score-=2;
+  // Supply pressure
+  if (supplyRatio<1.5) score+=2;
+  if (supplyRatio>3.0) score-=2;
+  // Relative strength vs BTC
+  const rs=c24-btc24h;
+  if (rs>10) score+=2;
+  else if (rs>5) score+=1;
+  else if (rs<-3) score-=1;
   score+=na.bonus;
   if (na.age==='EARLY'&&vt.trend==='SURGING') score+=2;
   return { symbol:token.symbol, id:token.id, price:q.price, c1, c24, c7,
@@ -460,13 +471,15 @@ async function loadData() {
 
     setStatus('Fetching token tags...', false);
     const tokens=listData.data;
+    const btcToken=tokens.find(t=>t.symbol==='BTC');
+    const btc24h=btcToken?.quote?.USD?.percent_change_24h||0;
     const ids=tokens.slice(0,100).map(t=>t.id).join(',');
     const infoRes=await fetch(`/api/proxy/v2/cryptocurrency/info?id=${ids}&aux=tags`,{headers:h});
     const infoData=await infoRes.json();
     const tagMap={};
     Object.entries(infoData.data||{}).forEach(([id,info])=>{ tagMap[parseInt(id)]=info.tags||[]; });
 
-    const scored=tokens.map(t=>scoreToken(t,tagMap)).filter(Boolean).sort((a,b)=>{
+    const scored=tokens.map(t=>scoreToken(t,tagMap,btc24h)).filter(Boolean).sort((a,b)=>{
       if (b.score!==a.score) return b.score-a.score;
       return (b.c1||0)-(a.c1||0);
     });
