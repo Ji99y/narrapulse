@@ -246,42 +246,46 @@ async function postSignalOpen(signal) {
 
 // ─── MESSAGE FORMATTING ──────────────────────────────────────────────────────
 
+function escMD(text) {
+  return String(text).replace(/[_*[\]()~`>#+=|{}.!-]/g, '\\$&');
+}
+
 function formatNewSignal(t, regime, fg, allocPct) {
   const ageEmoji = t.narAge.age === 'EARLY' ? '🟢' : t.narAge.age === 'PRIME' ? '🟡' : '⚪';
   const stop     = (t.price * 0.93).toFixed(6);
   const target   = (t.price * 1.20).toFixed(6);
   return `${ageEmoji} *NEW SIGNAL — NarraPulse*
 
-*Token:* \`${t.symbol}\` — ${t.narrative}
-*Narrative age:* ${t.narAge.label}
-*Entry:* \`$${t.price.toFixed(6)}\`
-*Stop loss:* \`$${stop}\` (−7%)
-*Take profit:* \`$${target}\` (+20%)
-*Score:* ${t.score} | *Volume:* ${t.volTrend.trend}
-*Weekly vol:* ${t.volTrend.weeklyTrend} | *DEX:* ${(t.volTrend.dexRatio*100).toFixed(0)}%
-*Regime:* ${regime.regime} — ${allocPct}% per position
-*Sentiment:* ${fg.label}
+*Token:* \`${escMD(t.symbol)}\` — ${escMD(t.narrative)}
+*Narrative age:* ${escMD(t.narAge.label)}
+*Entry:* \`$${escMD(t.price.toFixed(6))}\`
+*Stop loss:* \`$${escMD(stop)}\` \\(−7%\\)
+*Take profit:* \`$${escMD(target)}\` \\(\\+20%\\)
+*Score:* ${t.score} \\| *Volume:* ${escMD(t.volTrend.trend)}
+*Weekly vol:* ${escMD(t.volTrend.weeklyTrend)} \\| *DEX:* ${(t.volTrend.dexRatio*100).toFixed(0)}%
+*Regime:* ${escMD(regime.regime)} — ${allocPct}% per position
+*Sentiment:* ${escMD(fg.label)}
 
-_⚠️ Not financial advice. Always apply your own risk management._`;
+_⚠️ Not financial advice\\. Always apply your own risk management\\._`;
 }
 
 function formatMarketSummary(regime, fg, hotNarrative, watchlistCount) {
   return `📊 *NarraPulse — Market Update*
 
-*Regime:* ${regime.regime} (${regime.risk} risk)
-*Sentiment:* ${fg.label}
-*Hottest narrative:* ${hotNarrative}
+*Regime:* ${escMD(regime.regime)} \\(${escMD(regime.risk)} risk\\)
+*Sentiment:* ${escMD(fg.label)}
+*Hottest narrative:* ${escMD(hotNarrative)}
 *Signals on watchlist:* ${watchlistCount}
-*Note:* ${regime.note}
+*Note:* ${escMD(regime.note)}
 
-_Updated every 4 hours · narrapulse.vercel.app_`;
+_Updated every 4 hours · narrapulse\\.vercel\\.app_`;
 }
 
 function formatCloseAlert(symbol, outcome, returnPct) {
   const emoji = outcome === 'TARGET_HIT' ? '🎯' : outcome === 'STOPPED_OUT' ? '🛑' : '⏱';
   const label = outcome === 'TARGET_HIT' ? 'TARGET HIT' : outcome === 'STOPPED_OUT' ? 'STOPPED OUT' : 'EXPIRED';
-  const ret   = returnPct >= 0 ? `+${returnPct.toFixed(2)}%` : `${returnPct.toFixed(2)}%`;
-  return `${emoji} *Signal closed:* \`${symbol}\`\n*Outcome:* ${label} | *Return:* ${ret}`;
+  const ret   = returnPct >= 0 ? `\\+${returnPct.toFixed(2)}%` : `${returnPct.toFixed(2)}%`;
+  return `${emoji} *Signal closed:* \`${escMD(symbol)}\`\n*Outcome:* ${escMD(label)} \\| *Return:* ${ret}`;
 }
 
 // ─── MAIN SIGNAL CHECK ───────────────────────────────────────────────────────
@@ -340,7 +344,7 @@ async function runCheck() {
 
     for (const t of newSignals) {
       const msg = formatNewSignal(t, regime, fg, allocPct);
-      await bot.sendMessage(CHANNEL, msg, { parse_mode: 'Markdown' });
+      await bot.sendMessage(CHANNEL, msg, { parse_mode: 'MarkdownV2' });
       console.log(`✓ Sent new signal: ${t.symbol}`);
       await postSignalOpen({
         symbol:       t.symbol,
@@ -359,14 +363,14 @@ async function runCheck() {
     for (const symbol of closedSymbols) {
       const last = lastSignals.find(s => s.symbol === symbol);
       const msg  = formatCloseAlert(symbol, last?.outcome || 'CLOSED', last?.returnPct || 0);
-      await bot.sendMessage(CHANNEL, msg, { parse_mode: 'Markdown' });
+      await bot.sendMessage(CHANNEL, msg, { parse_mode: 'MarkdownV2' });
       console.log(`✓ Sent close alert: ${symbol}`);
       await new Promise(r => setTimeout(r, 500));
     }
 
     if (newSignals.length === 0 && closedSymbols.length === 0) {
       const summary = formatMarketSummary(regime, fg, hotNarrative, watchlist.length);
-      await bot.sendMessage(CHANNEL, summary, { parse_mode: 'Markdown' });
+      await bot.sendMessage(CHANNEL, summary, { parse_mode: 'MarkdownV2' });
       console.log('✓ Sent market summary');
     }
 
@@ -382,7 +386,7 @@ async function runCheck() {
   } catch (e) {
     console.error(`[ERROR] ${e.message}`);
     try {
-      await bot.sendMessage(CHANNEL, `⚠️ *NarraPulse bot error:* ${e.message}`, { parse_mode: 'Markdown' });
+      await bot.sendMessage(CHANNEL, `⚠️ *NarraPulse bot error:* ${e.message}`, { parse_mode: 'MarkdownV2' });
     } catch {}
   }
 }
