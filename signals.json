@@ -1,1 +1,22 @@
-{"signals":[],"lastUpdated":null}
+{
+  "signals": [
+    {
+      "id": "TWT-1785702086768",
+      "symbol": "TWT",
+      "narrativeAge": "MID",
+      "narrative": "Other",
+      "entry": 0.3797294741712354,
+      "stop": 0.353148,
+      "target": 0.455675,
+      "score": 7,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (62/100)",
+      "openedAt": "2026-08-02T20:21:26.768Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
+    }
+  ],
+  "lastUpdated": "2026-08-02T20:21:26.768Z"
+}
