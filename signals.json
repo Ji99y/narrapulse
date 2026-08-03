@@ -50,7 +50,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ICNT-1785744004833",
+      "symbol": "ICNT",
+      "narrativeAge": "EARLY",
+      "narrative": "Infra",
+      "entry": 0.2032389020959238,
+      "stop": 0.189012,
+      "target": 0.243887,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (39/100)",
+      "openedAt": "2026-08-03T08:00:04.833Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-03T00:00:12.139Z"
+  "lastUpdated": "2026-08-03T08:00:04.833Z"
 }
