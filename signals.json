@@ -152,7 +152,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "OPEN-1785787207174",
+      "symbol": "OPEN",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.18805511324905835,
+      "stop": 0.174891,
+      "target": 0.225666,
+      "score": 11,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-03T20:00:07.174Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-03T20:00:05.380Z"
+  "lastUpdated": "2026-08-03T20:00:07.174Z"
 }
