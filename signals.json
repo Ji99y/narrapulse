@@ -322,7 +322,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "AKT-1785859205603",
+      "symbol": "AKT",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.5165437404021305,
+      "stop": 0.480386,
+      "target": 0.619852,
+      "score": 15,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (55/100)",
+      "openedAt": "2026-08-04T16:00:05.603Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-04T16:00:03.756Z"
+  "lastUpdated": "2026-08-04T16:00:05.603Z"
 }
