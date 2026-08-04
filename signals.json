@@ -271,7 +271,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "HOME-1785844803749",
+      "symbol": "HOME",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.009826229208285324,
+      "stop": 0.009138,
+      "target": 0.011791,
+      "score": 26,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (63/100)",
+      "openedAt": "2026-08-04T12:00:03.749Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-04T08:00:05.875Z"
+  "lastUpdated": "2026-08-04T12:00:03.749Z"
 }
