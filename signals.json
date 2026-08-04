@@ -288,7 +288,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CASHCAT-1785844805627",
+      "symbol": "CASHCAT",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.07207402083675069,
+      "stop": 0.067029,
+      "target": 0.086489,
+      "score": 24,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (63/100)",
+      "openedAt": "2026-08-04T12:00:05.627Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-04T12:00:03.749Z"
+  "lastUpdated": "2026-08-04T12:00:05.627Z"
 }
