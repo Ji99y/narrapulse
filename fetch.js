@@ -188,6 +188,8 @@ function detectNarrativeAge(q) {
 
   if (c7 > 10 && c30 < 20 && c1 > 0 && c24 > 3)
     return { age: "EARLY", label: "🟢 EARLY", bonus: 3 };
+  if (c7 > 3 && c7 < 10 && c24 > 5 && c1 > 1)
+    return { age: "NASCENT", label: "🌱 NASCENT", bonus: 1 };
   if (c7 > 10 && c30 > 20 && c24 > 0)
     return { age: "PRIME", label: "🟡 PRIME", bonus: 1 };
   if (c30 > 80 && c24 < 5 && c1 < 1)
@@ -405,20 +407,20 @@ async function main() {
       // Secondary: 1h momentum as tiebreaker
       return (b.c1 || 0) - (a.c1 || 0);
     });
-  const top10 = scored.slice(0, 10);
+  const top20 = scored.slice(0, 20);
+  const top10 = top20.slice(0, 10);
 
   // Attach narratives
-  const ids = top10.map((t) => t.id).filter(Boolean);
+  const ids = top20.map((t) => t.id).filter(Boolean);
   const categoryData = await getTokenCategories(ids);
-  top10.forEach((t) => {
+  top20.forEach((t) => {
     const info = categoryData[t.id];
-    const tags = info?.tags || [];
-    t.narrative = classifyNarrative(tags);
+    t.narrative = classifyNarrative(info?.tags || []);
   });
 
   // Narrative heat map
   const narrativeMap = {};
-  top10.forEach((t) => {
+  top20.forEach((t) => {
     if (!narrativeMap[t.narrative])
       narrativeMap[t.narrative] = { syms: [], total: 0 };
     narrativeMap[t.narrative].syms.push(t.symbol);
@@ -487,15 +489,15 @@ async function main() {
 
   console.log("=== TOP MOMENTUM TOKENS ===");
   console.log(
-    "Rank | Symbol    | Narrative | Age         | 24h%   | 7d%    | Divergence   | WeekVol     | DEX%  | Score",
+    "Rank | Symbol    | Narrative | Age         | 24h%   | 7d%    | Divergence   | WeekVol     | DEX%  | Score | Watch",
   );
   console.log(
-    "-----|-----------|-----------|-------------|--------|--------|--------------|-------------|-------|------",
+    "-----|-----------|-----------|-------------|--------|--------|--------------|-------------|-------|-------|------",
   );
-  // Watchlist — uses object properties consistently
-  top10.forEach((t, i) => {
+  top20.forEach((t, i) => {
+    const watch = i >= 10 ? " 👁 WATCH" : "";
     console.log(
-      `${String(i + 1).padStart(4)} | ${t.symbol.padEnd(9)} | ${t.narrative.padEnd(9)} | ${t.narAge.label.padEnd(13)} | ${t.c24.toFixed(2).padStart(6)}% | ${t.c7.toFixed(2).padStart(6)}% | ${t.divergence.label.padEnd(12)} | ${t.volTrend.weeklyTrend.padEnd(11)} | ${(t.volTrend.dexRatio * 100).toFixed(0).padStart(4)}% | ${t.score}`,
+      `${String(i + 1).padStart(4)} | ${t.symbol.padEnd(9)} | ${t.narrative.padEnd(9)} | ${t.narAge.label.padEnd(13)} | ${t.c24.toFixed(2).padStart(6)}% | ${t.c7.toFixed(2).padStart(6)}% | ${t.divergence.label.padEnd(12)} | ${t.volTrend.weeklyTrend.padEnd(11)} | ${(t.volTrend.dexRatio * 100).toFixed(0).padStart(4)}% | ${String(t.score).padStart(5)}${watch}`,
     );
   });
 
