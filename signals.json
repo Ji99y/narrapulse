@@ -46,10 +46,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (58/100)",
       "openedAt": "2026-08-03T00:00:12.139Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T06:58:44.949Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 0.11376,
+      "returnPct": -7
     },
     {
       "id": "ICNT-1785744004833",
@@ -63,10 +63,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "🟠 FEAR (39/100)",
       "openedAt": "2026-08-03T08:00:04.833Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T06:58:44.949Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 0.189012,
+      "returnPct": -7
     },
     {
       "id": "OPEN-1785744006755",
@@ -148,10 +148,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (51/100)",
       "openedAt": "2026-08-03T20:00:05.380Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T06:58:44.949Z",
+      "outcome": "TARGET_HIT",
+      "exitPrice": 0.075691,
+      "returnPct": 20
     },
     {
       "id": "OPEN-1785787207174",
@@ -216,10 +216,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (59/100)",
       "openedAt": "2026-08-04T04:00:03.704Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T06:58:44.949Z",
+      "outcome": "TARGET_HIT",
+      "exitPrice": 0.082858,
+      "returnPct": 20
     },
     {
       "id": "AKT-1785816005319",
@@ -301,10 +301,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "🟡 GREED (63/100)",
       "openedAt": "2026-08-04T12:00:05.627Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T06:58:44.949Z",
+      "outcome": "TARGET_HIT",
+      "exitPrice": 0.086489,
+      "returnPct": 20
     },
     {
       "id": "SNDKB-1785859203756",
@@ -420,10 +420,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (50/100)",
       "openedAt": "2026-08-05T04:00:05.884Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T06:58:44.949Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 0.009703,
+      "returnPct": -7
     },
     {
       "id": "SKR-1785902407906",
@@ -443,5 +443,5 @@
       "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-05T04:00:07.906Z"
+  "lastUpdated": "2026-08-05T06:58:44.949Z"
 }
