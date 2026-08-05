@@ -84,7 +84,6 @@
 
     .tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 4px; }
     .t-early     { background: var(--gbg);  color: var(--green); border: 0.5px solid var(--gborder); }
-    .t-nascent   { background: var(--bbg);  color: var(--blue);  border: 0.5px solid var(--bborder); }
     .t-prime     { background: var(--abg);  color: var(--amber); border: 0.5px solid var(--aborder); }
     .t-mid       { background: var(--bg3);  color: var(--text3); border: 0.5px solid var(--border);  }
     .t-late,
@@ -144,7 +143,6 @@
 
 <div class="run-bar">
   <button class="btn" id="run-btn" onclick="loadData()">Run signals</button>
-  <button onclick="openHistory()" style="background:transparent;border:0.5px solid var(--border2);color:var(--text2);font-size:11px;font-weight:500;padding:7px 14px;border-radius:6px;cursor:pointer;font-family:'JetBrains Mono',monospace;white-space:nowrap;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text2)'">History ↗</button>
   <span class="run-note">Live CMC data · no API key required · updates on demand</span>
 </div>
 
@@ -215,55 +213,6 @@
   </div>
 </div>
 
-<style>
-  .hist-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:50}
-  .hist-panel{display:none;position:fixed;top:0;right:0;height:100vh;width:360px;background:var(--bg2);border-left:0.5px solid var(--border2);z-index:51;flex-direction:column;overflow:hidden}
-  .hist-head{padding:14px 18px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2);flex-shrink:0}
-  .hist-head-title{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.06em}
-  .hist-close{background:none;border:none;color:var(--text3);font-size:22px;cursor:pointer;line-height:1;padding:0 4px}
-  .hist-close:hover{color:var(--text)}
-  .hist-summary{padding:14px 18px;border-bottom:0.5px solid var(--border);background:var(--bg3);flex-shrink:0}
-  .hist-summary-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
-  .hist-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .hist-stat{text-align:center}
-  .hist-stat-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;line-height:1}
-  .hist-stat-lbl{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-top:3px}
-  .hist-signals{flex:1;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
-  .hist-signal-card{background:var(--bg3);border:0.5px solid var(--border);border-radius:10px;padding:13px 15px}
-  .hist-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-  .hist-sym{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700}
-  .hist-prices{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}
-  .hist-price-lbl{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:2px}
-  .hist-price-val{font-family:'JetBrains Mono',monospace;font-size:12px}
-  .hist-card-foot{display:flex;align-items:center;justify-content:space-between}
-  .hist-date{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace}
-  .hist-ret{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700}
-  .hist-empty{text-align:center;color:var(--text3);font-size:13px;padding:40px 0;line-height:1.8}
-  .t-nascent{background:var(--bbg);color:var(--blue);border:0.5px solid var(--bborder)}
-</style>
-
-<div class="hist-overlay" id="hist-overlay" onclick="closeHistory()"></div>
-<div class="hist-panel" id="hist-panel">
-  <div class="hist-head">
-    <div class="hist-head-title">Signal History</div>
-    <button class="hist-close" onclick="closeHistory()">×</button>
-  </div>
-  <div class="hist-summary">
-    <div class="hist-summary-label">Last 30 days</div>
-    <div class="hist-stats" id="hist-stats">
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text3)">—</div><div class="hist-stat-lbl">Win rate</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text3)">—</div><div class="hist-stat-lbl">Avg return</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text3)">—</div><div class="hist-stat-lbl">Signals</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text3)">—</div><div class="hist-stat-lbl">Targets</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text3)">—</div><div class="hist-stat-lbl">Stopped</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text3)">—</div><div class="hist-stat-lbl">Open</div></div>
-    </div>
-  </div>
-  <div class="hist-signals" id="hist-signals">
-    <div class="hist-empty">Click History ↗ to load signals</div>
-  </div>
-</div>
-
 <div class="footer">
   <strong style="color:var(--text)">NarraPulse</strong> &nbsp;·&nbsp;
   Built for <a href="https://dorahacks.io/hackathon/bnbhack-twt-cmc/" target="_blank">BNB HACK: AI Trading Agent Edition</a> &nbsp;·&nbsp;
@@ -323,12 +272,11 @@ function getDivergence(q) {
 function getNarrativeAge(q) {
   const c7=q.percent_change_7d||0, c30=q.percent_change_30d||0;
   const c24=q.percent_change_24h||0, c1=q.percent_change_1h||0;
-  if (c7>10&&c30<20&&c1>0&&c24>3)  return { age:'EARLY',   cls:'t-early',   label:'EARLY',   bonus: 3 };
-  if (c7>3&&c7<10&&c24>5&&c1>1)    return { age:'NASCENT', cls:'t-nascent', label:'NASCENT', bonus: 1 };
-  if (c7>10&&c30>20&&c24>0)        return { age:'PRIME',   cls:'t-prime',   label:'PRIME',   bonus: 1 };
-  if (c30>80&&c24<5&&c1<1)         return { age:'EXHAUSTED',cls:'t-exhausted',label:'EXHAUSTED',bonus:-3 };
-  if (c30>40&&c7<c30/4)            return { age:'LATE',    cls:'t-late',    label:'LATE',    bonus:-1 };
-  return                                  { age:'MID',     cls:'t-mid',     label:'MID',     bonus: 0 };
+  if (c7>10&&c30<20&&c1>0&&c24>3) return { age:'EARLY',    cls:'t-early',    label:'EARLY',    bonus: 3 };
+  if (c7>10&&c30>20&&c24>0)       return { age:'PRIME',    cls:'t-prime',    label:'PRIME',    bonus: 1 };
+  if (c30>80&&c24<5&&c1<1)        return { age:'EXHAUSTED',cls:'t-exhausted',label:'EXHAUSTED',bonus:-3 };
+  if (c30>40&&c7<c30/4)           return { age:'LATE',     cls:'t-late',     label:'LATE',     bonus:-1 };
+  return                                 { age:'MID',      cls:'t-mid',      label:'MID',      bonus: 0 };
 }
 function getPumpStatus(q, narAge) {
   const c1=q.percent_change_1h||0, c24=q.percent_change_24h||0, vc=q.volume_change_24h||0;
@@ -386,7 +334,7 @@ function computeSentiment(metrics, tokens) {
   const gated = gate === 'EXTREME_FEAR' || gate === 'EXTREME_GREED';
   return { score, gate, label:`${emoji} ${label}`, gated, breadth:breadth.toFixed(0), btcScore:btcScore.toFixed(0), volScore:volScore.toFixed(0) };
 }
-function scoreToken(token, tagMap, btc24h=0) {
+function scoreToken(token, tagMap={}, btc24h=0) {
   const q=token.quote.USD;
   const fdv=q.fully_diluted_market_cap||q.market_cap||0;
   const mcap=q.market_cap||0;
@@ -407,7 +355,7 @@ function scoreToken(token, tagMap, btc24h=0) {
   if (c7>5)  score+=1; if (c7>20) score+=2;
   if (vmr>0.10) score+=1; if (vmr>0.25) score+=2; if (vmr>0.50) score+=1;
   score=Math.round(score*vt.multiplier);
-  if (c24>80) score-=4; if (c7>200) score-=3; if (vmr>2.0) score-=2;
+  if (c24>80) score-=4; if (c7>200) return null; if (vmr>2.0) score-=2;
   if (supplyRatio<1.5) score+=2;
   if (supplyRatio>3.0) score-=2;
   if (vt.weeklyTrend==='BUILDING')  score+=2;
@@ -422,7 +370,7 @@ function scoreToken(token, tagMap, btc24h=0) {
   if (na.age==='EARLY'&&vt.trend==='SURGING') score+=2;
   return { symbol:token.symbol, id:token.id, price:q.price, c1, c24, c7,
            divergence:div, narAge:na, pumpStatus:ps, volTrend:vt,
-           allPos, narrative:'Other', score };
+           allPos, narrative:classifyNarrative(tagMap[token.id]||[]), score };
 }
 function detectRegime(m) {
   const btc=m.btc_dominance, vol=m.quote.USD.total_volume_24h, mcap=m.quote.USD.total_market_cap;
@@ -525,70 +473,6 @@ function renderWatchlist(tokens, regime, fg) {
       </div>`).join('');
 }
 
-function openHistory() {
-  document.getElementById('hist-overlay').style.display='block';
-  document.getElementById('hist-panel').style.display='flex';
-  loadHistory();
-}
-function closeHistory() {
-  document.getElementById('hist-overlay').style.display='none';
-  document.getElementById('hist-panel').style.display='none';
-}
-function outcomeTag(outcome) {
-  if (!outcome)                return `<span class="tag t-confirmed">OPEN</span>`;
-  if (outcome==='TARGET_HIT')  return `<span class="tag t-confirmed">TARGET HIT</span>`;
-  if (outcome==='STOPPED_OUT') return `<span class="tag t-exit">STOPPED OUT</span>`;
-  return                              `<span class="tag t-mid">EXPIRED</span>`;
-}
-async function loadHistory() {
-  document.getElementById('hist-signals').innerHTML='<div class="hist-empty">Loading...</div>';
-  try {
-    const res=await fetch('/api/signals');
-    const data=await res.json();
-    const s=data.summary||{};
-    document.getElementById('hist-stats').innerHTML=`
-      <div class="hist-stat"><div class="hist-stat-val" style="color:${(s.winRate||0)>=50?'var(--green)':'var(--red)'}">${s.winRate||0}%</div><div class="hist-stat-lbl">Win rate</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:${(s.avgReturn||0)>=0?'var(--green)':'var(--red)'}">${(s.avgReturn||0)>=0?'+':''}${s.avgReturn||0}%</div><div class="hist-stat-lbl">Avg return</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text)">${s.total||0}</div><div class="hist-stat-lbl">Signals</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--green)">${s.targetHit||0}</div><div class="hist-stat-lbl">Targets</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--red)">${s.stoppedOut||0}</div><div class="hist-stat-lbl">Stopped</div></div>
-      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--blue)">${s.open||0}</div><div class="hist-stat-lbl">Open</div></div>`;
-    const signals=(data.signals||[]).sort((a,b)=>new Date(b.openedAt)-new Date(a.openedAt));
-    if (!signals.length) {
-      document.getElementById('hist-signals').innerHTML=`<div class="hist-empty">No signals yet.<br><span style="font-size:11px">Signals appear here after<br>the bot fires its first alert.</span></div>`;
-      return;
-    }
-    const ageCls={EARLY:'t-early',NASCENT:'t-nascent',PRIME:'t-prime',MID:'t-mid',LATE:'t-late',EXHAUSTED:'t-exhausted'};
-    document.getElementById('hist-signals').innerHTML=signals.map(s=>{
-      const ret=s.returnPct!==null
-        ?`<span class="hist-ret" style="color:${s.returnPct>=0?'var(--green)':'var(--red)'}">${s.returnPct>=0?'+':''}${s.returnPct}%</span>`
-        :`<span class="hist-ret" style="color:var(--text3)">—</span>`;
-      const date=new Date(s.openedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-      const cls=ageCls[s.narrativeAge]||'t-mid';
-      return `<div class="hist-signal-card">
-        <div class="hist-card-top">
-          <div style="display:flex;align-items:center;gap:8px">
-            <span class="hist-sym">${s.symbol}</span>
-            <span class="tag ${cls}">${s.narrativeAge||'MID'}</span>
-          </div>
-          ${outcomeTag(s.outcome)}
-        </div>
-        <div class="hist-prices">
-          <div><div class="hist-price-lbl">Entry</div><div class="hist-price-val">${fmtPrice(s.entry)}</div></div>
-          <div><div class="hist-price-lbl">Stop</div><div class="hist-price-val" style="color:var(--red)">${fmtPrice(s.stop)}</div></div>
-          <div><div class="hist-price-lbl">Target</div><div class="hist-price-val" style="color:var(--green)">${fmtPrice(s.target)}</div></div>
-        </div>
-        <div class="hist-card-foot">
-          <span class="hist-date">${date} · ${s.regime||''}</span>
-          ${ret}
-        </div>
-      </div>`;
-    }).join('');
-  } catch(e) {
-    document.getElementById('hist-signals').innerHTML=`<div class="hist-empty" style="color:var(--red)">Failed to load: ${e.message}</div>`;
-  }
-}
-
 async function loadData() {
   clearError();
   const btn=document.getElementById('run-btn');
@@ -609,7 +493,7 @@ async function loadData() {
     const tokens=listData.data;
     const btcToken=tokens.find(t=>t.symbol==='BTC');
     const btc24h=btcToken?.quote?.USD?.percent_change_24h||0;
-    const ids=tokens.slice(0,100).map(t=>t.id).join(',');
+    const ids=tokens.slice(0,200).map(t=>t.id).join(',');
     const infoRes=await fetch(`/api/proxy/v2/cryptocurrency/info?id=${ids}&aux=tags`,{headers:h});
     const infoData=await infoRes.json();
     const tagMap={};
@@ -621,7 +505,7 @@ async function loadData() {
     });
 
     const topGainers=[...scored].filter(t=>(t.c1||0)>2).sort((a,b)=>(b.c1||0)-(a.c1||0)).slice(0,5);
-    topGainers.forEach(t=>{ t.score+=2; });
+    topGainers.forEach(t=>{ if (t.c7 > -20) { t.score+=2; } });
     scored.sort((a,b)=>{
       if (b.score!==a.score) return b.score-a.score;
       return (b.c1||0)-(a.c1||0);
