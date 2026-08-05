@@ -525,6 +525,70 @@ function renderWatchlist(tokens, regime, fg) {
       </div>`).join('');
 }
 
+function openHistory() {
+  document.getElementById('hist-overlay').style.display='block';
+  document.getElementById('hist-panel').style.display='flex';
+  loadHistory();
+}
+function closeHistory() {
+  document.getElementById('hist-overlay').style.display='none';
+  document.getElementById('hist-panel').style.display='none';
+}
+function outcomeTag(outcome) {
+  if (!outcome)                return `<span class="tag t-confirmed">OPEN</span>`;
+  if (outcome==='TARGET_HIT')  return `<span class="tag t-confirmed">TARGET HIT</span>`;
+  if (outcome==='STOPPED_OUT') return `<span class="tag t-exit">STOPPED OUT</span>`;
+  return                              `<span class="tag t-mid">EXPIRED</span>`;
+}
+async function loadHistory() {
+  document.getElementById('hist-signals').innerHTML='<div class="hist-empty">Loading...</div>';
+  try {
+    const res=await fetch('/api/signals');
+    const data=await res.json();
+    const s=data.summary||{};
+    document.getElementById('hist-stats').innerHTML=`
+      <div class="hist-stat"><div class="hist-stat-val" style="color:${(s.winRate||0)>=50?'var(--green)':'var(--red)'}">${s.winRate||0}%</div><div class="hist-stat-lbl">Win rate</div></div>
+      <div class="hist-stat"><div class="hist-stat-val" style="color:${(s.avgReturn||0)>=0?'var(--green)':'var(--red)'}">${(s.avgReturn||0)>=0?'+':''}${s.avgReturn||0}%</div><div class="hist-stat-lbl">Avg return</div></div>
+      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--text)">${s.total||0}</div><div class="hist-stat-lbl">Signals</div></div>
+      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--green)">${s.targetHit||0}</div><div class="hist-stat-lbl">Targets</div></div>
+      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--red)">${s.stoppedOut||0}</div><div class="hist-stat-lbl">Stopped</div></div>
+      <div class="hist-stat"><div class="hist-stat-val" style="color:var(--blue)">${s.open||0}</div><div class="hist-stat-lbl">Open</div></div>`;
+    const signals=(data.signals||[]).sort((a,b)=>new Date(b.openedAt)-new Date(a.openedAt));
+    if (!signals.length) {
+      document.getElementById('hist-signals').innerHTML=`<div class="hist-empty">No signals yet.<br><span style="font-size:11px">Signals appear here after<br>the bot fires its first alert.</span></div>`;
+      return;
+    }
+    const ageCls={EARLY:'t-early',NASCENT:'t-nascent',PRIME:'t-prime',MID:'t-mid',LATE:'t-late',EXHAUSTED:'t-exhausted'};
+    document.getElementById('hist-signals').innerHTML=signals.map(s=>{
+      const ret=s.returnPct!==null
+        ?`<span class="hist-ret" style="color:${s.returnPct>=0?'var(--green)':'var(--red)'}">${s.returnPct>=0?'+':''}${s.returnPct}%</span>`
+        :`<span class="hist-ret" style="color:var(--text3)">—</span>`;
+      const date=new Date(s.openedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+      const cls=ageCls[s.narrativeAge]||'t-mid';
+      return `<div class="hist-signal-card">
+        <div class="hist-card-top">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-sym">${s.symbol}</span>
+            <span class="tag ${cls}">${s.narrativeAge||'MID'}</span>
+          </div>
+          ${outcomeTag(s.outcome)}
+        </div>
+        <div class="hist-prices">
+          <div><div class="hist-price-lbl">Entry</div><div class="hist-price-val">${fmtPrice(s.entry)}</div></div>
+          <div><div class="hist-price-lbl">Stop</div><div class="hist-price-val" style="color:var(--red)">${fmtPrice(s.stop)}</div></div>
+          <div><div class="hist-price-lbl">Target</div><div class="hist-price-val" style="color:var(--green)">${fmtPrice(s.target)}</div></div>
+        </div>
+        <div class="hist-card-foot">
+          <span class="hist-date">${date} · ${s.regime||''}</span>
+          ${ret}
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    document.getElementById('hist-signals').innerHTML=`<div class="hist-empty" style="color:var(--red)">Failed to load: ${e.message}</div>`;
+  }
+}
+
 async function loadData() {
   clearError();
   const btn=document.getElementById('run-btn');
