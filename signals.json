@@ -284,10 +284,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "🟡 GREED (63/100)",
       "openedAt": "2026-08-04T12:00:03.749Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 0.009138,
+      "returnPct": -7
     },
     {
       "id": "CASHCAT-1785844805627",
@@ -318,10 +318,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (55/100)",
       "openedAt": "2026-08-04T16:00:03.756Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 1317.841179,
+      "returnPct": -7
     },
     {
       "id": "AKT-1785859205603",
@@ -352,10 +352,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (55/100)",
       "openedAt": "2026-08-04T20:00:02.774Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 1325.995425,
+      "returnPct": -7
     },
     {
       "id": "HOME-1785873604577",
@@ -403,10 +403,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (53/100)",
       "openedAt": "2026-08-05T00:00:08.242Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 1334.904339,
+      "returnPct": -7
     },
     {
       "id": "HOME-1785902405884",
@@ -437,10 +437,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (50/100)",
       "openedAt": "2026-08-05T04:00:07.906Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 0.008693,
+      "returnPct": -7
     },
     {
       "id": "SKYAI-1785916806303",
@@ -488,10 +488,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (50/100)",
       "openedAt": "2026-08-05T12:00:02.824Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "TARGET_HIT",
+      "exitPrice": 0.064397,
+      "returnPct": 20
     },
     {
       "id": "MARSCOIN-1785931204617",
@@ -505,10 +505,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (50/100)",
       "openedAt": "2026-08-05T12:00:04.617Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 0.05799,
+      "returnPct": -7
     },
     {
       "id": "SKYAI-1785945605354",
@@ -556,10 +556,10 @@
       "regime": "BTC_DOMINANCE",
       "sentiment": "⚪ NEUTRAL (49/100)",
       "openedAt": "2026-08-05T20:00:02.773Z",
-      "closedAt": null,
-      "outcome": null,
-      "exitPrice": null,
-      "returnPct": null
+      "closedAt": "2026-08-05T21:31:29.137Z",
+      "outcome": "STOPPED_OUT",
+      "exitPrice": 0.093894,
+      "returnPct": -7
     },
     {
       "id": "FORM-1785960004938",
@@ -579,5 +579,5 @@
       "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-05T20:00:04.938Z"
+  "lastUpdated": "2026-08-05T21:31:29.137Z"
 }
