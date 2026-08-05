@@ -361,6 +361,16 @@ function saveLastSignals(signals) {
 
 async function postSignalOpen(signal) {
   try {
+    // Check if symbol already has an open signal
+    const res = await fetch(SIGNALS_API);
+    const data = await res.json();
+    const alreadyOpen = (data.signals || []).some(
+      (s) => s.symbol === signal.symbol && s.outcome === null,
+    );
+    if (alreadyOpen) {
+      console.log(`↩ ${signal.symbol} already open — skipping duplicate`);
+      return;
+    }
     await fetch(SIGNALS_API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -370,7 +380,6 @@ async function postSignalOpen(signal) {
     console.error("Failed to post signal open:", e.message);
   }
 }
-
 // ─── MESSAGE FORMATTING ──────────────────────────────────────────────────────
 
 function escMD(text) {
