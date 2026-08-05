@@ -526,7 +526,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "MUB-1785945607374",
+      "symbol": "MUB",
+      "narrativeAge": "MID",
+      "narrative": "DeFi",
+      "entry": 913.0577906053643,
+      "stop": 849.143745,
+      "target": 1095.669349,
+      "score": 11,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-05T16:00:07.374Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-05T16:00:05.354Z"
+  "lastUpdated": "2026-08-05T16:00:07.374Z"
 }
