@@ -560,7 +560,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "FORM-1785960004938",
+      "symbol": "FORM",
+      "narrativeAge": "EARLY",
+      "narrative": "Gaming",
+      "entry": 0.2211260024845898,
+      "stop": 0.205647,
+      "target": 0.265351,
+      "score": 14,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-05T20:00:04.938Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-05T20:00:02.774Z"
+  "lastUpdated": "2026-08-05T20:00:04.938Z"
 }
