@@ -424,7 +424,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SKR-1785902407906",
+      "symbol": "SKR",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.009347705828448648,
+      "stop": 0.008693,
+      "target": 0.011217,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (50/100)",
+      "openedAt": "2026-08-05T04:00:07.906Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-05T04:00:05.884Z"
+  "lastUpdated": "2026-08-05T04:00:07.906Z"
 }
