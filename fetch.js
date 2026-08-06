@@ -332,7 +332,7 @@ function scoreToken(token, btc24h) {
   score = Math.round(score * volTrend.multiplier);
 
   if (c24 > 80) score -= 4;
-  if (c7 > 200) score -= 3;
+  if (c7 > 100) return null;
   if (vmr > 2.0) score -= 2;
   // Supply pressure — FDV/mcap ratio
   if (supplyRatio < 1.5) score += 2; // most supply circulating, low dilution risk
@@ -355,6 +355,39 @@ function scoreToken(token, btc24h) {
 
   score += narAge.bonus;
   if (narAge.age === "EARLY" && volTrend.trend === "SURGING") score += 2;
+  // Cap score for tokens moving down today — they won't make watchlist anyway
+  if (!allPos && c24 < 0) score = Math.min(score, 3);
+
+  // ── SIGNAL QUALITY IMPROVEMENTS ──────────────────────────────────────────
+
+  // 1. Price position within range
+  // Estimate 7d high from price before the 7d move
+  const priceBase7 = c7 !== -100 ? q.price / (1 + c7 / 100) : q.price;
+  const rangeHigh = Math.max(q.price, priceBase7);
+  const rangeLow = Math.min(q.price, priceBase7);
+  const rangeSpan = rangeHigh - rangeLow;
+  const rangePos = rangeSpan > 0 ? (q.price - rangeLow) / rangeSpan : 0.5;
+  // Breaking up from bottom of range = strong, already at top = crowded
+  if (rangePos < 0.3 && c24 > 0) score += 2; // bottom of range, moving up
+  if (rangePos > 0.85) score -= 1; // near top of range, crowded
+
+  // 2. Volume spike detection (normalize against expected daily turnover)
+  const volSpike = fdv > 0 ? vol / fdv / 0.05 : 0; // 5% daily turnover = baseline
+  if (volSpike > 5)
+    score += 3; // very unusual volume
+  else if (volSpike > 3)
+    score += 2; // unusual volume
+  else if (volSpike > 2) score += 1; // above average
+
+  // 3. Cross-timeframe consistency
+  const c30 = q.percent_change_30d || 0;
+  const consistency =
+    (c1 > 1 ? 1 : 0) + (c24 > 3 ? 1 : 0) + (c7 > 5 ? 1 : 0) + (c30 > 0 ? 1 : 0);
+  score += consistency;
+
+  // 4. 60d narrative age proxy — token that ran 60d ago now consolidating
+  const c60 = q.percent_change_60d || 0;
+  if (c60 > 200 && c30 < 30) return null; // old narrative in consolidation — exclude
 
   return {
     symbol: token.symbol,
@@ -407,20 +440,20 @@ async function main() {
       // Secondary: 1h momentum as tiebreaker
       return (b.c1 || 0) - (a.c1 || 0);
     });
-  const top20 = scored.slice(0, 20);
-  const top10 = top20.slice(0, 10);
+  const top10 = scored.slice(0, 10);
 
   // Attach narratives
-  const ids = top20.map((t) => t.id).filter(Boolean);
+  const ids = top10.map((t) => t.id).filter(Boolean);
   const categoryData = await getTokenCategories(ids);
-  top20.forEach((t) => {
+  top10.forEach((t) => {
     const info = categoryData[t.id];
-    t.narrative = classifyNarrative(info?.tags || []);
+    const tags = info?.tags || [];
+    t.narrative = classifyNarrative(tags);
   });
 
   // Narrative heat map
   const narrativeMap = {};
-  top20.forEach((t) => {
+  top10.forEach((t) => {
     if (!narrativeMap[t.narrative])
       narrativeMap[t.narrative] = { syms: [], total: 0 };
     narrativeMap[t.narrative].syms.push(t.symbol);
@@ -489,15 +522,15 @@ async function main() {
 
   console.log("=== TOP MOMENTUM TOKENS ===");
   console.log(
-    "Rank | Symbol    | Narrative | Age         | 24h%   | 7d%    | Divergence   | WeekVol     | DEX%  | Score | Watch",
+    "Rank | Symbol    | Narrative | Age         | 24h%   | 7d%    | Divergence   | WeekVol     | DEX%  | Score",
   );
   console.log(
-    "-----|-----------|-----------|-------------|--------|--------|--------------|-------------|-------|-------|------",
+    "-----|-----------|-----------|-------------|--------|--------|--------------|-------------|-------|------",
   );
-  top20.forEach((t, i) => {
-    const watch = i >= 10 ? " 👁 WATCH" : "";
+  // Watchlist — uses object properties consistently
+  top10.forEach((t, i) => {
     console.log(
-      `${String(i + 1).padStart(4)} | ${t.symbol.padEnd(9)} | ${t.narrative.padEnd(9)} | ${t.narAge.label.padEnd(13)} | ${t.c24.toFixed(2).padStart(6)}% | ${t.c7.toFixed(2).padStart(6)}% | ${t.divergence.label.padEnd(12)} | ${t.volTrend.weeklyTrend.padEnd(11)} | ${(t.volTrend.dexRatio * 100).toFixed(0).padStart(4)}% | ${String(t.score).padStart(5)}${watch}`,
+      `${String(i + 1).padStart(4)} | ${t.symbol.padEnd(9)} | ${t.narrative.padEnd(9)} | ${t.narAge.label.padEnd(13)} | ${t.c24.toFixed(2).padStart(6)}% | ${t.c7.toFixed(2).padStart(6)}% | ${t.divergence.label.padEnd(12)} | ${t.volTrend.weeklyTrend.padEnd(11)} | ${(t.volTrend.dexRatio * 100).toFixed(0).padStart(4)}% | ${t.score}`,
     );
   });
 
