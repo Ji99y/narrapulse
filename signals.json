@@ -645,7 +645,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SAHARA-1786003208288",
+      "symbol": "SAHARA",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 0.008493045066702613,
+      "stop": 0.007899,
+      "target": 0.010192,
+      "score": 14,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-06T08:00:08.288Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-06T08:00:06.248Z"
+  "lastUpdated": "2026-08-06T08:00:08.288Z"
 }
