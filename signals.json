@@ -696,7 +696,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ROBO-1786032004872",
+      "symbol": "ROBO",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.014816231611461745,
+      "stop": 0.013779,
+      "target": 0.017779,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (53/100)",
+      "openedAt": "2026-08-06T16:00:04.872Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-06T12:00:06.503Z"
+  "lastUpdated": "2026-08-06T16:00:04.872Z"
 }
