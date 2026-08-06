@@ -611,7 +611,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "VELVET-1785988807681",
+      "symbol": "VELVET",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.48485169196067485,
+      "stop": 0.450912,
+      "target": 0.581822,
+      "score": 14,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (50/100)",
+      "openedAt": "2026-08-06T04:00:07.681Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-06T04:00:05.806Z"
+  "lastUpdated": "2026-08-06T04:00:07.681Z"
 }
