@@ -883,7 +883,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ALLO-1786104004599",
+      "symbol": "ALLO",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.34333867952570196,
+      "stop": 0.319305,
+      "target": 0.412006,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (54/100)",
+      "openedAt": "2026-08-07T12:00:04.599Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-07T12:00:02.877Z"
+  "lastUpdated": "2026-08-07T12:00:04.599Z"
 }
