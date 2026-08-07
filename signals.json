@@ -951,7 +951,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BICO-1786132804499",
+      "symbol": "BICO",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.054447374229887255,
+      "stop": 0.050636,
+      "target": 0.065337,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (52/100)",
+      "openedAt": "2026-08-07T20:00:04.499Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-07T20:00:02.555Z"
+  "lastUpdated": "2026-08-07T20:00:04.499Z"
 }
