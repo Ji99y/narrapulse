@@ -781,7 +781,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ZBT-1786060806387",
+      "symbol": "ZBT",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.18613809914772408,
+      "stop": 0.173108,
+      "target": 0.223366,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-07T00:00:06.387Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-07T00:00:04.300Z"
+  "lastUpdated": "2026-08-07T00:00:06.387Z"
 }
