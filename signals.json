@@ -1019,7 +1019,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SKYAI-1786176010345",
+      "symbol": "SKYAI",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.11270119954502254,
+      "stop": 0.104812,
+      "target": 0.135241,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (56/100)",
+      "openedAt": "2026-08-08T08:00:10.345Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-08T04:00:12.211Z"
+  "lastUpdated": "2026-08-08T08:00:10.345Z"
 }
