@@ -1036,7 +1036,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BSV-1786176012140",
+      "symbol": "BSV",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 14.243991794021897,
+      "stop": 13.246912,
+      "target": 17.09279,
+      "score": 12,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (56/100)",
+      "openedAt": "2026-08-08T08:00:12.140Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-08T08:00:10.345Z"
+  "lastUpdated": "2026-08-08T08:00:12.140Z"
 }
