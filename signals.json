@@ -1104,7 +1104,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "TUT-1786204805198",
+      "symbol": "TUT",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.06995637124524773,
+      "stop": 0.065059,
+      "target": 0.083948,
+      "score": 15,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (61/100)",
+      "openedAt": "2026-08-08T16:00:05.198Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-08T16:00:03.580Z"
+  "lastUpdated": "2026-08-08T16:00:05.198Z"
 }
