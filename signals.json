@@ -1087,7 +1087,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "DUSK-1786204803580",
+      "symbol": "DUSK",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 0.06871352098999162,
+      "stop": 0.063904,
+      "target": 0.082456,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (61/100)",
+      "openedAt": "2026-08-08T16:00:03.580Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-08T12:00:04.781Z"
+  "lastUpdated": "2026-08-08T16:00:03.580Z"
 }
