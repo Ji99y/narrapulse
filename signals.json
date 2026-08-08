@@ -1121,7 +1121,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ARC-1786219205590",
+      "symbol": "ARC",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.06071638345628441,
+      "stop": 0.056466,
+      "target": 0.07286,
+      "score": 23,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (62/100)",
+      "openedAt": "2026-08-08T20:00:05.590Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-08T16:00:05.198Z"
+  "lastUpdated": "2026-08-08T20:00:05.590Z"
 }
