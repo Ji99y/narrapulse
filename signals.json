@@ -1240,7 +1240,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "PYTH-1786262405384",
+      "symbol": "PYTH",
+      "narrativeAge": "MID",
+      "narrative": "DeFi",
+      "entry": 0.04226997442141315,
+      "stop": 0.039311,
+      "target": 0.050724,
+      "score": 14,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (55/100)",
+      "openedAt": "2026-08-09T08:00:05.384Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-09T08:00:03.722Z"
+  "lastUpdated": "2026-08-09T08:00:05.384Z"
 }
