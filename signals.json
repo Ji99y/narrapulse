@@ -1342,7 +1342,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SUSHI-1786305604488",
+      "symbol": "SUSHI",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.17666025322295026,
+      "stop": 0.164294,
+      "target": 0.211992,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-09T20:00:04.488Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-09T20:00:02.708Z"
+  "lastUpdated": "2026-08-09T20:00:04.488Z"
 }
