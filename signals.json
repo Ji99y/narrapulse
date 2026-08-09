@@ -1274,7 +1274,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "DEEP-1786276806828",
+      "symbol": "DEEP",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.017756206188176228,
+      "stop": 0.016513,
+      "target": 0.021307,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-09T12:00:06.828Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-09T12:00:04.982Z"
+  "lastUpdated": "2026-08-09T12:00:06.828Z"
 }
