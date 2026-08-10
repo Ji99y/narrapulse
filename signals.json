@@ -1393,7 +1393,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BANANAS31-1786334405753",
+      "symbol": "BANANAS31",
+      "narrativeAge": "EARLY",
+      "narrative": "Meme",
+      "entry": 0.009341397443931674,
+      "stop": 0.008687,
+      "target": 0.01121,
+      "score": 27,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (46/100)",
+      "openedAt": "2026-08-10T04:00:05.753Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-10T00:00:06.582Z"
+  "lastUpdated": "2026-08-10T04:00:05.753Z"
 }
