@@ -1444,7 +1444,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ALT-1786348806567",
+      "symbol": "ALT",
+      "narrativeAge": "EARLY",
+      "narrative": "L2",
+      "entry": 0.006343845360563068,
+      "stop": 0.0059,
+      "target": 0.007613,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-10T08:00:06.567Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-10T08:00:04.609Z"
+  "lastUpdated": "2026-08-10T08:00:06.567Z"
 }
