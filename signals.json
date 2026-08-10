@@ -1376,7 +1376,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "THETA-1786320006582",
+      "symbol": "THETA",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 0.1402093912176138,
+      "stop": 0.130395,
+      "target": 0.168251,
+      "score": 15,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (42/100)",
+      "openedAt": "2026-08-10T00:00:06.582Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-10T00:00:04.875Z"
+  "lastUpdated": "2026-08-10T00:00:06.582Z"
 }
