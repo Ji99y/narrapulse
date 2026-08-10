@@ -1359,7 +1359,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "XAN-1786320004875",
+      "symbol": "XAN",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.022100295743067832,
+      "stop": 0.020553,
+      "target": 0.02652,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (42/100)",
+      "openedAt": "2026-08-10T00:00:04.875Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-09T20:00:04.488Z"
+  "lastUpdated": "2026-08-10T00:00:04.875Z"
 }
