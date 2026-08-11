@@ -1563,7 +1563,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ME-1786406406470",
+      "symbol": "ME",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.06652664100722758,
+      "stop": 0.06187,
+      "target": 0.079832,
+      "score": 16,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-11T00:00:06.470Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-11T00:00:04.774Z"
+  "lastUpdated": "2026-08-11T00:00:06.470Z"
 }
