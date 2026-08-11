@@ -1614,7 +1614,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SQD-1786435205149",
+      "symbol": "SQD",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.04604158273190197,
+      "stop": 0.042819,
+      "target": 0.05525,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (42/100)",
+      "openedAt": "2026-08-11T08:00:05.149Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-11T04:00:08.218Z"
+  "lastUpdated": "2026-08-11T08:00:05.149Z"
 }
