@@ -1648,7 +1648,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "GEOD-1786449603104",
+      "symbol": "GEOD",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.2304202733368184,
+      "stop": 0.214291,
+      "target": 0.276504,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (41/100)",
+      "openedAt": "2026-08-11T12:00:03.104Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-11T08:00:07.000Z"
+  "lastUpdated": "2026-08-11T12:00:03.104Z"
 }
