@@ -1784,7 +1784,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CRCLB-1786507208911",
+      "symbol": "CRCLB",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 71.05994564063903,
+      "stop": 66.085749,
+      "target": 85.271935,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (46/100)",
+      "openedAt": "2026-08-12T04:00:08.911Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-12T00:00:10.104Z"
+  "lastUpdated": "2026-08-12T04:00:08.911Z"
 }
