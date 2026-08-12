@@ -1767,7 +1767,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "FLOW-1786492810104",
+      "symbol": "FLOW",
+      "narrativeAge": "PRIME",
+      "narrative": "L1",
+      "entry": 0.032678701323998575,
+      "stop": 0.030391,
+      "target": 0.039214,
+      "score": 15,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (44/100)",
+      "openedAt": "2026-08-12T00:00:10.104Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-12T00:00:08.317Z"
+  "lastUpdated": "2026-08-12T00:00:10.104Z"
 }
