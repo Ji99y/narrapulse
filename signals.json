@@ -1801,7 +1801,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "IMX-1786507210686",
+      "symbol": "IMX",
+      "narrativeAge": "MID",
+      "narrative": "L2",
+      "entry": 0.11420470139590527,
+      "stop": 0.10621,
+      "target": 0.137046,
+      "score": 7,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (46/100)",
+      "openedAt": "2026-08-12T04:00:10.686Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-12T04:00:08.911Z"
+  "lastUpdated": "2026-08-12T04:00:10.686Z"
 }
