@@ -1988,7 +1988,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "MARSCOIN-1786593604469",
+      "symbol": "MARSCOIN",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.06218728314886367,
+      "stop": 0.057834,
+      "target": 0.074625,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (43/100)",
+      "openedAt": "2026-08-13T04:00:04.469Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-13T04:00:02.724Z"
+  "lastUpdated": "2026-08-13T04:00:04.469Z"
 }
