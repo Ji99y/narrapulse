@@ -2005,7 +2005,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "APR-1786608004011",
+      "symbol": "APR",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.48215073310418377,
+      "stop": 0.4484,
+      "target": 0.578581,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-13T08:00:04.011Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-13T04:00:04.469Z"
+  "lastUpdated": "2026-08-13T08:00:04.011Z"
 }
