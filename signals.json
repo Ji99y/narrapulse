@@ -2056,7 +2056,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "GPS-1786622409855",
+      "symbol": "GPS",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.011151486252166116,
+      "stop": 0.010371,
+      "target": 0.013382,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (44/100)",
+      "openedAt": "2026-08-13T12:00:09.855Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-13T12:00:07.704Z"
+  "lastUpdated": "2026-08-13T12:00:09.855Z"
 }
