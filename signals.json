@@ -2294,7 +2294,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ETHFI-1786737605279",
+      "symbol": "ETHFI",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.4568564660098899,
+      "stop": 0.424877,
+      "target": 0.548228,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (44/100)",
+      "openedAt": "2026-08-14T20:00:05.279Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-14T16:00:03.360Z"
+  "lastUpdated": "2026-08-14T20:00:05.279Z"
 }
