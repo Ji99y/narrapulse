@@ -2243,7 +2243,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SNDKB-1786708805060",
+      "symbol": "SNDKB",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 1631.0680712300293,
+      "stop": 1516.893306,
+      "target": 1957.281685,
+      "score": 24,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (47/100)",
+      "openedAt": "2026-08-14T12:00:05.061Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-14T08:00:09.617Z"
+  "lastUpdated": "2026-08-14T12:00:05.061Z"
 }
