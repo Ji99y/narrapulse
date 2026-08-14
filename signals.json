@@ -2277,7 +2277,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CROSS-1786723203360",
+      "symbol": "CROSS",
+      "narrativeAge": "PRIME",
+      "narrative": "Gaming",
+      "entry": 0.1445252332382909,
+      "stop": 0.134408,
+      "target": 0.17343,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (45/100)",
+      "openedAt": "2026-08-14T16:00:03.360Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-14T12:00:06.948Z"
+  "lastUpdated": "2026-08-14T16:00:03.360Z"
 }
