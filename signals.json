@@ -2158,7 +2158,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "AVNT-1786665608342",
+      "symbol": "AVNT",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.10841157873577333,
+      "stop": 0.100823,
+      "target": 0.130094,
+      "score": 23,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (59/100)",
+      "openedAt": "2026-08-14T00:00:08.342Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-14T00:00:06.359Z"
+  "lastUpdated": "2026-08-14T00:00:08.342Z"
 }
