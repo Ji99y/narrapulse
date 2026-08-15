@@ -2447,7 +2447,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "HUMA-1786795210562",
+      "symbol": "HUMA",
+      "narrativeAge": "MID",
+      "narrative": "DeFi",
+      "entry": 0.021361836487344587,
+      "stop": 0.019867,
+      "target": 0.025634,
+      "score": 12,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (54/100)",
+      "openedAt": "2026-08-15T12:00:10.562Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-15T12:00:08.737Z"
+  "lastUpdated": "2026-08-15T12:00:10.562Z"
 }
