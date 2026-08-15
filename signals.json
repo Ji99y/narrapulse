@@ -2464,7 +2464,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "PLUME-1786809603890",
+      "symbol": "PLUME",
+      "narrativeAge": "PRIME",
+      "narrative": "L1",
+      "entry": 0.013387573928503683,
+      "stop": 0.01245,
+      "target": 0.016065,
+      "score": 14,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (57/100)",
+      "openedAt": "2026-08-15T16:00:03.890Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-15T12:00:10.562Z"
+  "lastUpdated": "2026-08-15T16:00:03.890Z"
 }
