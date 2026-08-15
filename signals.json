@@ -2481,7 +2481,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "Q-1786809605783",
+      "symbol": "Q",
+      "narrativeAge": "MID",
+      "narrative": "Other",
+      "entry": 0.023935437141422208,
+      "stop": 0.02226,
+      "target": 0.028723,
+      "score": 13,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (57/100)",
+      "openedAt": "2026-08-15T16:00:05.783Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-15T16:00:03.890Z"
+  "lastUpdated": "2026-08-15T16:00:05.783Z"
 }
