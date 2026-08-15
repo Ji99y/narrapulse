@@ -2515,7 +2515,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SYRUP-1786824005291",
+      "symbol": "SYRUP",
+      "narrativeAge": "MID",
+      "narrative": "DeFi",
+      "entry": 0.1625745180051783,
+      "stop": 0.151194,
+      "target": 0.195089,
+      "score": 11,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (54/100)",
+      "openedAt": "2026-08-15T20:00:05.291Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-15T20:00:03.397Z"
+  "lastUpdated": "2026-08-15T20:00:05.291Z"
 }
