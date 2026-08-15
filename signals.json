@@ -2430,7 +2430,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "COW-1786795208737",
+      "symbol": "COW",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.1631809248217834,
+      "stop": 0.151758,
+      "target": 0.195817,
+      "score": 25,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (54/100)",
+      "openedAt": "2026-08-15T12:00:08.737Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-15T08:00:08.814Z"
+  "lastUpdated": "2026-08-15T12:00:08.737Z"
 }
