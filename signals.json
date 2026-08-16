@@ -2549,7 +2549,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CARDS-1786838404924",
+      "symbol": "CARDS",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.19405593564166312,
+      "stop": 0.180472,
+      "target": 0.232867,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-16T00:00:04.924Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-16T00:00:02.723Z"
+  "lastUpdated": "2026-08-16T00:00:04.924Z"
 }
