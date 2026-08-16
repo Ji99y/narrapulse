@@ -2685,7 +2685,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "DRV-1786910404580",
+      "symbol": "DRV",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.10697654317874024,
+      "stop": 0.099488,
+      "target": 0.128372,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (48/100)",
+      "openedAt": "2026-08-16T20:00:04.580Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-16T20:00:02.536Z"
+  "lastUpdated": "2026-08-16T20:00:04.580Z"
 }
