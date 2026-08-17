@@ -2838,7 +2838,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SPCXB-1786982404660",
+      "symbol": "SPCXB",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 149.50416543086553,
+      "stop": 139.038874,
+      "target": 179.404999,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (48/100)",
+      "openedAt": "2026-08-17T16:00:04.660Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-17T12:00:05.183Z"
+  "lastUpdated": "2026-08-17T16:00:04.660Z"
 }
