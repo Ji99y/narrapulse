@@ -2821,7 +2821,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CSPR-1786968005182",
+      "symbol": "CSPR",
+      "narrativeAge": "PRIME",
+      "narrative": "L1",
+      "entry": 0.003176462214349199,
+      "stop": 0.002954,
+      "target": 0.003812,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (50/100)",
+      "openedAt": "2026-08-17T12:00:05.182Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-17T12:00:03.030Z"
+  "lastUpdated": "2026-08-17T12:00:05.183Z"
 }
