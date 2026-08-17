@@ -2753,7 +2753,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CHIP-1786939208893",
+      "symbol": "CHIP",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.02921653636415911,
+      "stop": 0.027171,
+      "target": 0.03506,
+      "score": 16,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-17T04:00:08.893Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-17T04:00:07.300Z"
+  "lastUpdated": "2026-08-17T04:00:08.893Z"
 }
