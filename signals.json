@@ -2702,7 +2702,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "RIF-1786924807697",
+      "symbol": "RIF",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.07263774448795414,
+      "stop": 0.067553,
+      "target": 0.087165,
+      "score": 13,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (41/100)",
+      "openedAt": "2026-08-17T00:00:07.697Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-16T20:00:04.580Z"
+  "lastUpdated": "2026-08-17T00:00:07.697Z"
 }
