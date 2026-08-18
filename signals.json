@@ -3076,7 +3076,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "MET-1787083203750",
+      "symbol": "MET",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.17232672737729696,
+      "stop": 0.160264,
+      "target": 0.206792,
+      "score": 9,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (40/100)",
+      "openedAt": "2026-08-18T20:00:03.750Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-18T16:00:06.658Z"
+  "lastUpdated": "2026-08-18T20:00:03.750Z"
 }
