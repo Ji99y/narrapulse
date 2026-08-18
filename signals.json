@@ -2940,7 +2940,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "GPS-1787025604128",
+      "symbol": "GPS",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.017004410510911307,
+      "stop": 0.015814,
+      "target": 0.020405,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (39/100)",
+      "openedAt": "2026-08-18T04:00:04.128Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-18T00:00:08.929Z"
+  "lastUpdated": "2026-08-18T04:00:04.128Z"
 }
