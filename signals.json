@@ -2923,7 +2923,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ACU-1787011208929",
+      "symbol": "ACU",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.13134506629016854,
+      "stop": 0.122151,
+      "target": 0.157614,
+      "score": 15,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (53/100)",
+      "openedAt": "2026-08-18T00:00:08.929Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-18T00:00:06.915Z"
+  "lastUpdated": "2026-08-18T00:00:08.929Z"
 }
