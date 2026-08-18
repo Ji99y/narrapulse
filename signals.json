@@ -3008,7 +3008,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "RED-1787054405544",
+      "symbol": "RED",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.09975531987492002,
+      "stop": 0.092772,
+      "target": 0.119706,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (41/100)",
+      "openedAt": "2026-08-18T12:00:05.544Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-18T08:00:09.840Z"
+  "lastUpdated": "2026-08-18T12:00:05.544Z"
 }
