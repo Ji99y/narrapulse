@@ -3178,7 +3178,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "AGT-1787126407448",
+      "symbol": "AGT",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.01615170267239593,
+      "stop": 0.015021,
+      "target": 0.019382,
+      "score": 8,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (46/100)",
+      "openedAt": "2026-08-19T08:00:07.448Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-19T08:00:05.308Z"
+  "lastUpdated": "2026-08-19T08:00:07.448Z"
 }
