@@ -3195,7 +3195,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ELF-1787140803351",
+      "symbol": "ELF",
+      "narrativeAge": "MID",
+      "narrative": "L1",
+      "entry": 0.06685013752705384,
+      "stop": 0.062171,
+      "target": 0.08022,
+      "score": 16,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (46/100)",
+      "openedAt": "2026-08-19T12:00:03.351Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-19T08:00:07.448Z"
+  "lastUpdated": "2026-08-19T12:00:03.351Z"
 }
