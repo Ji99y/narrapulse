@@ -3246,7 +3246,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "GNO-1787155206635",
+      "symbol": "GNO",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 116.41654911618784,
+      "stop": 108.267391,
+      "target": 139.699859,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (64/100)",
+      "openedAt": "2026-08-19T16:00:06.635Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-19T16:00:04.705Z"
+  "lastUpdated": "2026-08-19T16:00:06.635Z"
 }
