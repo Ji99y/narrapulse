@@ -3331,7 +3331,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BIO-1787198412809",
+      "symbol": "BIO",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.028997972892472676,
+      "stop": 0.026968,
+      "target": 0.034798,
+      "score": 23,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (75/100)",
+      "openedAt": "2026-08-20T04:00:12.809Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-20T00:00:08.401Z"
+  "lastUpdated": "2026-08-20T04:00:12.809Z"
 }
