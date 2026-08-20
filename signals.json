@@ -3399,7 +3399,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BOME-1787227205499",
+      "symbol": "BOME",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.0013058471739926356,
+      "stop": 0.001214,
+      "target": 0.001567,
+      "score": 24,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (77/100)",
+      "openedAt": "2026-08-20T12:00:05.499Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-20T08:00:08.306Z"
+  "lastUpdated": "2026-08-20T12:00:05.499Z"
 }
