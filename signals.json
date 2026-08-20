@@ -3348,7 +3348,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "SPX-1787198414594",
+      "symbol": "SPX",
+      "narrativeAge": "EARLY",
+      "narrative": "Meme",
+      "entry": 0.3614957822823642,
+      "stop": 0.336191,
+      "target": 0.433795,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (75/100)",
+      "openedAt": "2026-08-20T04:00:14.594Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-20T04:00:12.809Z"
+  "lastUpdated": "2026-08-20T04:00:14.594Z"
 }
