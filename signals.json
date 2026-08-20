@@ -3484,7 +3484,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CORE-1787256004873",
+      "symbol": "CORE",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 0.025805718453910144,
+      "stop": 0.023999,
+      "target": 0.030967,
+      "score": 23,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (75/100)",
+      "openedAt": "2026-08-20T20:00:04.873Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-20T20:00:02.854Z"
+  "lastUpdated": "2026-08-20T20:00:04.873Z"
 }
