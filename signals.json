@@ -3603,7 +3603,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "PEOPLE-1787313602718",
+      "symbol": "PEOPLE",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.011485494301359011,
+      "stop": 0.010682,
+      "target": 0.013783,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (78/100)",
+      "openedAt": "2026-08-21T12:00:02.718Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-21T08:00:05.620Z"
+  "lastUpdated": "2026-08-21T12:00:02.719Z"
 }
