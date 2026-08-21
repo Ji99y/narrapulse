@@ -3654,7 +3654,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "GAS-1787328005804",
+      "symbol": "GAS",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 1.16464057943121,
+      "stop": 1.083116,
+      "target": 1.397569,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (79/100)",
+      "openedAt": "2026-08-21T16:00:05.804Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-21T16:00:03.656Z"
+  "lastUpdated": "2026-08-21T16:00:05.804Z"
 }
