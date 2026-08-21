@@ -3552,7 +3552,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "WIF-1787284806462",
+      "symbol": "WIF",
+      "narrativeAge": "EARLY",
+      "narrative": "Meme",
+      "entry": 0.16623119295591188,
+      "stop": 0.154595,
+      "target": 0.199477,
+      "score": 23,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (75/100)",
+      "openedAt": "2026-08-21T04:00:06.462Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-21T04:00:04.467Z"
+  "lastUpdated": "2026-08-21T04:00:06.462Z"
 }
