@@ -3637,7 +3637,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "USELESS-1787328003656",
+      "symbol": "USELESS",
+      "narrativeAge": "EARLY",
+      "narrative": "Meme",
+      "entry": 0.060175499971862514,
+      "stop": 0.055963,
+      "target": 0.072211,
+      "score": 25,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (79/100)",
+      "openedAt": "2026-08-21T16:00:03.656Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-21T12:00:04.839Z"
+  "lastUpdated": "2026-08-21T16:00:03.656Z"
 }
