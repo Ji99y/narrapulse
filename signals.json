@@ -3671,7 +3671,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "STX-1787342403377",
+      "symbol": "STX",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 0.17499348238978887,
+      "stop": 0.162744,
+      "target": 0.209992,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (77/100)",
+      "openedAt": "2026-08-21T20:00:03.377Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-21T16:00:05.804Z"
+  "lastUpdated": "2026-08-21T20:00:03.378Z"
 }
