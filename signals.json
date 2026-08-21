@@ -3535,7 +3535,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ORDI-1787284804467",
+      "symbol": "ORDI",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 4.2477042278714015,
+      "stop": 3.950365,
+      "target": 5.097245,
+      "score": 24,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (75/100)",
+      "openedAt": "2026-08-21T04:00:04.467Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-21T00:00:10.745Z"
+  "lastUpdated": "2026-08-21T04:00:04.467Z"
 }
