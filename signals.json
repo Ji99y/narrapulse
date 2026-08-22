@@ -3739,7 +3739,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "FET-1787371208162",
+      "symbol": "FET",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.18066126657750406,
+      "stop": 0.168015,
+      "target": 0.216794,
+      "score": 25,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🔴 EXTREME GREED (81/100)",
+      "openedAt": "2026-08-22T04:00:08.162Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-22T00:00:08.351Z"
+  "lastUpdated": "2026-08-22T04:00:08.162Z"
 }
