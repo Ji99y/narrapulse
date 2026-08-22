@@ -3841,7 +3841,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "TRB-1787414405001",
+      "symbol": "TRB",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 18.345897574121505,
+      "stop": 17.061685,
+      "target": 22.015077,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-22T16:00:05.001Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-22T16:00:03.145Z"
+  "lastUpdated": "2026-08-22T16:00:05.001Z"
 }
