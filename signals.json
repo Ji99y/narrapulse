@@ -3705,7 +3705,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "FET-1787356806252",
+      "symbol": "FET",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.17053385878571103,
+      "stop": 0.158596,
+      "target": 0.204641,
+      "score": 24,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (80/100)",
+      "openedAt": "2026-08-22T00:00:06.252Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-21T20:00:05.321Z"
+  "lastUpdated": "2026-08-22T00:00:06.252Z"
 }
