@@ -3875,7 +3875,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "MOVE-1787428804472",
+      "symbol": "MOVE",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 0.008078064704145302,
+      "stop": 0.007513,
+      "target": 0.009694,
+      "score": 23,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (60/100)",
+      "openedAt": "2026-08-22T20:00:04.472Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-22T20:00:02.505Z"
+  "lastUpdated": "2026-08-22T20:00:04.472Z"
 }
