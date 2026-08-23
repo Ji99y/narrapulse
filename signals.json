@@ -3943,7 +3943,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "COTI-1787457605500",
+      "symbol": "COTI",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.01197631475873751,
+      "stop": 0.011138,
+      "target": 0.014372,
+      "score": 11,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (35/100)",
+      "openedAt": "2026-08-23T04:00:05.500Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-23T04:00:03.714Z"
+  "lastUpdated": "2026-08-23T04:00:05.500Z"
 }
