@@ -4147,7 +4147,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "APEX-1787544006376",
+      "symbol": "APEX",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.2963159405347429,
+      "stop": 0.275574,
+      "target": 0.355579,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (68/100)",
+      "openedAt": "2026-08-24T04:00:06.376Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-24T04:00:04.426Z"
+  "lastUpdated": "2026-08-24T04:00:06.376Z"
 }
