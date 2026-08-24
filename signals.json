@@ -4181,7 +4181,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "UAI-1787558407330",
+      "symbol": "UAI",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.3457452617485621,
+      "stop": 0.321543,
+      "target": 0.414894,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (68/100)",
+      "openedAt": "2026-08-24T08:00:07.330Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-24T08:00:05.280Z"
+  "lastUpdated": "2026-08-24T08:00:07.330Z"
 }
