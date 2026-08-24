@@ -4113,7 +4113,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "TRAC-1787529610903",
+      "symbol": "TRAC",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.3770052874033741,
+      "stop": 0.350615,
+      "target": 0.452406,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (69/100)",
+      "openedAt": "2026-08-24T00:00:10.903Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-24T00:00:09.031Z"
+  "lastUpdated": "2026-08-24T00:00:10.903Z"
 }
