@@ -4164,7 +4164,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "PROM-1787558405280",
+      "symbol": "PROM",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 3.792061055978083,
+      "stop": 3.526617,
+      "target": 4.550473,
+      "score": 24,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (68/100)",
+      "openedAt": "2026-08-24T08:00:05.280Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-24T04:00:06.376Z"
+  "lastUpdated": "2026-08-24T08:00:05.280Z"
 }
