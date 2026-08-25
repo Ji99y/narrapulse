@@ -4419,7 +4419,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "JASMY-1787673603732",
+      "symbol": "JASMY",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.005132155965902158,
+      "stop": 0.004773,
+      "target": 0.006159,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-25T16:00:03.732Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-25T12:00:05.553Z"
+  "lastUpdated": "2026-08-25T16:00:03.732Z"
 }
