@@ -4368,7 +4368,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CATE-1787644810584",
+      "symbol": "CATE",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.06525042878658893,
+      "stop": 0.060683,
+      "target": 0.078301,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (62/100)",
+      "openedAt": "2026-08-25T08:00:10.584Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-25T08:00:06.728Z"
+  "lastUpdated": "2026-08-25T08:00:10.584Z"
 }
