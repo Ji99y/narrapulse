@@ -4402,7 +4402,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "PONS-1787659205553",
+      "symbol": "PONS",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.09078291468896296,
+      "stop": 0.084428,
+      "target": 0.108939,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (54/100)",
+      "openedAt": "2026-08-25T12:00:05.553Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-25T12:00:03.620Z"
+  "lastUpdated": "2026-08-25T12:00:05.553Z"
 }
