@@ -4470,7 +4470,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ONT-1787688005494",
+      "symbol": "ONT",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.05295869547720273,
+      "stop": 0.049252,
+      "target": 0.06355,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (51/100)",
+      "openedAt": "2026-08-25T20:00:05.494Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-25T20:00:03.619Z"
+  "lastUpdated": "2026-08-25T20:00:05.494Z"
 }
