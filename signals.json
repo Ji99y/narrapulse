@@ -4385,7 +4385,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "GRT-1787659203620",
+      "symbol": "GRT",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.018492571398721153,
+      "stop": 0.017198,
+      "target": 0.022191,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (54/100)",
+      "openedAt": "2026-08-25T12:00:03.620Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-25T08:00:10.584Z"
+  "lastUpdated": "2026-08-25T12:00:03.620Z"
 }
