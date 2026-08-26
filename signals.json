@@ -4538,7 +4538,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "FLUID-1787716810222",
+      "symbol": "FLUID",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 1.563544648219851,
+      "stop": 1.454097,
+      "target": 1.876254,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (41/100)",
+      "openedAt": "2026-08-26T04:00:10.222Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-26T04:00:08.390Z"
+  "lastUpdated": "2026-08-26T04:00:10.222Z"
 }
