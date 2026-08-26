@@ -4504,7 +4504,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "PEAQ-1787702405352",
+      "symbol": "PEAQ",
+      "narrativeAge": "EARLY",
+      "narrative": "L1",
+      "entry": 0.021179291239878315,
+      "stop": 0.019697,
+      "target": 0.025415,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (43/100)",
+      "openedAt": "2026-08-26T00:00:05.352Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-26T00:00:02.703Z"
+  "lastUpdated": "2026-08-26T00:00:05.352Z"
 }
