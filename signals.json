@@ -4555,7 +4555,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ONG-1787731202791",
+      "symbol": "ONG",
+      "narrativeAge": "PRIME",
+      "narrative": "L1",
+      "entry": 0.10864307741791594,
+      "stop": 0.101038,
+      "target": 0.130372,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (43/100)",
+      "openedAt": "2026-08-26T08:00:02.791Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-26T04:00:10.222Z"
+  "lastUpdated": "2026-08-26T08:00:02.791Z"
 }
