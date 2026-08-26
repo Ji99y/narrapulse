@@ -4606,7 +4606,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "FARTCOIN-1787745606512",
+      "symbol": "FARTCOIN",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.21162306931799282,
+      "stop": 0.196809,
+      "target": 0.253948,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (40/100)",
+      "openedAt": "2026-08-26T12:00:06.512Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-26T12:00:04.446Z"
+  "lastUpdated": "2026-08-26T12:00:06.512Z"
 }
