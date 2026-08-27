@@ -4708,7 +4708,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "CVX-1787788807672",
+      "symbol": "CVX",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 2.4898207225584135,
+      "stop": 2.315533,
+      "target": 2.987785,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟡 GREED (65/100)",
+      "openedAt": "2026-08-27T00:00:07.672Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-27T00:00:05.246Z"
+  "lastUpdated": "2026-08-27T00:00:07.672Z"
 }
