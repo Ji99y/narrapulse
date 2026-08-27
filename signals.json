@@ -4793,7 +4793,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "S-1787832004036",
+      "symbol": "S",
+      "narrativeAge": "PRIME",
+      "narrative": "L1",
+      "entry": 0.03096079888646929,
+      "stop": 0.028794,
+      "target": 0.037153,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (60/100)",
+      "openedAt": "2026-08-27T12:00:04.036Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-27T08:00:06.746Z"
+  "lastUpdated": "2026-08-27T12:00:04.036Z"
 }
