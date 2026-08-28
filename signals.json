@@ -5014,7 +5014,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BAS-1787918406325",
+      "symbol": "BAS",
+      "narrativeAge": "EARLY",
+      "narrative": "Other",
+      "entry": 0.030001375409403414,
+      "stop": 0.027901,
+      "target": 0.036002,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-28T12:00:06.325Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T12:00:04.299Z"
+  "lastUpdated": "2026-08-28T12:00:06.325Z"
 }
