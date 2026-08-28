@@ -4929,7 +4929,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BEAM-1787889605314",
+      "symbol": "BEAM",
+      "narrativeAge": "EARLY",
+      "narrative": "Gaming",
+      "entry": 0.001716896264792936,
+      "stop": 0.001597,
+      "target": 0.00206,
+      "score": 23,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (52/100)",
+      "openedAt": "2026-08-28T04:00:05.314Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T00:00:06.081Z"
+  "lastUpdated": "2026-08-28T04:00:05.314Z"
 }
