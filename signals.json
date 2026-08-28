@@ -5065,7 +5065,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "TURBO-1787947203488",
+      "symbol": "TURBO",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.0011022337892932592,
+      "stop": 0.001025,
+      "target": 0.001323,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (37/100)",
+      "openedAt": "2026-08-28T20:00:03.488Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T16:00:05.721Z"
+  "lastUpdated": "2026-08-28T20:00:03.488Z"
 }
