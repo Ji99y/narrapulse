@@ -5048,7 +5048,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "KAVA-1787932805721",
+      "symbol": "KAVA",
+      "narrativeAge": "MID",
+      "narrative": "L1",
+      "entry": 0.04740611095258817,
+      "stop": 0.044088,
+      "target": 0.056887,
+      "score": 14,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (38/100)",
+      "openedAt": "2026-08-28T16:00:05.721Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T16:00:03.745Z"
+  "lastUpdated": "2026-08-28T16:00:05.721Z"
 }
