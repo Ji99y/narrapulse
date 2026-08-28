@@ -5031,7 +5031,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "DEXE-1787932803745",
+      "symbol": "DEXE",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 2.211394814081082,
+      "stop": 2.056597,
+      "target": 2.653674,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (38/100)",
+      "openedAt": "2026-08-28T16:00:03.745Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T12:00:06.325Z"
+  "lastUpdated": "2026-08-28T16:00:03.745Z"
 }
