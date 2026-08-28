@@ -4946,7 +4946,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ANSEM-1787889607212",
+      "symbol": "ANSEM",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.3800097263679673,
+      "stop": 0.353409,
+      "target": 0.456012,
+      "score": 18,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (52/100)",
+      "openedAt": "2026-08-28T04:00:07.212Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T04:00:05.314Z"
+  "lastUpdated": "2026-08-28T04:00:07.212Z"
 }
