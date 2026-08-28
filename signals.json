@@ -4997,7 +4997,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "MELANIA-1787918404299",
+      "symbol": "MELANIA",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.12093043126412875,
+      "stop": 0.112465,
+      "target": 0.145117,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (49/100)",
+      "openedAt": "2026-08-28T12:00:04.299Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T08:00:07.128Z"
+  "lastUpdated": "2026-08-28T12:00:04.299Z"
 }
