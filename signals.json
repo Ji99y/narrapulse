@@ -5082,7 +5082,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "龙虾-1787947206981",
+      "symbol": "龙虾",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.06232265951643746,
+      "stop": 0.05796,
+      "target": 0.074787,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (37/100)",
+      "openedAt": "2026-08-28T20:00:06.981Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-28T20:00:03.488Z"
+  "lastUpdated": "2026-08-28T20:00:06.981Z"
 }
