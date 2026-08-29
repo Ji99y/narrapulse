@@ -5252,7 +5252,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "MINA-1788019206008",
+      "symbol": "MINA",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.06431552162244412,
+      "stop": 0.059813,
+      "target": 0.077179,
+      "score": 12,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (50/100)",
+      "openedAt": "2026-08-29T16:00:06.008Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-29T16:00:03.980Z"
+  "lastUpdated": "2026-08-29T16:00:06.008Z"
 }
