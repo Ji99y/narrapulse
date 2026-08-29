@@ -5235,7 +5235,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "NPC-1788019203979",
+      "symbol": "NPC",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.017159037637640134,
+      "stop": 0.015958,
+      "target": 0.020591,
+      "score": 13,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (50/100)",
+      "openedAt": "2026-08-29T16:00:03.980Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-29T12:00:07.805Z"
+  "lastUpdated": "2026-08-29T16:00:03.980Z"
 }
