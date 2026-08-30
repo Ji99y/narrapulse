@@ -5388,7 +5388,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "DOS-1788076812197",
+      "symbol": "DOS",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.31195107756381496,
+      "stop": 0.290115,
+      "target": 0.374341,
+      "score": 17,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (53/100)",
+      "openedAt": "2026-08-30T08:00:12.197Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-30T08:00:09.592Z"
+  "lastUpdated": "2026-08-30T08:00:12.197Z"
 }
