@@ -5354,7 +5354,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "HNT-1788062409471",
+      "symbol": "HNT",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.5180468580773278,
+      "stop": 0.481784,
+      "target": 0.621656,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (54/100)",
+      "openedAt": "2026-08-30T04:00:09.471Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-30T04:00:07.601Z"
+  "lastUpdated": "2026-08-30T04:00:09.471Z"
 }
