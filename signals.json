@@ -5524,7 +5524,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "ZORA-1788148807055",
+      "symbol": "ZORA",
+      "narrativeAge": "PRIME",
+      "narrative": "L2",
+      "entry": 0.009867423602192773,
+      "stop": 0.009177,
+      "target": 0.011841,
+      "score": 20,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (41/100)",
+      "openedAt": "2026-08-31T04:00:07.055Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-31T04:00:05.131Z"
+  "lastUpdated": "2026-08-31T04:00:07.055Z"
 }
