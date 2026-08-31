@@ -5575,7 +5575,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "AXL-1788177604625",
+      "symbol": "AXL",
+      "narrativeAge": "PRIME",
+      "narrative": "DeFi",
+      "entry": 0.04851578876017899,
+      "stop": 0.04512,
+      "target": 0.058219,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "🟠 FEAR (40/100)",
+      "openedAt": "2026-08-31T12:00:04.625Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-31T08:00:07.370Z"
+  "lastUpdated": "2026-08-31T12:00:04.625Z"
 }
