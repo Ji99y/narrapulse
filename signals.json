@@ -5558,7 +5558,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "BARD-1788163207370",
+      "symbol": "BARD",
+      "narrativeAge": "EARLY",
+      "narrative": "DeFi",
+      "entry": 0.13218321941763286,
+      "stop": 0.12293,
+      "target": 0.15862,
+      "score": 14,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (46/100)",
+      "openedAt": "2026-08-31T08:00:07.370Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-31T08:00:05.120Z"
+  "lastUpdated": "2026-08-31T08:00:07.370Z"
 }
