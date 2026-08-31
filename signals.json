@@ -5507,7 +5507,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "牛来-1788148805131",
+      "symbol": "牛来",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.1264595538100958,
+      "stop": 0.117607,
+      "target": 0.151751,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (41/100)",
+      "openedAt": "2026-08-31T04:00:05.131Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-30T20:00:06.824Z"
+  "lastUpdated": "2026-08-31T04:00:05.131Z"
 }
