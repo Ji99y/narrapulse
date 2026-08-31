@@ -5660,7 +5660,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "STONKBROKER-1788206409059",
+      "symbol": "STONKBROKER",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.03297032139041787,
+      "stop": 0.030662,
+      "target": 0.039564,
+      "score": 19,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (42/100)",
+      "openedAt": "2026-08-31T20:00:09.059Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-08-31T20:00:06.528Z"
+  "lastUpdated": "2026-08-31T20:00:09.059Z"
 }
