@@ -5779,7 +5779,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "USELESS-1788264004806",
+      "symbol": "USELESS",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.10275971884008171,
+      "stop": 0.095567,
+      "target": 0.123312,
+      "score": 24,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (58/100)",
+      "openedAt": "2026-09-01T12:00:04.806Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-09-01T08:00:10.062Z"
+  "lastUpdated": "2026-09-01T12:00:04.806Z"
 }
