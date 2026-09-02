@@ -6017,7 +6017,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "AI-1788364805612",
+      "symbol": "AI",
+      "narrativeAge": "PRIME",
+      "narrative": "Meme",
+      "entry": 0.24148069453443335,
+      "stop": 0.224577,
+      "target": 0.289777,
+      "score": 21,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (43/100)",
+      "openedAt": "2026-09-02T16:00:05.612Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-09-02T16:00:02.940Z"
+  "lastUpdated": "2026-09-02T16:00:05.612Z"
 }
