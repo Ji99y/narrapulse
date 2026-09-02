@@ -6051,7 +6051,24 @@
       "outcome": null,
       "exitPrice": null,
       "returnPct": null
+    },
+    {
+      "id": "T-1788379208780",
+      "symbol": "T",
+      "narrativeAge": "PRIME",
+      "narrative": "Other",
+      "entry": 0.005381911664924581,
+      "stop": 0.005005,
+      "target": 0.006458,
+      "score": 22,
+      "regime": "BTC_DOMINANCE",
+      "sentiment": "⚪ NEUTRAL (47/100)",
+      "openedAt": "2026-09-02T20:00:08.780Z",
+      "closedAt": null,
+      "outcome": null,
+      "exitPrice": null,
+      "returnPct": null
     }
   ],
-  "lastUpdated": "2026-09-02T20:00:05.178Z"
+  "lastUpdated": "2026-09-02T20:00:08.780Z"
 }
